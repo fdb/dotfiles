@@ -1,0 +1,16 @@
+[user]
+	name = Frederik De Bleser
+	email = frederik@burocrazy.com
+
+[alias]
+    st = status
+    ci = commit
+    co = checkout
+    di = diff
+    dc = diff --cached
+
+[format]
+    pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
+
+[merge]
+    tool = vimdiff
