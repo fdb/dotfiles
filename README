@@ -2,6 +2,8 @@ My Un*x configuration files.
 
 To install:
   cd
-  git clone fdb@slurf.net:dotfiles.git 
-  dotfiles/install.sh
+  git clone fdb@slurf.net:git/dotfiles.git 
+  cd dotfiles
+  git submodule update --init
+  ./install.sh
 

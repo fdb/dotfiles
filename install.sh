@@ -1,9 +1,10 @@
 #!/bin/sh
 # Symlink all dot files to their correct positions.
 
-ln -s ~/dotfiles/bashrc ~/.bashrc
-ln -s ~/dotfiles/gitconfig ~/.gitconfig
-ln -s ~/dotfiles/screenrc ~/.screenrc
-ln -s ~/dotfiles/vim ~/.vim
-ln -s ~/dotfiles/vimrc ~/.vimrc
+ln -sf ~/dotfiles/bashrc ~/.bashrc
+ln -sf ~/dotfiles/gitconfig ~/.gitconfig
+ln -sf ~/dotfiles/screenrc ~/.screenrc
+ln -sf ~/dotfiles/vim ~/.vim
+ln -sf ~/dotfiles/vimrc ~/.vimrc
+ln -sf ~/dotfiles/bin ~/bin
 
