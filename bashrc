@@ -27,5 +27,9 @@ shopt -s histappend
 # Custom prompt: host + working directory
 PS1="\h:\W\$ "
 
-
+# Git Autocomplete
 . ~/bin/git-completion.bash
+
+# RVM
+[[ -s "/Users/fdb/.rvm/scripts/rvm" ]] && source "/Users/fdb/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+
