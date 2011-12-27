@@ -1,12 +1,11 @@
 " VIM configuration file
 
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 
 set nocompatible                  " Must come first because it changes other options.
 
 syntax enable                     " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
-" au! BufRead,BufNewFile *.haml setfiletype haml " Custom HAML syntax highlighting
 
 set showcmd                       " Display incomplete commands.
 set showmode                      " Display the mode you're in.
@@ -46,9 +45,11 @@ set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
-set background=dark
-colorscheme solarized
-set gfn=Menlo:h14
+if has("gui_running")
+  set background=light
+  colorscheme solarized
+  set gfn=Menlo:h14
+endif
 
 " Tab mappings.
 let mapleader=","
