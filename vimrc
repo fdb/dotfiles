@@ -49,6 +49,8 @@ if has("gui_running")
   set background=light
   colorscheme solarized
   set gfn=Menlo:h14
+  set lines=100
+  set columns=171
 endif
 
 " Tab mappings.
@@ -62,4 +64,6 @@ map <leader>tp :tabprevious<cr>
 map <leader>tf :tabfirst<cr>
 map <leader>tl :tablast<cr>
 map <leader>tm :tabmove
+map <leader>k 10k
+map <leader>j 10j
 
