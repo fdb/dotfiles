@@ -36,6 +36,7 @@ set visualbell                    " No beeping.
 set nobackup                      " Don't make a backup before overwriting a file.
 set nowritebackup                 " And again.
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp " Keep swap files in one location
+set wildignore=bin,include,lib,.git,*.pyc " Ignore virtualenv / git files
 
 set tabstop=4                    " Global tab width.
 set shiftwidth=4                 " And again, related.
@@ -55,15 +56,17 @@ endif
 
 " Tab mappings.
 let mapleader=","
-map <leader>tt :tabnew<cr>
-map <leader>te :tabedit
-map <leader>tc :tabclose<cr>
-map <leader>to :tabonly<cr>
-map <leader>tn :tabnext<cr>
-map <leader>tp :tabprevious<cr>
-map <leader>tf :tabfirst<cr>
-map <leader>tl :tablast<cr>
-map <leader>tm :tabmove
+"map <leader>tt :tabnew<cr>
+"map <leader>te :tabedit
+"map <leader>tc :tabclose<cr>
+"map <leader>to :tabonly<cr>
+"map <leader>tn :tabnext<cr>
+"map <leader>tp :tabprevious<cr>
+"map <leader>tf :tabfirst<cr>
+"map <leader>tl :tablast<cr>
+"map <leader>tm :tabmove
 map <leader>k 10k
 map <leader>j 10j
+map <leader>t :CommandT<cr>
+
 
