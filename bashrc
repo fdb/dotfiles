@@ -16,8 +16,6 @@ alias gs='git status'
 alias gb='git branch'
 alias gd='git diff'
 alias gl='git log'
-alias vi='mvim'
-alias vim='mvim'
 
 # Erase duplicates in history
 export HISTCONTROL=erasedups
