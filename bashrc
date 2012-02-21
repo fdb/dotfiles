@@ -15,6 +15,7 @@ alias m=mate
 alias gs='git status'
 alias gb='git branch'
 alias gd='git diff'
+alias gdk='git difftool -y -t Kaleidoscope'
 alias gl='git log'
 alias vi='mvim'
 alias vim='mvim'

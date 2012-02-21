@@ -16,3 +16,5 @@
     tool = vimdiff
 [core]
 	quotepath = false
+[difftool "Kaleidoscope"]
+	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
