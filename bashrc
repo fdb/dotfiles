@@ -34,3 +34,5 @@ PS1="\h:\W\$ "
 # RVM
 [[ -s "/Users/fdb/.rvm/scripts/rvm" ]] && source "/Users/fdb/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 
+# Use Compiler Cache
+export USE_CCACHE=1
