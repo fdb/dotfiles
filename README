@@ -4,6 +4,5 @@ To install:
   cd
   git clone fdb@slurf.net:git/dotfiles.git 
   cd dotfiles
-  git submodule update --init
   ./install.sh
 
