@@ -32,7 +32,10 @@ PS1="\h:\W\$ "
 . ~/bin/git-completion.bash
 
 # RVM
-[[ -s "/Users/fdb/.rvm/scripts/rvm" ]] && source "/Users/fdb/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+source /Users/fdb/.rvm/scripts/rvm
+#[[ -s "/Users/fdb/.rvm/scripts/rvm" ]] && source "/Users/fdb/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 
 # Use Compiler Cache
 export USE_CCACHE=1
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
