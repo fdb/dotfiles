@@ -39,3 +39,8 @@ source /Users/fdb/.rvm/scripts/rvm
 export USE_CCACHE=1
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+# Todo.sh
+alias t=todo.sh
+source ~/.todo/completion
+complete -F _todo t
