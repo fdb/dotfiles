@@ -31,14 +31,8 @@ PS1="\h:\W\$ "
 # Git Autocomplete
 . ~/bin/git-completion.bash
 
-# RVM
-source /Users/fdb/.rvm/scripts/rvm
-#[[ -s "/Users/fdb/.rvm/scripts/rvm" ]] && source "/Users/fdb/.rvm/scripts/rvm"  # This loads RVM into a shell session.
-
 # Use Compiler Cache
 export USE_CCACHE=1
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # Todo.sh
 alias t=todo.sh
