@@ -12,6 +12,7 @@ export GREP_OPTIONS="--color"
 
 # Define common aliases
 alias m=mate
+alias git=hub
 alias gs='git status -sb'
 alias gb='git branch'
 alias gd='git diff'
