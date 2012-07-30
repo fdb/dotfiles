@@ -34,8 +34,3 @@ PS1="\h:\W\$ "
 
 # Use Compiler Cache
 export USE_CCACHE=1
-
-# Todo.sh
-alias t=todo.sh
-source ~/.todo/completion
-complete -F _todo t
