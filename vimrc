@@ -67,6 +67,5 @@ let mapleader=","
 "map <leader>tm :tabmove
 map <leader>k 10k
 map <leader>j 10j
-map <leader>t :CommandT<cr>
 
 
