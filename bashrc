@@ -18,6 +18,7 @@ alias gb='git branch'
 alias gd='git diff'
 alias gdk='git difftool -y -t Kaleidoscope'
 alias gl='git log'
+alias gp='git pull'
 
 # Erase duplicates in history
 export HISTCONTROL=erasedups
