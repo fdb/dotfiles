@@ -3,12 +3,13 @@
 	email = frederik@burocrazy.com
 
 [alias]
-    st = status
-    ci = commit
-    co = checkout
-    di = diff
-    dc = diff --cached
-    count = shortlog -sn
+  st = status
+  ci = commit
+  co = checkout
+  di = diff
+  dc = diff --cached
+  count = shortlog -sn
+  latest = for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname:short)'
 
 [format]
     pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
