@@ -11,4 +11,5 @@ ln -sf ~/dotfiles/screenrc ~/.screenrc
 ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/vim ~/.vim
 ln -sf ~/dotfiles/vimrc ~/.vimrc
+ln -sf ~/dotfiles/emacs ~/.emacs
 ln -sf ~/dotfiles/bin ~/bin
