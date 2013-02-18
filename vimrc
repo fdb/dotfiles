@@ -43,6 +43,8 @@ set shiftwidth=2                 " And again, related.
 set expandtab                    " Use spaces instead of tabs
 
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 " 4 Spaces for Python
+autocmd FileType go setlocal noexpandtab " Tabs for Go
+
 
 set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
