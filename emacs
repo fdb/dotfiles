@@ -32,7 +32,7 @@
 (add-hook 'nrepl-mode-hook 'paredit-mode)
 
 ; Use shift-arrowkeys to move between windows.
-(global-set-key "\M-[1;2A" 'windmove-up)
-(global-set-key "\M-[1;2B" 'windmove-down)
-(global-set-key "\M-[1;2C" 'windmove-right)
-(global-set-key "\M-[1;2D" 'windmove-left)
+(global-set-key (kbd "S-<up>") 'windmove-up)
+(global-set-key (kbd "S-<down>") 'windmove-down)
+(global-set-key (kbd "S-<right>") 'windmove-right)
+(global-set-key (kbd "S-<left>") 'windmove-left)
