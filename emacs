@@ -48,9 +48,5 @@
 (setq nrepl-popup-stacktraces nil)
 ; Enable CamelCase support for forward-word, backward-word
 (add-hook 'nrepl-mode-hook 'subword-mode)
-; Enable paredit in clojure mode
-(add-hook 'clojure-mode-hook 'paredit-mode)
 ; Enable whitespace in clojure mode
 (add-hook 'clojure-mode-hook 'whitespace-mode)
-; Enable paredit in nrepl
-(add-hook 'nrepl-mode-hook 'paredit-mode)
