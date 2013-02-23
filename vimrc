@@ -70,6 +70,9 @@ let mapleader=","
 "map <leader>tl :tablast<cr>
 "map <leader>tm :tabmove
 map <leader>k 10k
-map <leader>j 10j
+map <leader>j 11j
+
+" Ctrl-P plugin binding.
+nmap ; :CtrlPMixed<CR>
 
 
