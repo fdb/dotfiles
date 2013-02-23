@@ -15,7 +15,7 @@
       (package-install p))))
 
 (ensure-packages-installed
- '(clojure-mode clojure-test-mode paredit))
+ '(clojure-mode clojure-test-mode nrepl))
 
 ;===============================================================================
 ; Global settings
