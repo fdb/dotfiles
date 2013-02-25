@@ -20,6 +20,9 @@
 ;===============================================================================
 ; Global settings
 
+; Always use spaces instead of tabs.
+(setq-default indent-tabs-mode nil)
+
 ; Use shift-arrowkeys to move between windows.
 (global-set-key (kbd "S-<up>") 'windmove-up)
 (global-set-key (kbd "S-<down>") 'windmove-down)
