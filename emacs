@@ -43,8 +43,10 @@
 (set-face-background 'hl-line "#333")
 (custom-set-faces
  '(whitespace-space
-   ((((class color) (background dark)) (:background "#242424" :foreground "#666"))
-    (((class color) (background light)) (:background "yellow" :foreground "black"))
+   ((((class color) (background dark))
+     (:background "#242424" :foreground "#333"))
+    (((class color) (background light))
+     (:background "yellow" :foreground "black"))
     (t (:inverse-video t)))))
 
 ;===============================================================================
