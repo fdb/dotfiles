@@ -28,13 +28,21 @@
 
 ; Highlight the current line.
 (global-hl-line-mode 1)
-(set-face-background 'hl-line "#eee")
 
 ; Use standard copy-paste.
 (cua-mode 1)
 
 ; Highlight matching parenthesis.
 (show-paren-mode 1)
+
+; Use dark theme
+(load-theme 'wombat t)
+(set-face-background 'hl-line "#333")
+(custom-set-faces
+ '(whitespace-space
+   ((((class color) (background dark)) (:background "#242424" :foreground "#666"))
+    (((class color) (background light)) (:background "yellow" :foreground "black"))
+    (t (:inverse-video t)))))
 
 ;===============================================================================
 ; Clojure settings
