@@ -63,3 +63,8 @@
 (add-hook 'nrepl-mode-hook 'subword-mode)
 ; Enable whitespace in clojure mode
 (add-hook 'clojure-mode-hook 'whitespace-mode)
+
+; Use nice key bindings to evalute expressions.
+(global-set-key (kbd "C-M-<return>") 'nrepl-eval-expression-at-point)
+(global-set-key (kbd "C-S-<return>") 'nrepl-load-current-buffer)
+(global-set-key (kbd "C-.") 'clojure-test-run-tests)
