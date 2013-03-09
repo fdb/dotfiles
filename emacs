@@ -23,6 +23,9 @@
 ; Always use spaces instead of tabs.
 (setq-default indent-tabs-mode nil)
 
+; Complete using tab.
+(global-set-key (kbd "TAB") 'complete-symbol)
+
 ; Use shift-arrowkeys to move between windows.
 (global-set-key (kbd "S-<up>") 'windmove-up)
 (global-set-key (kbd "S-<down>") 'windmove-down)
