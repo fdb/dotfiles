@@ -50,3 +50,6 @@ set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
 set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%)
 
+" Go run and go fmt
+map ,r :w<cr>:!go run %<cr>
+map ,f :w<cr>:!go fmt %<cr>:e!<cr>

@@ -1,7 +1,7 @@
 . ~/bin/bash_colors.sh
 
 # Setup the path
-export PATH="~/bin:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/heroku/bin:${PATH}"
+export PATH="~/bin:~/Android/sdk/tools:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/heroku/bin:${PATH}"
 
 # Use colors in the terminal
 export TERM='xterm-color'
