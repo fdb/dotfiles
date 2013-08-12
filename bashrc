@@ -28,8 +28,8 @@ export HISTSIZE=10000
 # Append to the history file when exiting instead of overwriting it
 shopt -s histappend
 
-# Custom prompt: host + working directory
-PS1="\h:\W\$ "
+# Custom prompt: user@host + working directory
+export PS1="\u@\h:\W$ "
 
 # Git Autocomplete
 . ~/bin/git-completion.bash
