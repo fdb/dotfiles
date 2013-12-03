@@ -20,6 +20,12 @@ alias gdk='git difftool -y -t Kaleidoscope'
 alias gl='git log'
 alias gp='git pull'
 
+# Make sure the open command is available on Linux.
+if [[ $OSTYPE == linux* ]];
+then
+  alias open=gnome-open
+fi
+
 # Erase duplicates in history
 export HISTCONTROL=erasedups
 # Store 10k history entries
