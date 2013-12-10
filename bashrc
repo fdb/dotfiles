@@ -19,6 +19,7 @@ alias gd='git diff'
 alias gdk='git difftool -y -t Kaleidoscope'
 alias gl='git log'
 alias gp='git pull'
+alias bigfiles='du -hsx * | sort -rh | head -10'
 
 # Make sure the open command is available on Linux.
 if [[ $OSTYPE == linux* ]];
