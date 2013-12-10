@@ -38,11 +38,13 @@ set nowritebackup                 " And again.
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp " Keep swap files in one location
 set wildignore=bin,include,lib,.git,*.pyc " Ignore virtualenv / git files
 
-set tabstop=2                    " Global tab width.
-set shiftwidth=2                 " And again, related.
+set tabstop=4                    " Global tab width.
+set shiftwidth=4                 " And again, related.
 set expandtab                    " Use spaces instead of tabs
 
-autocmd FileType python setlocal shiftwidth=4 tabstop=4 " 4 Spaces for Python
+set list                         " Show tab characters.
+set listchars=tab:>-,trail:~     " Show tabs and trailing whitespace.
+
 autocmd FileType go setlocal noexpandtab " Tabs for Go
 
 
