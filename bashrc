@@ -21,6 +21,7 @@ alias gl='git log'
 alias gp='git pull'
 alias gup='git log --branches --not --remotes' # Git UnPushed
 alias bigfiles='du -hsx * | sort -rh | head -10'
+alias uu='sudo apt-get update && sudo apt-get upgrade -y'
 
 # Make sure the open command is available on Linux.
 if [[ $OSTYPE == linux* ]];
