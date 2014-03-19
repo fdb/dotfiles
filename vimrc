@@ -74,6 +74,10 @@ nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
+" Emmet default key
+let g:user_emmet_leader_key='<c-e>'
+
 " Go run and go fmt
 map ,r :w<cr>:!go run %<cr>
 map ,f :w<cr>:!go fmt %<cr>:e!<cr>
+
