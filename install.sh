@@ -13,3 +13,7 @@ ln -sf ~/dotfiles/vim ~/.vim
 ln -sf ~/dotfiles/vimrc ~/.vimrc
 ln -sf ~/dotfiles/emacs ~/.emacs
 ln -sf ~/dotfiles/bin ~/bin
+
+# Install Vundle
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+vim +BundleInstall +qa

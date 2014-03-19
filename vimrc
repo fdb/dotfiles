@@ -1,8 +1,19 @@
-" VIM configuration file
+" Initialize Vundle
+set nocompatible
 
-call pathogen#infect()
+filetype off
+set rtp +=~/.vim/bundle/vundle/
+call vundle#rc()
 
-set nocompatible                  " Must come first because it changes other options.
+" Let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+
+" Define bundles via GitHub repos
+Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/syntastic'
+Bundle 'mattn/emmet-vim'
+
+filetype on
 
 syntax enable                     " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
