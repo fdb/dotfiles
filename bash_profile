@@ -48,6 +48,9 @@ export USE_CCACHE=1
 # Set the number of open files to be 1024
 ulimit -S -n 1024
 
+# Rust: set source path
+export RUST_SRC_PATH=~/Source/rust/src
+
 # Add locale information
 export LANG="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
