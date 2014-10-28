@@ -15,7 +15,7 @@
       (package-install p))))
 
 (ensure-packages-installed
- '(clojure-mode clojure-test-mode nrepl))
+ '(clojure-mode clojure-test-mode nrepl rust-mode))
 
 ;===============================================================================
 ; Global settings
