@@ -20,6 +20,8 @@
 ;===============================================================================
 ; Global settings
 
+(set-default-font "Input-Mono 13")
+
 ; Always use spaces instead of tabs.
 (setq-default indent-tabs-mode nil)
 
