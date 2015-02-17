@@ -12,7 +12,6 @@ export GREP_OPTIONS="--color"
 export VISUAL='vim'
 
 # Define common aliases
-alias m=mate
 alias gs='git status -sb'
 alias gb='git branch'
 alias gd='git diff'
