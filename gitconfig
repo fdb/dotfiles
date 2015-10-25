@@ -22,6 +22,7 @@
     tool = vimdiff
 [core]
 	quotepath = false
+    excludesfile = ~/.global-gitignore
 
 [difftool "Kaleidoscope"]
 	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"

@@ -15,10 +15,12 @@
       (package-install p))))
 
 (ensure-packages-installed
- '(clojure-mode clojure-test-mode nrepl))
+ '(clojure-mode clojure-test-mode nrepl rust-mode))
 
 ;===============================================================================
 ; Global settings
+
+(set-default-font "Input-Mono 13")
 
 ; Always use spaces instead of tabs.
 (setq-default indent-tabs-mode nil)

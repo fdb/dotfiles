@@ -5,8 +5,10 @@
 rm -rf ~/bin
 rm -rf ~/.vim
 
+ln -sf ~/dotfiles/bashrc ~/.bashrc
 ln -sf ~/dotfiles/bash_profile ~/.bash_profile
 ln -sf ~/dotfiles/gitconfig ~/.gitconfig
+ln -sf ~/dotfiles/global-gitignore ~/.global-gitignore
 ln -sf ~/dotfiles/screenrc ~/.screenrc
 ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/vim ~/.vim

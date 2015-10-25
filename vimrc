@@ -1,8 +1,6 @@
-" VIM configuration file
+set nocompatible                  " Modern VIM.
 
-call pathogen#infect()
-
-set nocompatible                  " Must come first because it changes other options.
+execute pathogen#infect()
 
 syntax enable                     " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
@@ -52,6 +50,15 @@ set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
 set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%)
 
+" Shortcuts
+let mapleader = " "
+" Switch between the last two files
+nnoremap <leader><leader> <c-^>
+
+" Emmet default key
+let g:user_emmet_leader_key='<c-e>'
+
 " Go run and go fmt
 map ,r :w<cr>:!go run %<cr>
 map ,f :w<cr>:!go fmt %<cr>:e!<cr>
+
