@@ -1,6 +1,6 @@
 [user]
-	name = Frederik De Bleser
-	email = frederik@debleser.be
+  name = Frederik De Bleser
+  email = frederik@debleser.be
 
 [alias]
   st = status
@@ -20,18 +20,13 @@
 
 [merge]
     tool = vimdiff
+
 [core]
-	quotepath = false
+  quotepath = false
     excludesfile = ~/.global-gitignore
 
-[difftool "Kaleidoscope"]
-	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
-
 [color]
-	ui = auto
+  ui = auto
+
 [push]
-	default = current
-[filter "media"]
-	required = true
-	clean = git media clean %f
-	smudge = git media smudge %f
+  default = current
