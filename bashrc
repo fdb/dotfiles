@@ -1,8 +1,5 @@
 . ~/bin/bash_colors.sh
 
-# Setup the path
-export PATH="~/bin:~/Android/sdk/tools:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/heroku/bin:${PATH}"
-
 # Use colors in the terminal
 export TERM='xterm-color'
 alias ls='ls -G'
@@ -28,6 +25,11 @@ then
   alias open=gnome-open
 fi
 
+if [[ $OSTYPE == darwin* ]];
+then
+    alias emacs=/Applications/Emacs.app/Contents/MacOS/Emacs
+fi
+
 # Erase duplicates in history
 export HISTCONTROL=erasedups
 # Store 10k history entries
@@ -50,6 +52,9 @@ ulimit -S -n 1024
 # Rust: set source path
 export RUST_SRC_PATH=~/Source/rust/src
 
+# GO: set source path
+export GOPATH=~/go
+
 # Add locale information
 export LANG="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
@@ -59,3 +64,7 @@ export LC_MONETARY="en_US.UTF-8"
 export LC_NUMERIC="en_US.UTF-8"
 export LC_TIME="en_US.UTF-8"
 export LC_ALL=
+
+# Setup the path
+export PATH="~/bin:~/Android/sdk/tools:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/heroku/bin:${GOPATH}/bin:${PATH}"
+
