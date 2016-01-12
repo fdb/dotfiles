@@ -51,7 +51,7 @@ set laststatus=2                  " Show the status line all the time
 set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%)
 
 " Shortcuts
-let mapleader = " "
+let mapleader = ","
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
 
@@ -61,4 +61,5 @@ let g:user_emmet_leader_key='<c-e>'
 " Go run and go fmt
 map ,r :w<cr>:!go run %<cr>
 map ,f :w<cr>:!go fmt %<cr>:e!<cr>
+:autocmd BufWritePre *.go silent :GoImports
 
