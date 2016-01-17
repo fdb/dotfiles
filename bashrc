@@ -54,6 +54,7 @@ export RUST_SRC_PATH=~/Source/rust/src
 
 # GO: set source path
 export GOPATH=~/go
+export GOROOT=~/go
 
 # Add locale information
 export LANG="en_US.UTF-8"
