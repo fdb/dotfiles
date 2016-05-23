@@ -23,17 +23,6 @@
 ; '(clojure-mode clojure-test-mode nrepl rust-mode))
 
 ;===============================================================================
-; Windowing functions
-
-(defun maximize-frame ()
-    "Maximize the current frame"
-     (interactive)
-     (when platform-mac
-         (let ((f (selected-frame)))
-            (modify-frame-parameters f `((fullscreen . ,(if (eq nil (frame-parameter f 'fullscreen)) 'fullboth nil))))))
-     (when platform-windows (w32-send-sys-command 61488)))
-
-;===============================================================================
 ; Editing functions
 
 (defun fdb-save-buffer ()
@@ -123,8 +112,8 @@
 (global-set-key (kbd "C-<down>") 'next-blank-line)
 
 ; Fonts and colors
-(add-to-list 'default-frame-alist '(font . "Input-12"))
-(set-face-attribute 'default t :font "Input-12")
+(add-to-list 'default-frame-alist '(font . "Liberation Mono-12"))
+(set-face-attribute 'default t :font "Liberation Mono-12")
 (set-face-attribute 'font-lock-builtin-face nil :foreground "#f9f9f5")
 (set-face-attribute 'font-lock-comment-face nil :foreground "#88846f")
 (set-face-attribute 'font-lock-constant-face nil :foreground "#ff4484") ; TODO
@@ -138,11 +127,11 @@
 (defun post-load-stuff ()
   (interactive)
   (menu-bar-mode -1)
-  (maximize-frame)
   (set-foreground-color "#a6bacc")
   (set-background-color "#171d20")
   (set-cursor-color "#FFFFFF")
 )
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 (add-hook 'window-setup-hook 'post-load-stuff t)
 
 ;===============================================================================
@@ -199,6 +188,10 @@
 
 (when platform-mac
   (setq platform-makescript "build_osx.sh")
+)
+
+(when platform-linux
+  (setq platform-makescript "./build_linux.sh")
 )
 
 (defun find-project-directory-recursive ()
