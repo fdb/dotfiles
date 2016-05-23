@@ -1,4 +1,5 @@
 #!/bin/sh
+# Usage: gifenc input.mov output.gif
 
 palette="/tmp/palette.png"
 
