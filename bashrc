@@ -66,7 +66,7 @@ export LC_TIME="en_US.UTF-8"
 export LC_ALL=
 
 # Setup the path
-export PATH="~/bin:~/Android/sdk/tools:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/heroku/bin:${GOPATH}/bin:${PATH}"
+export PATH="~/bin:~/Android/sdk/tools:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/heroku/bin:${GOPATH}/bin:/Users/fdb/.cargo/bin:${PATH}"
 
 # OS X: Change directory to topmost finder window.
 function ff { osascript -e 'tell application "Finder"'\
