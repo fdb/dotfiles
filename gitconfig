@@ -22,7 +22,7 @@
     tool = vimdiff
 
 [core]
-  quotepath = false
+    quotepath = false
     excludesfile = ~/.global-gitignore
 
 [color]
