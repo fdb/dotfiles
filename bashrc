@@ -68,3 +68,11 @@ export LC_ALL=
 # Setup the path
 export PATH="~/bin:~/Android/sdk/tools:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/heroku/bin:${GOPATH}/bin:${PATH}"
 
+# OS X: Change directory to topmost finder window.
+function ff { osascript -e 'tell application "Finder"'\
+    -e "if (${1-1} <= (count Finder windows)) then"\
+    -e "get POSIX path of (target of window ${1-1} as alias)"\
+    -e 'else' -e 'get POSIX path of (desktop as alias)'\
+    -e 'end if' -e 'end tell'; };\
+
+function cdff { cd "`ff $@`"; };
