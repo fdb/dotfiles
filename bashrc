@@ -1,11 +1,8 @@
-. ~/bin/bash_colors.sh
-
-# Use colors in the terminal
-export TERM='xterm-color'
+# Don't print group names in long listings
 alias ls='ls -G'
 alias ll='ls -lG'
-export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
-export GREP_OPTIONS="--color"
+
+# Use VIM as the editor
 export VISUAL='vim'
 
 # Define common aliases
