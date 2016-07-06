@@ -1,6 +1,6 @@
 # Don't print group names in long listings
-alias ls='ls -G'
-alias ll='ls -lG'
+alias ls='ls -G --color=auto'
+alias ll='ls -lG --color=auto'
 
 # Use VIM as the editor
 export VISUAL='vim'
