@@ -58,8 +58,3 @@ nnoremap <leader><leader> <c-^>
 " Emmet default key
 let g:user_emmet_leader_key='<c-e>'
 
-" Go run and go fmt
-map ,r :w<cr>:!go run %<cr>
-map ,f :w<cr>:!go fmt %<cr>:e!<cr>
-:autocmd BufWritePre *.go silent :GoImports
-
