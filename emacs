@@ -112,8 +112,8 @@
 (global-set-key (kbd "C-<down>") 'next-blank-line)
 
 ; Fonts and colors
-(add-to-list 'default-frame-alist '(font . "Liberation Mono-12"))
-(set-face-attribute 'default t :font "Liberation Mono-12")
+(add-to-list 'default-frame-alist '(font . "Roboto Mono-10"))
+(set-face-attribute 'default t :font "Roboto Mono-10")
 (set-face-attribute 'font-lock-builtin-face nil :foreground "#f9f9f5")
 (set-face-attribute 'font-lock-comment-face nil :foreground "#88846f")
 (set-face-attribute 'font-lock-constant-face nil :foreground "#ff4484") ; TODO
