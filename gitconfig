@@ -16,17 +16,22 @@
   longhash = rev-parse HEAD
 
 [format]
-    pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
+  pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
 
 [merge]
-    tool = vimdiff
+  tool = vimdiff
 
 [core]
-    quotepath = false
-    excludesfile = ~/.global-gitignore
+  quotepath = false
+  excludesfile = ~/.global-gitignore
 
 [color]
   ui = auto
 
 [push]
   default = current
+
+[filter "lfs"]
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
