@@ -81,3 +81,6 @@ function ff { osascript -e 'tell application "Finder"'\
     -e 'end if' -e 'end tell'; };\
 
 function cdff { cd "`ff $@`"; };
+
+# Remember SSH keys
+ssh-add -A
