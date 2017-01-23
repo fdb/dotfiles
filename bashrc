@@ -83,4 +83,7 @@ function ff { osascript -e 'tell application "Finder"'\
 function cdff { cd "`ff $@`"; };
 
 # Remember SSH keys
-ssh-add -A
+if [[ $OSTYPE == darwin* ]];
+then
+  ssh-add -A
+fi
