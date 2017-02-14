@@ -1,5 +1,5 @@
 #!/bin/sh
-# Usage: gifenc input.mov
+# Usage: gifit input.mov
 
 # Convert the given input file to a GIF. Uses the same name as the input, with the ".gif" extension.
 # Frame rate is reduced to 15FPS. Scale is left unchanged.
