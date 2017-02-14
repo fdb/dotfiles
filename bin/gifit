@@ -1,0 +1,14 @@
+#!/bin/sh
+# Usage: gifenc input.mov
+
+# Convert the given input file to a GIF. Uses the same name as the input, with the ".gif" extension.
+# Frame rate is reduced to 15FPS. Scale is left unchanged.
+
+# Reference: http://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality
+
+filename="$1"
+palette="/tmp/palette.png"
+filters="fps=15"
+
+ffmpeg -v warning -i $1 -vf "$filters,palettegen" -y $palette
+ffmpeg -v warning -i $1 -i $palette -filter_complex "$filters [x]; [x][1:v] paletteuse=dither=none" -y ${filename%.*}.gif
