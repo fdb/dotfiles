@@ -15,3 +15,4 @@ ln -sf ~/dotfiles/vim ~/.vim
 ln -sf ~/dotfiles/vimrc ~/.vimrc
 ln -sf ~/dotfiles/emacs ~/.emacs
 ln -sf ~/dotfiles/bin ~/bin
+ln -sf ~/dotfiles/npmrc ~/.npmrc
