@@ -17,7 +17,6 @@ export VISUAL='vim'
 alias gs='git status -sb'
 alias gb='git branch'
 alias gd='git diff'
-alias gdk='git difftool -y -t Kaleidoscope'
 alias gl='git log --oneline --graph'
 alias gp='git pull'
 alias gup='git log --branches --not --remotes' # Git UnPushed
@@ -28,11 +27,6 @@ alias uu='sudo apt-get update && sudo apt-get upgrade -y'
 if [[ $OSTYPE == linux* ]];
 then
   alias open=gnome-open
-fi
-
-if [[ $OSTYPE == darwin* ]];
-then
-    alias emacs=/Applications/Emacs.app/Contents/MacOS/Emacs
 fi
 
 # Erase duplicates in history
@@ -54,11 +48,8 @@ export USE_CCACHE=1
 # Set the number of open files to be 1024
 ulimit -S -n 1024
 
-# Rust: set source path
-export RUST_SRC_PATH=~/Source/rust/src
-
 # GO: set source path
-export GOPATH=~/go
+export GOPATH="$HOME/go"
 
 # Add locale information
 export LANG="en_US.UTF-8"
@@ -71,7 +62,7 @@ export LC_TIME="en_US.UTF-8"
 export LC_ALL=
 
 # Setup the path
-export PATH="~/bin:~/Android/sdk/tools:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/heroku/bin:${GOPATH}/bin:~/.cargo/bin:~/go_appengine:${PATH}"
+export PATH="/usr/local/bin:${HOME}/bin:${GOPATH}/bin:${HOME}/.cargo/bin:${PATH}"
 
 # OS X: Change directory to topmost finder window.
 function ff { osascript -e 'tell application "Finder"'\
@@ -82,5 +73,3 @@ function ff { osascript -e 'tell application "Finder"'\
 
 function cdff { cd "`ff $@`"; };
 
-# Remember SSH keys
-ssh-add -A
