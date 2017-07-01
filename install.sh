@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Symlink all dot files to their correct positions.
 
 # Delete directories that are in the way.
@@ -20,5 +20,9 @@ ln -sf ~/dotfiles/vimrc ~/.vimrc
 ln -sf ~/dotfiles/emacs ~/.emacs
 ln -sf ~/dotfiles/bin ~/bin
 ln -sf ~/dotfiles/npmrc ~/.npmrc
-ln -sf ~/dotfiles/ssh-config ~/.ssh/config
+
+if [[ $OSTYPE == darwin* ]];
+then
+  ln -sf ~/dotfiles/ssh-config ~/.ssh/config
+fi
 
