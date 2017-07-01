@@ -51,6 +51,10 @@ ulimit -S -n 1024
 # GO: set source path
 export GOPATH="$HOME/go"
 
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+
 # Add locale information
 export LANG="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
