@@ -7,7 +7,7 @@ fi
 if [[ $OSTYPE == darwin* ]];
 then
   alias ls='ls -G'
-  alias ll='ls -lG'
+  alias ll='exa -Fla --git'
 fi
 
 # Use VIM as the editor
