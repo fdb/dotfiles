@@ -20,6 +20,7 @@ alias gb='git branch'
 alias gd='git diff'
 alias gl='git log --oneline --graph'
 alias gp='git push'
+alias gpull='git pull'
 alias gup='git log --branches --not --remotes' # Git UnPushed
 alias bigfiles='du -hsx * | sort -rh | head -10'
 alias uu='sudo apt-get update && sudo apt-get upgrade -y'
