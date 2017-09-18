@@ -1,2 +1,6 @@
 Host *
     UseKeychain yes
+
+Host debleser.be
+    User fdb
+    IdentityFile "~/.ssh/id_rsa"
