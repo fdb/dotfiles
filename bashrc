@@ -14,11 +14,12 @@ fi
 export VISUAL='vim'
 
 # Define common aliases
+alias gc='git commit -a'
 alias gs='git status -sb'
 alias gb='git branch'
 alias gd='git diff'
 alias gl='git log --oneline --graph'
-alias gp='git pull'
+alias gp='git push'
 alias gup='git log --branches --not --remotes' # Git UnPushed
 alias bigfiles='du -hsx * | sort -rh | head -10'
 alias uu='sudo apt-get update && sudo apt-get upgrade -y'
