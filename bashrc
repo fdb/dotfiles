@@ -68,7 +68,7 @@ export LC_TIME="en_US.UTF-8"
 export LC_ALL=
 
 # Setup the path
-export PATH="/usr/local/bin:${HOME}/bin:${GOPATH}/bin:${HOME}/.cargo/bin:${PATH}"
+export PATH="/usr/local/bin:${HOME}/bin:${GOPATH}/bin:${HOME}/.cargo/bin:${HOME}/google-cloud-sdk/bin:${PATH}"
 
 source $HOME/.cargo/env
 
