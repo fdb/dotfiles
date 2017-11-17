@@ -62,3 +62,6 @@ nnoremap <leader><leader> <c-^>
 " Emmet default key
 let g:user_emmet_leader_key='<c-e>'
 
+" Syntastic always use c++11
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+
