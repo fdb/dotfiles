@@ -14,6 +14,7 @@ fi
 export VISUAL='vim'
 
 # Define common aliases
+alias ga='git add'
 alias gc='git commit -a'
 alias gs='git status -sb'
 alias gb='git branch'
@@ -57,6 +58,9 @@ export GOPATH="$HOME/go"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
+# Qt
+export QTPATH="/usr/local/opt/qt"
+
 # Add locale information
 export LANG="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
@@ -68,7 +72,7 @@ export LC_TIME="en_US.UTF-8"
 export LC_ALL=
 
 # Setup the path
-export PATH="/usr/local/bin:${HOME}/bin:${GOPATH}/bin:${HOME}/.cargo/bin:${PATH}"
+export PATH="/usr/local/bin:${HOME}/bin:${GOPATH}/bin:${HOME}/.cargo/bin:${QTPATH}/bin:${PATH}"
 
 source $HOME/.cargo/env
 
