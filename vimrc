@@ -54,6 +54,9 @@ set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
 set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%)
 
+" Ctrl-P should ignore node_modules
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
 " Shortcuts
 let mapleader = ","
 " Switch between the last two files
