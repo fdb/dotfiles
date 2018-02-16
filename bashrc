@@ -2,12 +2,12 @@
 if [[ $OSTYPE == linux* ]];
 then
   alias ls='ls -G --color=auto'
-  alias ll='ls -lG --color=auto'
+  alias ll='ls -ltrG --color=auto'
 fi
 if [[ $OSTYPE == darwin* ]];
 then
   alias ls='ls -G'
-  alias ll='exa -Fla --git'
+  alias ll='exa -Fla --sort newest --git'
 fi
 
 # Use VIM as the editor
