@@ -37,7 +37,7 @@ set visualbell                    " No beeping.
 
 set nobackup                      " Don't make a backup before overwriting a file.
 set nowritebackup                 " And again.
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp " Keep swap files in one location
+set directory=$HOME/.vim/swapfiles// " Keep swap files in one location
 set wildignore=bin,include,lib,.git,*.pyc " Ignore virtualenv / git files
 
 set tabstop=4                    " Global tab width.
@@ -53,6 +53,9 @@ autocmd FileType go setlocal noexpandtab " Tabs for Go
 set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
 set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%)
+
+" Ctrl-P should ignore node_modules
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 " Shortcuts
 let mapleader = ","
