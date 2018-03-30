@@ -73,7 +73,7 @@ export LC_TIME="en_US.UTF-8"
 export LC_ALL=
 
 # Setup the path
-export PATH="/usr/local/bin:${HOME}/bin:${GOPATH}/bin:${HOME}/.cargo/bin:${QTPATH}/bin:${PATH}"
+export PATH="/usr/local/bin:${HOME}/bin:${GOPATH}/bin:${HOME}/.cargo/bin:${QTPATH}/bin:$HOME/.yarn/bin:${PATH}"
 
 source $HOME/.cargo/env
 
