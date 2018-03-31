@@ -2,24 +2,26 @@
 if [[ $OSTYPE == linux* ]];
 then
   alias ls='ls -G --color=auto'
-  alias ll='ls -lG --color=auto'
+  alias ll='ls -ltrG --color=auto'
 fi
 if [[ $OSTYPE == darwin* ]];
 then
   alias ls='ls -G'
-  alias ll='exa -Fla --git'
+  alias ll='exa -Fla --sort newest --git'
 fi
 
 # Use VIM as the editor
 export VISUAL='vim'
 
 # Define common aliases
+alias ga='git add'
 alias gc='git commit -a'
 alias gs='git status -sb'
 alias gb='git branch'
 alias gd='git diff'
 alias gl='git log --oneline --graph'
 alias gp='git push'
+alias gpush='git push'
 alias gpull='git pull'
 alias gup='git log --branches --not --remotes' # Git UnPushed
 alias bigfiles='du -hsx * | sort -rh | head -10'
@@ -57,6 +59,9 @@ export GOPATH="$HOME/go"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
+# Qt
+export QTPATH="/usr/local/opt/qt"
+
 # Add locale information
 export LANG="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
@@ -68,7 +73,7 @@ export LC_TIME="en_US.UTF-8"
 export LC_ALL=
 
 # Setup the path
-export PATH="/usr/local/bin:${HOME}/bin:${GOPATH}/bin:${HOME}/.cargo/bin:${HOME}/google-cloud-sdk/bin:${PATH}"
+export PATH="/usr/local/bin:${HOME}/bin:${GOPATH}/bin:${HOME}/.cargo/bin:${HOME}/google-cloud-sdk/bin:${QTPATH}/bin:$HOME/.yarn/bin:${PATH}"
 
 source $HOME/.cargo/env
 
