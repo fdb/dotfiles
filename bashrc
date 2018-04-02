@@ -62,6 +62,9 @@ export NVM_DIR="$HOME/.nvm"
 # Qt
 export QTPATH="/usr/local/opt/qt"
 
+# Android
+export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
+
 # Add locale information
 export LANG="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
