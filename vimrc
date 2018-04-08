@@ -49,6 +49,8 @@ set listchars=tab:>-,trail:~     " Show tabs and trailing whitespace.
 
 autocmd FileType go setlocal noexpandtab " Tabs for Go
 
+" Trim trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
 
 set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
