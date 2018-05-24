@@ -1,0 +1,7 @@
+#!/bin/sh
+# Usage: gif2mp4 input.gif
+
+# Convert the given input GIF to a mp4. Uses the same name as the input, with the ".mp4" extension.
+
+filename="$1"
+ffmpeg -i $1 -movflags faststart -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -y ${filename%.*}.mp4
