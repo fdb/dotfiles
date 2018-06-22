@@ -78,7 +78,9 @@ export LC_ALL=
 # Setup the path
 export PATH="/usr/local/bin:${HOME}/bin:${GOPATH}/bin:${HOME}/.cargo/bin:${HOME}/google-cloud-sdk/bin:${QTPATH}/bin:$HOME/.yarn/bin:${PATH}"
 
-source $HOME/.cargo/env
+if [ -f $HOME/.cargo/env ]; then
+    source $HOME/.cargo/env
+fi
 
 # OS X: Change directory to topmost finder window.
 function ff { osascript -e 'tell application "Finder"'\
