@@ -8,6 +8,7 @@ if [[ $OSTYPE == darwin* ]];
 then
   alias ls='ls -G'
   alias ll='exa -Fla --sort newest --git'
+  alias love='/Applications/love.app/Contents/MacOS/love'
 fi
 
 # Use VIM as the editor
