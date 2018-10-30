@@ -20,6 +20,7 @@ ln -sf ~/dotfiles/vimrc ~/.vimrc
 ln -sf ~/dotfiles/emacs ~/.emacs
 ln -sf ~/dotfiles/bin ~/bin
 ln -sf ~/dotfiles/npmrc ~/.npmrc
+ln -sf ~/dotfiles/radare2rc ~/.radare2rc
 
 if [[ $OSTYPE == darwin* ]];
 then
