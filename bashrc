@@ -42,7 +42,11 @@ export HISTSIZE=10000
 shopt -s histappend
 
 # Custom prompt: user@host + working directory
-export PS1="\u@\h:\W$ "
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+export PS1='\e[1;30m\w\e[0;32m$(parse_git_branch)\[\e[0m\] $ '
+
 
 # Git Autocomplete
 . ~/bin/git-completion.bash
