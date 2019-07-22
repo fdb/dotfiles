@@ -5,7 +5,7 @@ set nocompatible                  " Modern VIM.
 
 set background=dark               " Dark backgrounds ftw.
 set t_Co=256                      " 256 colors.
-colorscheme smyck
+colors deus
 
 syntax enable                     " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
