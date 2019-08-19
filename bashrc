@@ -31,7 +31,7 @@ alias uu='sudo apt-get update && sudo apt-get upgrade -y'
 # Make sure the open command is available on Linux.
 if [[ $OSTYPE == linux* ]];
 then
-  alias open=gnome-open
+  alias open=xdg-open
 fi
 
 # Erase duplicates in history
