@@ -28,10 +28,13 @@ alias gup='git log --branches --not --remotes' # Git UnPushed
 alias bigfiles='du -hsx * | sort -rh | head -10'
 alias uu='sudo apt-get update && sudo apt-get upgrade -y'
 
+# Define pomo alias that plays noise for 25 minutes
+alias pomo='play -n synth 25:0 brownnoise synth pinknoise mix synth sine amod 0.05 10'
+
 # Make sure the open command is available on Linux.
 if [[ $OSTYPE == linux* ]];
 then
-  alias open=gnome-open
+  alias open=xdg-open
 fi
 
 # Erase duplicates in history

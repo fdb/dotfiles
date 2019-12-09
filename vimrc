@@ -67,7 +67,6 @@ nnoremap <leader><leader> <c-^>
 
 " Remap escape to jj
 inoremap jj <ESC>
-inoremap `` <ESC>
 
 " Emmet default key
 let g:user_emmet_leader_key='<c-e>'
