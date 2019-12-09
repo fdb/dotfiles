@@ -60,10 +60,6 @@ ulimit -S -n 1024
 # GO: set source path
 export GOPATH="$HOME/go"
 
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-
 # Qt
 export QTPATH="/usr/local/opt/qt"
 
