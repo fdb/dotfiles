@@ -1,5 +1,8 @@
-" MIT License. Copyright (c) 2013-2016 Bailey Ling.
+" MIT License. Copyright (c) 2013-2019 Bailey Ling et al.
+" PLugin: https://eclim.org
 " vim: et ts=2 sts=2 sw=2
+
+scriptencoding utf-8
 
 if !exists(':ProjectCreate')
   finish
@@ -57,4 +60,3 @@ function! airline#extensions#eclim#init(ext)
   call airline#parts#define_function('eclim', 'airline#extensions#eclim#get_warnings')
   call a:ext.add_statusline_func('airline#extensions#eclim#creat_line')
 endfunction
-

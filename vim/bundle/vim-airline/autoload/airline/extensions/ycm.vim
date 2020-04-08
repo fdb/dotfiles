@@ -1,5 +1,7 @@
-" MIT License. Copyright (c) 2015 Evgeny Firsov.
+" MIT License. Copyright (c) 2015-2019 Evgeny Firsov et al.
 " vim: et ts=2 sts=2 sw=2
+
+scriptencoding utf-8
 
 let s:spc = g:airline_symbols.space
 let s:error_symbol = get(g:, 'airline#extensions#ycm#error_symbol', 'E:')
@@ -33,4 +35,3 @@ function! airline#extensions#ycm#get_warning_count()
 
   return ''
 endfunction
-
