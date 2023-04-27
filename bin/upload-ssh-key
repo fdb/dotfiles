@@ -3,5 +3,5 @@ if [ $# != 1 ]; then
     echo "Usage: $0 user@hostname\n\n    Authorizes your SSH public key to login to the given server.\n"
     exit 1
 else
-     ssh $1 "echo `cat ~/.ssh/id_rsa.pub` >> ~/.ssh/authorized_keys" 
+     ssh $1 "echo `cat ~/.ssh/id_ed25519.pub` >> ~/.ssh/authorized_keys" 
 fi
