@@ -5,6 +5,7 @@ alias gl='git log'
 alias gd='git diff'
 alias gpush='git push'
 alias gpull='git pull'
+alias gdmb='git branch --merged | egrep -v "(^\*|master|main|dev)" | xargs git branch -d'
 
 
 export PATH=/usr/local/bin:/opt/homebrew/bin:$PATH
