@@ -15,7 +15,7 @@ export PATH=/opt/homebrew/bin:/Applications/Postgres.app/Contents/Versions/lates
 compress_video() {
     local input_file="$1"
     local output_file="${input_file:r}.mp4"
-    ffmpeg -i "$input_file" -vf "scale='min(1920,iw)':'min(1080,ih)'" -r 15 -crf 28 -pix_fmt yuv420p -movflags +faststart "$output_file"
+    ffmpeg -y -i "$input_file" -vf "scale=-2:1080" -r 15 -crf 28 -pix_fmt yuv420p -movflags +faststart "$output_file"
 }
 
 # >>> conda initialize >>>
