@@ -8,7 +8,7 @@ alias gpull='git pull'
 alias gdmb='git branch --merged | egrep -v "(^\*|master|main|dev)" | xargs git branch -d'
 
 
-export PATH=/usr/local/bin:/opt/homebrew/bin:$PATH
+export PATH=/opt/homebrew/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -32,5 +32,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-# eval "$(github-copilot-cli alias -- "$0")"
