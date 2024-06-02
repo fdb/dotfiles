@@ -10,7 +10,7 @@ alias gdmb='git branch --merged | egrep -v "(^\*|master|main|dev)" | xargs git b
 
 export PATH=/opt/homebrew/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f /opt/homebrew/bin/fzf ] &&  source <(fzf --zsh)
 
 compress_video() {
     local input_file="$1"
