@@ -7,7 +7,6 @@ alias gpush='git push'
 alias gpull='git pull'
 alias gdmb='git branch --merged | egrep -v "(^\*|master|main|dev)" | xargs git branch -d'
 
-
 export PATH=/opt/homebrew/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
 
 [ -f /opt/homebrew/bin/fzf ] &&  source <(fzf --zsh)
@@ -20,14 +19,14 @@ compress_video() {
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/fdb/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/fdb/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/fdb/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/fdb/miniconda3/bin:$PATH"
+        export PATH="/opt/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
