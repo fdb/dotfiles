@@ -95,4 +95,3 @@ function ff { osascript -e 'tell application "Finder"'\
 
 function cdff { cd "`ff $@`"; };
 
-. "$HOME/.cargo/env"
