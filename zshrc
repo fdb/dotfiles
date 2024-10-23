@@ -10,6 +10,7 @@ function cheat() { curl cheat.sh/$1 }
 function up() { cd $(eval printf '../'%.0s {1..$1}); }
 alias ..="cd .."
 alias ...="cd ../.."
+alias duh='du -h -d 1 | sort -h'
 
 export PATH=/opt/homebrew/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
 
