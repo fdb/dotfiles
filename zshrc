@@ -12,7 +12,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias duh='du -h -d 1 | sort -h'
 
-export PATH=/opt/homebrew/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
+export PATH=/opt/homebrew/bin:~/.local/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
 
 [ -f /opt/homebrew/bin/fzf ] &&  source <(fzf --zsh)
 
