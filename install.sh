@@ -14,6 +14,7 @@ ln -sf ~/dotfiles/bash_profile ~/.bash_profile
 ln -sf ~/dotfiles/gitconfig ~/.gitconfig
 ln -sf ~/dotfiles/global-gitignore ~/.global-gitignore
 ln -sf ~/dotfiles/screenrc ~/.screenrc
+ln -sf ~/dotfiles/sqliterc ~/.sqliterc
 ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/vim ~/.vim
 ln -sf ~/dotfiles/vimrc ~/.vimrc
@@ -26,4 +27,3 @@ if [[ $OSTYPE == darwin* ]];
 then
   ln -sf ~/dotfiles/ssh-config ~/.ssh/config
 fi
-
