@@ -3,6 +3,10 @@
 # This won't be added again if you remove it.
 Include ~/.orbstack/ssh/config
 
+  Host codespace-4090
+    HostName codespace-4090
+    User codespace
+
 Host *
     UseKeychain yes
 
