@@ -12,6 +12,9 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias duh='du -h -d 1 | sort -h'
 
+# Set type of terminal
+export TERM=xterm-256color
+
 export PATH=/opt/homebrew/bin:~/.local/bin::~/go/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
 
 [ -f /opt/homebrew/bin/fzf ] &&  source <(fzf --zsh)

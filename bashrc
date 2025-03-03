@@ -14,6 +14,9 @@ fi
 # Use VIM as the editor
 export VISUAL='vim'
 
+# Set a terminal color scheme
+export TERM=xterm-256color
+
 # Define common aliases
 alias ga='git add'
 alias gc='git commit -a'
