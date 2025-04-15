@@ -40,3 +40,7 @@ cdff() {
 # Fly.io
 export FLYCTL_INSTALL="/Users/fdb/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
+# Tailscale
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
