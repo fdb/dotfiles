@@ -3,4 +3,5 @@ Thumbs.db
 .idea
 *.iml
 config.codekit
-.vscode
+.vscode/
+.claude/
