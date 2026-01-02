@@ -3,7 +3,6 @@ if [ -f ~/.bashrc ]; then
 fi
 
 . "$HOME/.cargo/env"
-export PATH="$HOME/.cargo/bin:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -19,3 +18,8 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/fdb/.lmstudio/bin"
+# End of LM Studio CLI section
+

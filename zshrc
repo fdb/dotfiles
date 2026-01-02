@@ -15,7 +15,7 @@ alias duh='du -h -d 1 | sort -h'
 # Set type of terminal
 export TERM=xterm-256color
 
-export PATH=/opt/homebrew/bin:~/.local/bin::~/go/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
+export PATH=/opt/homebrew/bin:~/.local/bin:~/go/bin:$PATH
 
 [ -f /opt/homebrew/bin/fzf ] &&  source <(fzf --zsh)
 
@@ -37,10 +37,34 @@ cdff() {
     cd "$(ff "$@")"
 }
 
-# Fly.io
-export FLYCTL_INSTALL="/Users/fdb/.fly"
-export PATH="$FLYCTL_INSTALL/bin:$PATH"
+# llvm
+export LLVM_PATH="$(brew --prefix llvm)"
+export PATH="$LLVM_PATH/bin:$PATH"
+export LDFLAGS="-L$LLVM_PATH/lib"
+export CPPFLAGS="-I$LLVM_PATH/include"
 
 # Tailscale
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
+# Codex
+alias ccc='codex --yolo'
+
+alias llama='llama-server -hf ggml-org/gpt-oss-20b-GGUF --ctx-size 0 --jinja -ub 2048 -b 2048 -ngl 99 -fa'
+
+
+# Herd injected PHP 8.4 configuration.
+export HERD_PHP_84_INI_SCAN_DIR="/Users/fdb/Library/Application Support/Herd/config/php/84/"
+
+
+# Herd injected NVM configuration
+export NVM_DIR="/Users/fdb/Library/Application Support/Herd/config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+[[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
+
+# Herd injected PHP binary.
+export PATH="/Users/fdb/Library/Application Support/Herd/bin/":$PATH
+
+
+# Herd injected PHP 8.3 configuration.
+export HERD_PHP_83_INI_SCAN_DIR="/Users/fdb/Library/Application Support/Herd/config/php/83/"
