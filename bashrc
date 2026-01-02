@@ -100,9 +100,10 @@ function ff { osascript -e 'tell application "Finder"'\
     -e 'end if' -e 'end tell'; };\
 
 function cdff { cd "`ff $@`"; };
-. "$HOME/.cargo/env"
 
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/fdb/.lmstudio/bin"
 # End of LM Studio CLI section
-
+if [ -f "${HOME}/.ghcup/env" ]; then
+    source "${HOME}/.ghcup/env"
+fi

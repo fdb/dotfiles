@@ -37,12 +37,6 @@ cdff() {
     cd "$(ff "$@")"
 }
 
-# llvm
-export LLVM_PATH="$(brew --prefix llvm)"
-export PATH="$LLVM_PATH/bin:$PATH"
-export LDFLAGS="-L$LLVM_PATH/lib"
-export CPPFLAGS="-I$LLVM_PATH/include"
-
 # Tailscale
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
@@ -50,6 +44,9 @@ alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 alias ccc='codex --yolo'
 
 alias llama='llama-server -hf ggml-org/gpt-oss-20b-GGUF --ctx-size 0 --jinja -ub 2048 -b 2048 -ngl 99 -fa'
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/fdb/.lmstudio/bin"
+# End of LM Studio CLI section
 
 
 # Herd injected PHP 8.4 configuration.
@@ -65,6 +62,10 @@ export NVM_DIR="/Users/fdb/Library/Application Support/Herd/config/nvm"
 # Herd injected PHP binary.
 export PATH="/Users/fdb/Library/Application Support/Herd/bin/":$PATH
 
-
 # Herd injected PHP 8.3 configuration.
 export HERD_PHP_83_INI_SCAN_DIR="/Users/fdb/Library/Application Support/Herd/config/php/83/"
+# Added by Antigravity
+export PATH="/Users/fdb/.antigravity/antigravity/bin:$PATH"
+if [ -f "${HOME}/.ghcup/env" ]; then
+  source "${HOME}/.ghcup/env"
+fi
