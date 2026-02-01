@@ -1,0 +1,47 @@
+# Common shell configuration for bash and zsh
+# Source this file from both .bashrc and .zshrc
+
+# Git aliases
+alias gs='git status'
+alias ga='git add'
+alias gaa='git add --all'
+alias gb='git branch'
+alias gco='git checkout'
+alias gc='git commit'
+alias gca='git commit --amend'
+alias gcm='git commit -m'
+alias gl='git log --oneline --graph'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gf='git fetch'
+alias gpush='git push'
+alias gpull='git pull'
+alias gss='git stash'
+alias gsp='git stash pop'
+alias gdmb='git branch --merged | egrep -v "(^\*|master|main|dev)" | xargs git branch -d'
+
+# Directory navigation
+alias ..="cd .."
+alias ...="cd ../.."
+alias duh='du -h -d 1 | sort -h'
+
+# Set terminal colors
+export TERM=xterm-256color
+
+# Cheat sheet lookup
+function cheat() { curl cheat.sh/$1; }
+
+# Navigate up N directories
+function up() { cd $(eval printf '../'%.0s {1..$1}); }
+
+# macOS: Navigate to Finder window
+if [[ "$OSTYPE" == darwin* ]]; then
+    ff() {
+        osascript -e 'tell application "Finder"' \
+        -e "if (${1-1} <= (count Finder windows)) then" \
+        -e "get POSIX path of (target of window ${1-1} as alias)" \
+        -e 'else' -e 'get POSIX path of (desktop as alias)' \
+        -e 'end if' -e 'end tell'
+    }
+    cdff() { cd "$(ff "$@")"; }
+fi

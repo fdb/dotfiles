@@ -38,7 +38,7 @@ set visualbell                    " No beeping.
 
 set nobackup                      " Don't make a backup before overwriting a file.
 set nowritebackup                 " And again.
-set directory=$HOME/.vim/swapfiles// " Keep swap files in one location
+set noswapfile                    " Disable swap files (git provides version control)
 set wildignore=bin,include,lib,.git,*.pyc " Ignore virtualenv / git files
 
 set tabstop=2                    " Global tab width.

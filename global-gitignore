@@ -1,7 +1,22 @@
+# macOS
 .DS_Store
-Thumbs.db
-.idea
+.AppleDouble
+.LSOverride
+._*
+
+# Editors
+*.swp
+*.swo
+*~
+.idea/
 *.iml
-config.codekit
 .vscode/
-.claude/
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Project tools
+config.codekit
+.claude/settings.local.json
+.env.local
