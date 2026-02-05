@@ -1,6 +1,10 @@
 # Source common shell configuration
 source ~/dotfiles/shell_common
 
+# Enable zsh completion system (for git, etc.)
+fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+autoload -Uz compinit && compinit
+
 # zsh-specific settings
 [ -f /opt/homebrew/bin/fzf ] && source <(fzf --zsh)
 
