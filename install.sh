@@ -22,6 +22,7 @@ ln -sf ~/dotfiles/emacs ~/.emacs
 ln -sf ~/dotfiles/bin ~/bin
 ln -sf ~/dotfiles/radare2rc ~/.radare2rc
 ln -sf ~/dotfiles/zshrc ~/.zshrc
+ln -sf ~/dotfiles/claude ~/.claude
 
 if [[ $OSTYPE == darwin* ]];
 then
