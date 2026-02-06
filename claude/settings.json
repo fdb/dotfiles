@@ -13,5 +13,9 @@
     "rust-analyzer-lsp@claude-plugins-official": true,
     "code-review@claude-plugins-official": true
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "statusLine": {
+    "type": "command",
+    "command": "input=$(cat); cwd=$(echo \"$input\" | jq -r '.workspace.current_dir'); branch=$(git -C \"$cwd\" --no-optional-locks branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \\(.*\\)/ (\\1)/'); printf \"\\033[01;28m%s\\033[00;32m%s\\033[0m\" \"$cwd\" \"$branch\""
+  }
 }
