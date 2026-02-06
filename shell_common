@@ -20,6 +20,9 @@ alias gss='git stash'
 alias gsp='git stash pop'
 alias gdmb='git branch --merged | egrep -v "(^\*|master|main|dev)" | xargs git branch -d'
 
+# Claude alias
+alias ccc='claude --dangerously-skip-permissions'
+
 # Directory navigation
 alias ..="cd .."
 alias ...="cd ../.."

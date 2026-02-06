@@ -19,9 +19,6 @@ compress_video() {
     ffmpeg -y -i "$input_file" -vf "scale=-2:1080" -r 15 -crf 28 -pix_fmt yuv420p -movflags +faststart "$output_file"
 }
 
-# Codex
-alias ccc='codex --yolo'
-
 # Local LLM
 alias llama='llama-server -hf ggml-org/gpt-oss-20b-GGUF --ctx-size 0 --jinja -ub 2048 -b 2048 -ngl 99 -fa'
 
