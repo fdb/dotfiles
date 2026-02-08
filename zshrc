@@ -23,7 +23,7 @@ compress_video() {
 alias llama='llama-server -hf ggml-org/gpt-oss-20b-GGUF --ctx-size 0 --jinja -ub 2048 -b 2048 -ngl 99 -fa'
 
 # PATH additions
-export PATH=~/.local/bin:~/opt/homebrew/bin:/go/bin:$PATH
+export PATH=~/.local/bin:/opt/homebrew/bin:/go/bin:$PATH
 
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/fdb/.lmstudio/bin"
