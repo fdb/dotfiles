@@ -28,3 +28,9 @@ if [[ $OSTYPE == darwin* ]];
 then
   ln -sf ~/dotfiles/ssh-config ~/.ssh/config
 fi
+
+# Install Claude Code plugins if claude is available.
+if command -v claude &> /dev/null; then
+  claude plugin marketplace add anthropics/claude-plugins-official 2>/dev/null
+  claude plugin install frontend-design@claude-plugins-official playwright@claude-plugins-official ralph-loop@claude-plugins-official code-simplifier@claude-plugins-official swift-lsp@claude-plugins-official rust-analyzer-lsp@claude-plugins-official code-review@claude-plugins-official 2>/dev/null
+fi
