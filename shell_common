@@ -21,6 +21,12 @@ alias gsp='git stash pop'
 alias gdmb='git branch --merged | egrep -v "(^\*|master|main|dev)" | xargs git branch -d'
 
 # Git worktree helpers
+function _git_main_root() {
+  local common_dir
+  common_dir=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null) || { echo "Not in a git repo" >&2; return 1; }
+  echo "${common_dir%/.git}"
+}
+
 function gwt() {
   if [ -z "$1" ]; then
     git worktree list
@@ -28,7 +34,7 @@ function gwt() {
   fi
   local name="$1"
   local root
-  root=$(git rev-parse --show-toplevel 2>/dev/null) || { echo "Not in a git repo"; return 1; }
+  root=$(_git_main_root) || return 1
   local wt_dir="$root/.worktrees/$name"
   if [ -d "$wt_dir" ]; then
     cd "$wt_dir"
@@ -38,14 +44,21 @@ function gwt() {
 }
 
 function gwtrm() {
-  if [ -z "$1" ]; then
-    echo "Usage: gwtrm <branch-name>"
-    return 1
-  fi
-  local name="$1"
   local root
-  root=$(git rev-parse --show-toplevel 2>/dev/null) || { echo "Not in a git repo"; return 1; }
-  git worktree remove "$root/.worktrees/$name"
+  root=$(_git_main_root) || return 1
+
+  local name="$1"
+  if [ -z "$name" ]; then
+    local toplevel
+    toplevel=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [ "$toplevel" = "$root" ]; then
+      echo "Not in a worktree. Usage: gwtrm [branch-name]"
+      return 1
+    fi
+    name=$(basename "$toplevel")
+  fi
+
+  cd "$root" && git worktree remove "$root/.worktrees/$name"
 }
 
 # Claude alias
