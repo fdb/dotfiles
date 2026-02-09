@@ -20,6 +20,34 @@ alias gss='git stash'
 alias gsp='git stash pop'
 alias gdmb='git branch --merged | egrep -v "(^\*|master|main|dev)" | xargs git branch -d'
 
+# Git worktree helpers
+function gwt() {
+  if [ -z "$1" ]; then
+    git worktree list
+    return
+  fi
+  local name="$1"
+  local root
+  root=$(git rev-parse --show-toplevel 2>/dev/null) || { echo "Not in a git repo"; return 1; }
+  local wt_dir="$root/.worktrees/$name"
+  if [ -d "$wt_dir" ]; then
+    cd "$wt_dir"
+  else
+    git worktree add "$wt_dir" -b "$name" && cd "$wt_dir"
+  fi
+}
+
+function gwtrm() {
+  if [ -z "$1" ]; then
+    echo "Usage: gwtrm <branch-name>"
+    return 1
+  fi
+  local name="$1"
+  local root
+  root=$(git rev-parse --show-toplevel 2>/dev/null) || { echo "Not in a git repo"; return 1; }
+  git worktree remove "$root/.worktrees/$name"
+}
+
 # Claude alias
 alias ccc='claude --dangerously-skip-permissions'
 
