@@ -1,6 +1,6 @@
 ---
+name: ship
 description: Commit all changes, push to remote, and create a PR if on a feature branch
-allowed-tools: Bash, Read, Glob, Grep, AskUserQuestion
 ---
 
 # Ship — Commit, Push & Create PR

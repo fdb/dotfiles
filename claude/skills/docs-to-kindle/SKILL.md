@@ -1,7 +1,6 @@
 ---
-argument-hint: <docs-url>
+name: docs-to-kindle
 description: Scrape a documentation website and convert it to .epub and .azw3 for Kindle
-allowed-tools: Bash, Read, Write, Edit, Glob, Grep, WebFetch, mcp__plugin_playwright_playwright__browser_navigate, mcp__plugin_playwright_playwright__browser_snapshot, mcp__plugin_playwright_playwright__browser_click, mcp__plugin_playwright_playwright__browser_run_code, mcp__plugin_playwright_playwright__browser_close, mcp__plugin_playwright_playwright__browser_evaluate, Task, TaskCreate, TaskUpdate, TaskList
 ---
 
 # Docs to Kindle
