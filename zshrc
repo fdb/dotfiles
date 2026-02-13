@@ -8,6 +8,20 @@ autoload -Uz compinit && compinit
 # zsh-specific settings
 [ -f /opt/homebrew/bin/fzf ] && source <(fzf --zsh)
 
+# Git prompt: branch name + clean/dirty indicator (⋅)
+# White ⋅ = clean, orange ⋅ = dirty
+git_prompt_info() {
+  local branch
+  branch=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null) || return
+  if git diff --quiet HEAD -- 2>/dev/null && git diff --cached --quiet HEAD -- 2>/dev/null; then
+    echo " %F{white}${branch} ⋅%f"
+  else
+    echo " %F{208}${branch} ⋅%f"
+  fi
+}
+setopt PROMPT_SUBST
+PROMPT='%~$(git_prompt_info) $ '
+
 # macOS-specific aliases
 alias ll='exa -Fla --sort newest --git'
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
