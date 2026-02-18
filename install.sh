@@ -9,24 +9,24 @@ rm -rf ~/.vim
 mkdir -p ~/.ssh
 
 # Symlink all config files.
-ln -sf ~/dotfiles/bashrc ~/.bashrc
-ln -sf ~/dotfiles/bash_profile ~/.bash_profile
-ln -sf ~/dotfiles/gitconfig ~/.gitconfig
-ln -sf ~/dotfiles/global-gitignore ~/.global-gitignore
-ln -sf ~/dotfiles/screenrc ~/.screenrc
-ln -sf ~/dotfiles/sqliterc ~/.sqliterc
-ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf
-ln -sf ~/dotfiles/vim ~/.vim
-ln -sf ~/dotfiles/vimrc ~/.vimrc
-ln -sf ~/dotfiles/emacs ~/.emacs
-ln -sf ~/dotfiles/bin ~/bin
-ln -sf ~/dotfiles/radare2rc ~/.radare2rc
-ln -sf ~/dotfiles/zshrc ~/.zshrc
-ln -sf ~/dotfiles/claude ~/.claude
+ln -sfn ~/dotfiles/bashrc ~/.bashrc
+ln -sfn ~/dotfiles/bash_profile ~/.bash_profile
+ln -sfn ~/dotfiles/gitconfig ~/.gitconfig
+ln -sfn ~/dotfiles/global-gitignore ~/.global-gitignore
+ln -sfn ~/dotfiles/screenrc ~/.screenrc
+ln -sfn ~/dotfiles/sqliterc ~/.sqliterc
+ln -sfn ~/dotfiles/tmux.conf ~/.tmux.conf
+ln -sfn ~/dotfiles/vim ~/.vim
+ln -sfn ~/dotfiles/vimrc ~/.vimrc
+ln -sfn ~/dotfiles/emacs ~/.emacs
+ln -sfn ~/dotfiles/bin ~/bin
+ln -sfn ~/dotfiles/radare2rc ~/.radare2rc
+ln -sfn ~/dotfiles/zshrc ~/.zshrc
+ln -sfn ~/dotfiles/claude ~/.claude
 
 if [[ $OSTYPE == darwin* ]];
 then
-  ln -sf ~/dotfiles/ssh-config ~/.ssh/config
+  ln -sfn ~/dotfiles/ssh-config ~/.ssh/config
 fi
 
 # Install Claude Code plugins if claude is available.

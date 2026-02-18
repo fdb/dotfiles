@@ -69,6 +69,10 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias duh='du -h -d 1 | sort -h'
 
+# Rust aliases
+alias cr='cargo run'
+alias ct='cargo test'
+
 # Set terminal colors
 export TERM=xterm-256color
 
