@@ -62,7 +62,7 @@ function gwtrm() {
 }
 
 # Claude alias
-alias ccc='claude --dangerously-skip-permissions'
+alias ccc='claude --dangerously-skip-permissions --worktree'
 
 # Directory navigation
 alias ..="cd .."
