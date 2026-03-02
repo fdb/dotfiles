@@ -1,5 +1,5 @@
 ---
-name: explain-code
+name: code-explainer
 description: Use when the user asks to create an interactive HTML explainer, visual code walkthrough, or "making of" page for a codebase or feature. Triggered by requests like "explain this code visually", "create an explainer", "make an interactive walkthrough".
 ---
 
