@@ -22,5 +22,6 @@
   },
   "outputStyle": "Explanatory",
   "alwaysThinkingEnabled": true,
+  "voiceEnabled": true,
   "skipDangerousModePermissionPrompt": true
 }
