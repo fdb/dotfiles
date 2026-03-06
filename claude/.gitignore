@@ -1,6 +1,9 @@
 # Ignore everything by default
 *
 
+# Whitelist CLAUDE.md
+!CLAUDE.md
+
 # Whitelist these directories and their contents
 !commands/
 !commands/**
