@@ -1,0 +1,26 @@
+#!/bin/bash
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+    echo "Usage: kill_port <port>" >&2
+    exit 1
+fi
+
+port="$1"
+
+if ! [[ "$port" =~ ^[0-9]+$ ]]; then
+    echo "Error: '$port' is not a valid port number" >&2
+    exit 1
+fi
+
+pids=$(lsof -ti :"$port" 2>/dev/null || true)
+
+if [[ -z "$pids" ]]; then
+    echo "No process found on port $port"
+    exit 0
+fi
+
+echo "$pids" | while read -r pid; do
+    echo "Killing PID $pid on port $port"
+    kill "$pid"
+done
