@@ -38,7 +38,14 @@ function gwt() {
   local wt_dir="$root/.worktrees/$name"
   if [ -d "$wt_dir" ]; then
     cd "$wt_dir"
+  elif git show-ref --verify --quiet "refs/heads/$name"; then
+    # Local branch exists — check it out in a worktree
+    git worktree add "$wt_dir" "$name" && cd "$wt_dir"
+  elif git show-ref --verify --quiet "refs/remotes/origin/$name"; then
+    # Remote branch exists — create tracking worktree
+    git fetch origin "$name" && git worktree add "$wt_dir" "$name" && cd "$wt_dir"
   else
+    # No existing branch — create a new one
     git worktree add "$wt_dir" -b "$name" && cd "$wt_dir"
   fi
 }
