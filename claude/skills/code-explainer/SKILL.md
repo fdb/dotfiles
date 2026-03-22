@@ -1,21 +1,31 @@
 ---
 name: code-explainer
-description: Use when the user asks to create an interactive HTML explainer, visual code walkthrough, or "making of" page for a codebase or feature. Triggered by requests like "explain this code visually", "create an explainer", "make an interactive walkthrough".
+description: Use when the user asks to create an interactive HTML explainer, visual walkthrough, or "making of" page for a codebase, feature, protocol, spec, architecture, commit history, or technical documentation. Triggered by requests like "explain this code visually", "create an explainer", "make an interactive walkthrough", "explain this protocol", "visualize the architecture".
 ---
 
 # Interactive Code Explainer
 
-Generate a self-contained HTML file that visually explains how a codebase works — with animations, interactive diagrams, and step-by-step navigation.
+Generate a self-contained HTML file that visually explains how a system works — with animations, interactive diagrams, and step-by-step navigation.
 
 ## Process
 
-1. **Read the source code** thoroughly — every file that matters
-2. **Identify sections** from the code (see Section Template below)
-3. **Generate a single HTML file** with all CSS/JS inline — zero dependencies
+1. **Read the relevant source** thoroughly — code, specs, protocol docs, commit history, architecture docs, or whatever the user points you at
+2. **Identify sections** from the source material (see Section Template below)
+3. **Generate a single HTML file** with all CSS/JS inline — external libraries allowed only via CDN
 
-## Required Sections
+## Audience
 
-Analyze the codebase and create slides for each applicable section:
+Target audience: a technical product manager who understands networking/systems concepts but doesn't live in the code day-to-day.
+
+Implications:
+- Lead with **diagrams and data structures**, not code listings
+- Show code snippets only when they clarify a concept (e.g., a key struct definition, an enum of message types)
+- Never dump full functions or files — extract the 5-10 lines that matter
+- Explain *why* things are designed a way, not just *what* they are
+
+## Sections
+
+Analyze the source material and create slides for each applicable section. **Pick what fits** — not every section applies to every explainer:
 
 | Section | What to show |
 |---------|-------------|
@@ -23,11 +33,56 @@ Analyze the codebase and create slides for each applicable section:
 | **Data Model** | Core types/interfaces with annotated code blocks; entity relationship diagrams if applicable |
 | **Data Flow** | How data moves through the system — animated pipeline diagram with "Animate" button |
 | **Components / Architecture** | Interactive component tree (click to inspect), module diagram, or layer diagram |
+| **Protocol / Wire Format** | Packet structure diagrams, message type tables, sequence diagrams for handshakes/exchanges |
+| **Timeline / History** | For commit-based or changelog-based explainers, a visual timeline of changes |
 | **Design System / Style** | Color swatches (hover for usage), typography scale, spacing system, component showcase with annotated classes |
 | **Validation / Testing** | Test map (unit vs E2E vs integration), clickable test paths through the system |
 | **Summary** | Key architectural decisions in card grid |
 
-Skip sections that don't apply. Add project-specific sections when the code warrants it (e.g., "Dialog Tree" for a Yarn Spinner app, "API Routes" for a backend, "State Machine" for complex state).
+Add project-specific sections when the material warrants it (e.g., "Dialog Tree" for a Yarn Spinner app, "API Routes" for a backend, "State Machine" for complex state).
+
+## External Libraries
+
+CDN-loaded libraries are permitted via `esm.sh` or `unpkg`. Everything still ships as **one `.html` file** with no build step.
+
+Recommended libraries:
+
+- **Mermaid** — sequence diagrams, flowcharts, entity-relationship diagrams, state machines
+- **D3.js** — custom interactive visualizations when Mermaid isn't expressive enough
+- **Prism.js** or **highlight.js** — syntax highlighting (alternative to manual span classes)
+
+Load via `<script type="module">` with esm.sh imports or `<script src="https://unpkg.com/...">`.
+
+### Mermaid Integration
+
+Initialize Mermaid with the dark theme to match the explainer design system:
+
+```html
+<script type="module">
+  import mermaid from 'https://esm.sh/mermaid@11';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+      primaryColor: '#1a1a26',
+      primaryBorderColor: '#3a3a52',
+      primaryTextColor: '#e8e8f0',
+      lineColor: '#fb923c',
+      secondaryColor: '#22222e',
+      tertiaryColor: '#12121a'
+    }
+  });
+</script>
+```
+
+Useful diagram types:
+
+- **Sequence diagrams** — protocol flows, API call chains, handshake sequences
+- **Flowcharts** — decision logic, state transitions, request routing
+- **ER diagrams** — data models, table relationships, struct hierarchies
+- **State diagrams** — lifecycle states, connection states, mode transitions
+
+Mermaid renders into SVG automatically. Override `.mermaid svg` styles as needed to fit the dark theme.
 
 ## Design System
 
@@ -62,7 +117,7 @@ Include at least 2-3 of these per explainer:
 - **Color swatch grid**: Hover reveals usage context
 - **Test path animation**: Click a path to animate traversal through nodes
 - **Node graph**: Hover to highlight connected edges and neighbors (for tree/graph structures)
-- **Annotated code blocks**: macOS-style header with filename, syntax-highlighted with `<span>` classes
+- **Annotated code blocks**: macOS-style header with filename, syntax-highlighted with `<span>` classes or a highlighting library
 
 ## Code Block Style
 
@@ -80,11 +135,12 @@ Include at least 2-3 of these per explainer:
 
 ## Quality Checklist
 
-- [ ] Single HTML file, no external dependencies (except Google Fonts)
-- [ ] All CSS inline in `<style>`, all JS inline in `<script>`
+- [ ] Single HTML file. External libraries allowed only via CDN (esm.sh / unpkg). No build step.
+- [ ] All CSS inline in `<style>`, all JS inline in `<script>` (except CDN imports)
 - [ ] Every slide has `data-section` attribute
 - [ ] Keyboard (arrows, space), mouse (nav dots), and touch (swipe) navigation all work
-- [ ] Code blocks use syntax highlighting spans, not plain text
+- [ ] Diagrams preferred over code blocks for explaining flow and architecture
+- [ ] Code snippets show only key data structures and signatures, not full implementations
 - [ ] At least 2 interactive/animated elements
 - [ ] Cards have hover effects (lift + glow)
 - [ ] Background has subtle radial gradient texture + grid overlay
