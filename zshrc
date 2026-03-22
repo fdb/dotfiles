@@ -39,17 +39,8 @@ alias llama='llama-server -hf ggml-org/gpt-oss-20b-GGUF --ctx-size 0 --jinja -ub
 # PATH additions
 export PATH=~/.local/bin:/opt/homebrew/bin:/go/bin:$PATH
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/fdb/.lmstudio/bin"
-
 # Herd injected PHP 8.4 configuration.
 export HERD_PHP_84_INI_SCAN_DIR="/Users/fdb/Library/Application Support/Herd/config/php/84/"
-
-# Herd injected NVM configuration
-export NVM_DIR="/Users/fdb/Library/Application Support/Herd/config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
-[[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
 
 # Herd injected PHP binary.
 export PATH="/Users/fdb/Library/Application Support/Herd/bin/":$PATH
@@ -57,16 +48,8 @@ export PATH="/Users/fdb/Library/Application Support/Herd/bin/":$PATH
 # Herd injected PHP 8.3 configuration.
 export HERD_PHP_83_INI_SCAN_DIR="/Users/fdb/Library/Application Support/Herd/config/php/83/"
 
-# Added by Antigravity
-export PATH="/Users/fdb/.antigravity/antigravity/bin:$PATH"
-
-# GHCup (Haskell)
-if [ -f "${HOME}/.ghcup/env" ]; then
-    source "${HOME}/.ghcup/env"
-fi
-
-# Amp CLI
-export PATH="/Users/fdb/.amp/bin:$PATH"
-
 # GNU Radio Companion fix
 export GSETTINGS_SCHEMA_DIR=/opt/homebrew/share/glib-2.0/schemas
+
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"
