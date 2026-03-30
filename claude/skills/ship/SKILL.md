@@ -5,7 +5,7 @@ description: Commit all changes, push to remote, and create a PR if on a feature
 
 # Ship — Commit, Push & Create PR
 
-Commit all staged/unstaged changes, push to origin, and if on a feature branch, create a pull request.
+Commit staged/unstaged changes related to this session, push to origin, and if on a feature branch, create a pull request.
 
 ## Steps
 
