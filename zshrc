@@ -33,6 +33,15 @@ compress_video() {
     ffmpeg -y -i "$input_file" -vf "scale=-2:1080" -r 15 -crf 28 -pix_fmt yuv420p -movflags +faststart "$output_file"
 }
 
+convert_gif() {
+    local input_file="$1"
+    local output_file="${input_file:r}.gif"
+    local palette=$(mktemp /tmp/palette.XXXXXX.png)
+    ffmpeg -y -i "$input_file" -vf "format=rgb24,palettegen" "$palette" && \
+    ffmpeg -y -i "$input_file" -i "$palette" -lavfi "format=rgb24[x];[x][1:v]paletteuse" "$output_file"
+    rm -f "$palette"
+}
+
 # Local LLM
 alias llama='llama-server -hf ggml-org/gpt-oss-20b-GGUF --ctx-size 0 --jinja -ub 2048 -b 2048 -ngl 99 -fa'
 
