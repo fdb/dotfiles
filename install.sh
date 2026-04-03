@@ -22,7 +22,18 @@ ln -sfn ~/dotfiles/emacs ~/.emacs
 ln -sfn ~/dotfiles/bin ~/bin
 ln -sfn ~/dotfiles/radare2rc ~/.radare2rc
 ln -sfn ~/dotfiles/zshrc ~/.zshrc
-ln -sfn ~/dotfiles/claude ~/.claude
+# Symlink versioned Claude config items into ~/.claude/ (don't replace the whole directory).
+mkdir -p ~/.claude
+for item in CLAUDE.md skills commands settings.json keybindings.json; do
+  src=~/dotfiles/claude/$item
+  dest=~/.claude/$item
+  [ ! -e "$src" ] && continue
+  if [ -e "$dest" ] && [ ! -L "$dest" ]; then
+    echo "WARNING: ~/.claude/$item already exists and is not a symlink — skipping (won't overwrite)"
+  else
+    ln -sfn "$src" "$dest"
+  fi
+done
 
 if [[ $OSTYPE == darwin* ]];
 then
