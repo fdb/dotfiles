@@ -60,5 +60,3 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/fdb/Library/Application Support/Herd/con
 # GNU Radio Companion fix
 export GSETTINGS_SCHEMA_DIR=/opt/homebrew/share/glib-2.0/schemas
 
-# Vite+ bin (https://viteplus.dev)
-. "$HOME/.vite-plus/env"
