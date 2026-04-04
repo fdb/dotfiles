@@ -6,3 +6,6 @@ Start answers immediately, no filler. Conceptual principles over step-by-step. C
 
 ## Python
 Always `uv` instead of `python3` or `pip` directly.
+
+## Coding
+Use TDD with red/green workflow when fixing bugs.
