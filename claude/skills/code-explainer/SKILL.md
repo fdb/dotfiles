@@ -48,10 +48,26 @@ CDN-loaded libraries are permitted via `esm.sh` or `unpkg`. Everything still shi
 Recommended libraries:
 
 - **Mermaid** — sequence diagrams, flowcharts, entity-relationship diagrams, state machines
-- **D3.js** — custom interactive visualizations when Mermaid isn't expressive enough
+- **Observable Plot** — fast, declarative charts (histograms, scatterplots, bar charts, density plots, timelines). Great default for one-off data visualizations.
+- **D3.js** — custom interactive visualizations when Mermaid + Plot aren't expressive enough (sankey, chord, sunburst, force-directed graphs, custom layouts)
 - **Prism.js** or **highlight.js** — syntax highlighting (alternative to manual span classes)
 
-Load via `<script type="module">` with esm.sh imports or `<script src="https://unpkg.com/...">`.
+Load via `<script type="module">` with esm.sh / jsdelivr imports or `<script src="https://unpkg.com/...">`.
+
+### Observable Plot example
+
+A minimal Plot chart fits in a few lines. Drop it into any slide:
+
+```html
+<div id="myplot"></div>
+<script type="module">
+  import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
+  const plot = Plot.rectY({length: 10000}, Plot.binX({y: "count"}, {x: Math.random})).plot();
+  document.querySelector("#myplot").append(plot);
+</script>
+```
+
+Style Plot output to match the dark theme by passing `{style: {background: "transparent", color: "#e8e8f0"}}` to `.plot()`, or override via CSS on `svg` inside the container.
 
 ### Mermaid Integration
 
@@ -110,14 +126,67 @@ The HTML must include:
 
 ## Interactive Elements
 
-Include at least 2-3 of these per explainer:
+Include at least 2-3 of these per explainer — but follow the rule below first.
 
-- **Animated data flow**: Pipeline boxes that light up sequentially on button click
-- **Clickable component/module tree**: Click a node to show its code signature in a side panel
-- **Color swatch grid**: Hover reveals usage context
-- **Test path animation**: Click a path to animate traversal through nodes
-- **Node graph**: Hover to highlight connected edges and neighbors (for tree/graph structures)
+### Animations must be functional, not decorative
+
+**Decorative animations are forbidden.** An animation that only sequentially highlights a row of boxes is noise — it tells the viewer nothing they couldn't learn by reading the labels. Don't ship it.
+
+A functional animation must reveal *something about the behavior* of the system:
+
+- **State change** — show values transforming (e.g., a text field growing as tokens stream in, a counter incrementing, an array filling up, a buffer draining)
+- **Data transformation** — show input → output side by side as a process runs (e.g., raw JSON on the left being compressed on the right, a tokenizer splitting text into tokens)
+- **Causality** — show which node triggers which (e.g., a message traveling along an edge, a request fanning out to workers)
+- **Comparison** — show two or more approaches running side-by-side so the viewer can see the difference (e.g., sync vs async timing, with vs without caching)
+
+  **Critical rule for comparison animations**: both panes must render *visibly different content* at every step. If your two panes look identical at some point, the comparison isn't working — you're showing the common outcome twice instead of the differing inputs or operations.
+
+  Before building a comparison, identify the exact axis where the two approaches differ:
+  - If the final result is the same but the *process* differs → show the intermediate state that diverges (e.g., "what the API yields at each tick", "what the accumulator variable holds", "which branch runs")
+  - If the process is the same but the *inputs* differ → show both inputs distinctly, not just the identical output they produce
+  - If both process and output differ → show both, clearly labeled
+
+  Each pane should have at minimum: (1) an "input" row showing what arrived or was given this step, and (2) an "output" row showing what the code produced. The input row is where the divergence must be visible.
+- **Traversal** — walk through a real data structure in the order the algorithm would visit it (e.g., BFS vs DFS on a tree, not just lighting up nodes in arbitrary sequence)
+
+Rule of thumb: if you can remove the animation and replace it with a single static diagram without losing information, the animation was decorative. Cut it.
+
+### Patterns to use
+
+- **Data-driven animation**: bind animated elements to real values from the system being explained — token counts, packet sizes, node depths, actual message contents. The viewer should learn a fact they didn't know.
+- **Clickable component/module tree**: click a node to show its code signature / responsibility in a side panel
+- **Node graph hover**: highlight connected edges and neighbors in a tree/graph structure
+- **Before/after toggles**: one button swaps between two states of the same diagram to show what a change does
+- **Parameter sliders**: move a slider to see how a parameter affects the output (e.g., chunk size vs throughput)
 - **Annotated code blocks**: macOS-style header with filename, syntax-highlighted with `<span>` classes or a highlighting library
+
+## Choose Visualizations by Data Shape
+
+Match the chart type to the *kind* of data the concept produces. Picking the wrong shape makes the explainer look polished but teaches the wrong thing.
+
+| Data shape | Use | Library |
+|---|---|---|
+| **Distribution** (how values spread across a range) | histogram, density plot, hexbin, violin plot | Observable Plot, D3 |
+| **Individual points** (each item has attributes) | scatterplot, beeswarm, bubble chart, strip plot | Observable Plot, D3 |
+| **Time-based events** (ordered by when they happen) | sequence diagram, timeline, event stream, gantt | Mermaid (sequence/gantt), Plot, D3 |
+| **Hierarchies** (parent/child containment) | tree map, sunburst, icicle, indented tree | D3 |
+| **Networks / flows** (nodes connected by edges or quantities) | DAG, sankey, chord diagram, force-directed graph | D3 |
+| **State machines** (discrete states + transitions) | state diagram | Mermaid |
+| **Comparisons across categories** (A vs B vs C) | bar chart, dot plot, grouped bar, slope chart | Observable Plot |
+| **Correlations** (relationship between two variables) | scatterplot with regression, heatmap | Observable Plot, D3 |
+| **Rankings / ordered lists** (top N, leaderboards) | horizontal bar, dot plot with labels | Observable Plot |
+| **Geographic data** | choropleth, dot map | D3 + geo |
+
+When the explainer covers *code behavior* specifically, prefer these pairings:
+
+- **Streaming / async flows** → sequence diagram (showing actors + time axis)
+- **Data pipelines** → sankey or flow diagram (showing what volume flows where)
+- **Module dependencies** → DAG or indented tree
+- **Performance breakdowns** → stacked bar or horizontal bar per phase
+- **Request lifecycles** → timeline with phases colored
+- **Algorithm steps** → snapshot animation walking the real data structure
+
+If you can't map your concept to one of these, stop and reconsider — the concept may not warrant a chart, and a table or static diagram may serve better.
 
 ## Code Block Style
 
@@ -141,7 +210,8 @@ Include at least 2-3 of these per explainer:
 - [ ] Keyboard (arrows, space), mouse (nav dots), and touch (swipe) navigation all work
 - [ ] Diagrams preferred over code blocks for explaining flow and architecture
 - [ ] Code snippets show only key data structures and signatures, not full implementations
-- [ ] At least 2 interactive/animated elements
+- [ ] At least 2 interactive/animated elements, each of which is **functional** (reveals a state change, transformation, causality, comparison, or traversal) — never decorative sequential highlighting
+- [ ] Visualization choices match the data shape (see Visualization Picker table)
 - [ ] Cards have hover effects (lift + glow)
 - [ ] Background has subtle radial gradient texture + grid overlay
 - [ ] No horizontal scrolling at 1024px+ viewport width
