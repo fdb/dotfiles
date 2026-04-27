@@ -1,5 +1,3 @@
 .DS_Store
 vim/swapfiles/*.swp
 vim/.netrwhist
-
-claude/skills/*/SKILL.bak
