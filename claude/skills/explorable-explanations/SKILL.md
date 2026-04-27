@@ -128,6 +128,8 @@ Surface composite device classes when topic shape suggests them:
 - **Ladder of abstraction** (Bret Victor) — concrete examples + aggregate patterns side by side
 - **Role-based negotiation** — multi-stakeholder tradeoff
 
+After mechanic + device selection, also propose **2–4 presentation techniques from the Toolbox section** (e.g., sticky-visual scrollytelling, inline interactives, big-number callouts, layered reveal). The mechanic and the toolbox are orthogonal — the same parameter-slider mechanic can sit in three very different presentation shells. Pick what serves *this* topic; don't grab everything.
+
 ### Round 6 — Self-implication moment + Model Contract
 
 Require the user to write **one sentence**: *"the reader produces the phenomenon by doing X."* This is the most important gate (G1). If the user can't write the sentence, warn and offer patterns from the Patterns library.
@@ -241,6 +243,46 @@ For sensitive topics, use the **intimate tone overlay** (see Design System). Sur
 - **Wrong intuitive fix → counterintuitive correct fix** (Polygons demand-diversity inversion)
 - **Personal verdict** — make the reader the input (NPR Jobs, Social Security build-your-career)
 
+## Toolbox: presentation techniques
+
+The mechanic ladder is about *what the reader does*. The patterns library is about *named editorial moves*. The toolbox is about *how the surrounding presentation behaves* — orthogonal to both. A parameter-slider mechanic can sit in a sticky-visual scrollytelling layout, or in inline-interactive form, or as a standalone figure. Same mechanic, very different reader experience.
+
+Pick techniques that serve the topic. **Overdoing it is a worse failure than underdoing it** — three sticky-scrollytelling sections in one piece is fatiguing; one well-placed one is memorable. Most explorables use 2–4 toolbox items total.
+
+The skill consults this during Round 5 (after picking mechanics, also consider presentation techniques) and P3 (narrative wiring decides where each technique sits).
+
+### Scroll-driven presentation
+
+- **Sticky-visual scrollytelling** — pin a visual element (`position: sticky; top: 10vh`) while prose scrolls past it; each text "step" updates the visual (adds/removes elements, scales them up/down, recolors, swaps datasets) via `IntersectionObserver` triggers. The visual carries the through-line; the prose layers commentary. Use when **one canvas tells the whole story and the prose annotates it stepwise** (NYT-style data stories, Pudding-style narratives). Don't use when there are multiple distinct visuals to show — sticky carries one canvas, not three.
+- **Inline interactives** — embed a tiny widget in prose flow: a draggable number, a hover-revealing sparkline, a one-button toggle inline with the sentence ("...the rate has risen to **[•sparkline•]** since 2019..."). Bret Victor's reactive-document pattern. Use to make a single sentence inspectable. Don't use when the widget exceeds 1–2 lines of text — at that size it's a figure, not an inline.
+- **Scroll-driven state morph** — the visual smoothly interpolates between two named states as the reader scrolls (D3 transitions, FLIP technique, or `view-timeline` where supported). Use to show *transformation* in the abstract (before → after, then → now). Don't use when the transformation is the *mechanic itself* — that should be reader-driven, not scroll-driven.
+
+### Quantitative punctuation
+
+- **Big-number callout** — one giant number, tiny attribution underneath, generous whitespace around it ("**9.194** kinderen op de wachtlijst"). Use as section opener for a single load-bearing fact. Don't string three big numbers in a row — each loses weight; if you have three numbers that matter equally, that's a small chart, not three callouts.
+- **Isotype** (unit-as-quantity) — repeated unit shape where each unit = N entities. Otto Neurath / *Gerd Arntz* lineage. Use when scale matters and the reader needs to *count* rather than *read* numerals. **Watch G4b** — anthropomorphic units (little person silhouettes) re-introduce the ethical problem stand-ins were meant to defuse for vulnerable populations; use abstract shapes for sensitive topics.
+- **Inline sparkline** — micro-chart inside prose flow, often hand-drawn-feeling SVG. Use when a trend is a side-fact reinforcing prose, not the central argument.
+
+### Pacing and focus
+
+- **Layered reveal** — a complex visual builds up layer-by-layer as the prose introduces each layer (axis → data → reference line → annotations → conclusion). Use when the finished diagram would be overwhelming if shown all at once. Don't use when the reader will jump around — layered reveal punishes non-linear reading.
+- **Camera moves** — zoom in on a focal point as the story narrows, zoom out as it widens (Mapbox-style on geographic data; SVG `viewBox` animation on abstract figures). Use sparingly to mirror the prose's rhetorical scope-change. Don't use as decoration — every camera move should track a sentence-level scope shift.
+- **Deliberate silence** — a large empty space between sections, or a section that is just a single short blockquote on white. Use to mark a beat the reader needs to feel before moving on. Don't use more than once per piece — it stops working.
+
+### Reader orientation (long pieces only)
+
+- **Section anchor nav** — a small floating list of section titles that tracks the current position (highlights the section the reader is currently in). Use for pieces over 30 minutes. Don't use for short pieces; the nav becomes more visual weight than the content can support.
+- **Progress indicator** — thin progress bar at top, or a percent-read in the corner. Less invasive than an anchor nav. Use when the piece is long and the reader benefits from a "how much further?" signal.
+
+### Native primitives worth reaching for
+
+- **`<details>` for "go deeper"** — progressive disclosure for footnotes, derivations, edge cases. Reward curiosity without punishing the reader who just wants the spine. Use generously.
+- **`<dialog>` for content warnings or definitional asides** — native modal with accessible focus management, escape-to-close, backdrop styling.
+- **`IntersectionObserver` API** — the engine behind sticky-visual scrollytelling and reveal-on-scroll. Set thresholds, fire callbacks; do not poll scroll position manually.
+- **CSS `position: sticky`** — the layout primitive for pinned visuals. Honors the parent's bounding box.
+- **CSS scroll-snap** — step-based scrolling (one section per snap point). Powerful but invasive — fights the browser's natural feel. Use only when the explorable is genuinely slide-like, not for editorial scroll narratives.
+- **`prefers-reduced-motion`** — every motion technique above must check this. Animations skip; transitions become instant; `IntersectionObserver`-driven state changes still happen but without the smooth interpolation.
+
 ## Anti-patterns (the skill warns about all of these; some block via G5)
 
 1. **Lookup-not-model** — reader inputs themselves but learns no causal mechanism (NPR Jobs)
@@ -269,7 +311,7 @@ Five build phases (P1–P5), then a Playwright E2E verification pass. Phase orde
 |---|---|---|
 | **P1 — Scaffold** | HTML skeleton; sections stubbed with placeholder text; mechanic stub elements present but not wired; aesthetic preset CSS inlined | Does the page render top-to-bottom without errors? |
 | **P2 — Core mechanic in isolation** | The mechanic actually produces the phenomenon. Crude visuals OK; no narrative persuasion yet. | **Can a cold reader, with only the minimal rules and labels needed to operate the model — no narrative persuasion, no framing prose — produce the phenomenon by interacting? If no, fix the mechanic, not the prose, before continuing.** |
-| **P3 — Narrative wiring** | Prose written into sections; mechanic-prose handoffs wired; scroll/step transitions in place | Does the piece flow if you read it top to bottom *without* touching the mechanic? Does it flow if you only touch the mechanic and never read prose? |
+| **P3 — Narrative wiring** | Prose written into sections; mechanic-prose handoffs wired; scroll/step transitions in place; **Toolbox techniques implemented where Round 5 selected them** (sticky-visual scrollytelling, layered reveal, etc.) | Does the piece flow if you read it top to bottom *without* touching the mechanic? Does it flow if you only touch the mechanic and never read prose? Does each Toolbox technique earn its complexity (no decorative scrollytelling, no isotype that reintroduces G4b)? |
 | **P4 — Design pass** | Color, type, spacing per genre preset (read from `presets/<preset>.css`); figure styling; responsive | Does the design match the genre and the topic's emotional register? |
 | **P5 — Polish** | Reduced-motion, keyboard nav, mobile, state-on-scroll-back, content warnings if applicable, source/provenance section, model-limits section | Is there a single accessibility or UX bug a first-time reader will hit? |
 
