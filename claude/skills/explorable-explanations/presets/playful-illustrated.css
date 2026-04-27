@@ -1,0 +1,62 @@
+/*
+ * Playful-illustrated preset
+ * For: parameter-driven essays — Polygons, Outbreak, ETFs, Ballot, Taxicab
+ * Mood: bright, flat, chunky, hand-drawn affect
+ *
+ * Inlined into the generated HTML's :root{} block at P4 (design pass).
+ */
+:root {
+  /* surfaces — warm off-whites, never pure */
+  --bg:         oklch(0.98 0.012 85);    /* page background, warm cream */
+  --surface:    oklch(0.95 0.018 85);    /* figures, cards */
+  --surface-2:  oklch(0.91 0.022 85);    /* code, inset blocks */
+  --rule:       oklch(0.84 0.020 85);    /* borders */
+
+  /* text — warm darks, never pure black */
+  --ink:        oklch(0.22 0.02 250);    /* primary text */
+  --ink-muted:  oklch(0.42 0.02 250);    /* secondary */
+  --ink-faint:  oklch(0.58 0.015 250);   /* tertiary, axis labels */
+
+  /* two vivid accents (one warm, one cool) — used sparingly */
+  --accent:      oklch(0.72 0.18 50);    /* vivid orange */
+  --accent-bg:   oklch(0.92 0.06 50);    /* soft orange wash */
+  --deep:        oklch(0.62 0.16 220);   /* clear blue */
+  --deep-bg:     oklch(0.92 0.06 220);
+
+  /* extended palette for two-group stand-ins (Polygons-style) */
+  --hue-a:       oklch(0.72 0.18 50);    /* group A — orange */
+  --hue-b:       oklch(0.62 0.16 220);   /* group B — blue */
+  --hue-c:       oklch(0.70 0.16 150);   /* group C — green (third party) */
+  --hue-warn:    oklch(0.72 0.18 25);    /* unhappy/wrong state */
+
+  /* type scale — chunky display */
+  --font-display: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body:    var(--font-display);
+  --font-mono:    ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --h1-size: clamp(2.4rem, 5vw + 1rem, 3.6rem);
+  --h1-weight: 800;
+  --h1-tracking: -0.025em;
+
+  --h2-size: 1.8rem;
+  --h2-weight: 700;
+
+  --body-size: 18px;
+  --body-leading: 1.65;
+
+  /* spacing rhythm — generous */
+  --section-gap: 5rem;
+  --para-gap: 1.25rem;
+  --content-max: 64ch;
+
+  /* motion — playful but disciplined */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-slow: 0ms;
+  }
+}

@@ -1,0 +1,59 @@
+/*
+ * Reverent-scientific preset
+ * For: walkthroughs — Ciechanowski, Sight & Light, Log-spherical
+ * Mood: whiteground, restrained single-accent, technical figure captions
+ */
+:root {
+  --bg:         oklch(0.99 0.004 240);   /* near-white, faint cool cast */
+  --surface:    oklch(0.97 0.005 240);
+  --surface-2:  oklch(0.94 0.006 240);
+  --rule:       oklch(0.86 0.006 240);
+
+  --ink:        oklch(0.18 0.012 250);
+  --ink-muted:  oklch(0.40 0.010 250);
+  --ink-faint:  oklch(0.60 0.008 250);
+
+  /* single muted accent — slate blue, technical */
+  --accent:      oklch(0.50 0.10 240);
+  --accent-bg:   oklch(0.94 0.04 240);
+  --deep:        var(--accent);          /* same accent in this preset */
+  --deep-bg:     var(--accent-bg);
+
+  /* sparing semantic colors */
+  --hue-a:       oklch(0.55 0.12 240);
+  --hue-b:       oklch(0.58 0.12 30);
+  --hue-warn:    oklch(0.62 0.16 25);
+
+  --font-display: 'Inter Tight', 'Inter', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
+
+  --h1-size: clamp(2rem, 4vw + 0.5rem, 2.75rem);
+  --h1-weight: 600;
+  --h1-tracking: -0.02em;
+
+  --h2-size: 1.5rem;
+  --h2-weight: 600;
+
+  --body-size: 17px;
+  --body-leading: 1.7;
+
+  --section-gap: 4.5rem;
+  --para-gap: 1.1rem;
+  --content-max: 68ch;
+
+  --transition-fast: 120ms ease;
+  --transition-slow: 260ms ease;
+
+  /* figure caption styling — small, technical */
+  --caption-size: 13px;
+  --caption-leading: 1.5;
+  --caption-color: var(--ink-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-slow: 0ms;
+  }
+}

@@ -1,0 +1,66 @@
+/*
+ * Gamified preset
+ * For: game-with-explanatory-frame — Ballot, District, Trolley Problem
+ * Mood: chunky UI panels, strong feedback (success/fail), rule-explainer chrome
+ */
+:root {
+  --bg:         oklch(0.20 0.020 270);   /* dark slate */
+  --surface:    oklch(0.26 0.022 270);   /* card panels */
+  --surface-2:  oklch(0.32 0.024 270);
+  --rule:       oklch(0.42 0.024 270);
+
+  --ink:        oklch(0.94 0.008 90);    /* warm off-white */
+  --ink-muted:  oklch(0.74 0.010 90);
+  --ink-faint:  oklch(0.58 0.010 90);
+
+  /* feedback colors — explicit success/fail */
+  --accent:      oklch(0.78 0.16 90);    /* highlight yellow — selection/active */
+  --accent-bg:   oklch(0.32 0.10 90);
+  --deep:        oklch(0.70 0.14 250);   /* info blue */
+  --deep-bg:     oklch(0.30 0.06 250);
+  --success:     oklch(0.72 0.18 145);   /* green */
+  --success-bg:  oklch(0.30 0.08 145);
+  --warn:        oklch(0.72 0.18 25);    /* red */
+  --warn-bg:     oklch(0.30 0.10 25);
+
+  --hue-a:       var(--accent);
+  --hue-b:       var(--deep);
+  --hue-c:       var(--success);
+
+  --font-display: 'Inter', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    ui-monospace, 'JetBrains Mono', Menlo, monospace;
+
+  --h1-size: clamp(2.2rem, 5vw + 0.5rem, 3.2rem);
+  --h1-weight: 800;
+  --h1-tracking: -0.025em;
+
+  --h2-size: 1.6rem;
+  --h2-weight: 700;
+
+  --body-size: 17px;
+  --body-leading: 1.6;
+
+  --section-gap: 4rem;
+  --para-gap: 1rem;
+  --content-max: 60ch;
+
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 280ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* UI panel chrome — chunky borders, strong feedback */
+  --panel-radius: 12px;
+  --panel-border: 2px solid var(--rule);
+  --panel-shadow: 0 4px 0 oklch(0.10 0.020 270);  /* hard drop shadow, retro feel */
+
+  /* button chrome */
+  --button-radius: 10px;
+  --button-padding: 0.75rem 1.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-slow: 0ms;
+  }
+}

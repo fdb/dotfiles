@@ -1,0 +1,58 @@
+/*
+ * Editorial preset
+ * For: scrollytelling data stories — NYT/NPR/Bloomberg sensibility
+ * Mood: large display serif, single accent, generous whitespace
+ */
+:root {
+  --bg:         oklch(0.99 0.003 80);    /* warm near-white */
+  --surface:    oklch(0.97 0.005 80);
+  --surface-2:  oklch(0.93 0.006 80);
+  --rule:       oklch(0.84 0.006 80);
+
+  --ink:        oklch(0.16 0.010 50);    /* near-black warm */
+  --ink-muted:  oklch(0.40 0.008 50);
+  --ink-faint:  oklch(0.58 0.006 50);
+
+  /* single brand-style accent — editorial red or NYT blue, picked per piece */
+  --accent:      oklch(0.55 0.18 25);    /* default: editorial red */
+  --accent-bg:   oklch(0.94 0.05 25);
+  --deep:        var(--accent);
+  --deep-bg:     var(--accent-bg);
+
+  --hue-a:       oklch(0.55 0.16 25);
+  --hue-b:       oklch(0.50 0.14 230);
+
+  /* serif display, sans body — the editorial signature */
+  --font-display: 'Lora', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    ui-monospace, Menlo, monospace;
+
+  --h1-size: clamp(2.5rem, 5.5vw + 0.5rem, 4rem);
+  --h1-weight: 700;
+  --h1-tracking: -0.03em;
+
+  --h2-size: 1.75rem;
+  --h2-weight: 600;
+
+  --body-size: 18px;
+  --body-leading: 1.7;
+
+  --section-gap: 5rem;
+  --para-gap: 1.3rem;
+  --content-max: 62ch;
+
+  --transition-fast: 150ms ease;
+  --transition-slow: 300ms ease;
+
+  /* deck/lede styling — the oversized intro paragraph */
+  --lede-size: 22px;
+  --lede-leading: 1.55;
+  --lede-color: var(--ink-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-slow: 0ms;
+  }
+}

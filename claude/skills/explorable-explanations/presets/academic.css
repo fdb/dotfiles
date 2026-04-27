@@ -1,0 +1,60 @@
+/*
+ * Academic preset
+ * For: textbook-with-interactives — Mathigon, Sines & Signals, Immersive Math
+ * Mood: serif body, numbered figures, deep glossary, textbook chrome
+ */
+:root {
+  --bg:         oklch(0.99 0.002 90);
+  --surface:    oklch(0.96 0.004 90);
+  --surface-2:  oklch(0.92 0.005 90);
+  --rule:       oklch(0.82 0.006 90);
+
+  --ink:        oklch(0.18 0.008 270);   /* slight cool cast — scholarly */
+  --ink-muted:  oklch(0.42 0.008 270);
+  --ink-faint:  oklch(0.60 0.006 270);
+
+  /* deeper, more saturated single accent — textbook blue */
+  --accent:      oklch(0.45 0.16 250);
+  --accent-bg:   oklch(0.94 0.05 250);
+  --deep:        oklch(0.42 0.14 280);   /* secondary, slight purple */
+  --deep-bg:     oklch(0.94 0.05 280);
+
+  /* multi-color palette for math diagrams — RGB convention */
+  --hue-x: oklch(0.55 0.20 25);          /* x-axis red */
+  --hue-y: oklch(0.55 0.18 145);         /* y-axis green */
+  --hue-z: oklch(0.50 0.18 250);         /* z-axis blue */
+
+  --font-display: 'Lora', 'Source Serif Pro', Georgia, serif;
+  --font-body:    'Lora', 'Source Serif Pro', Georgia, serif;  /* serif throughout */
+  --font-mono:    ui-monospace, 'JetBrains Mono', Menlo, monospace;
+
+  --h1-size: clamp(2rem, 4vw + 0.5rem, 2.75rem);
+  --h1-weight: 700;
+  --h1-tracking: -0.02em;
+
+  --h2-size: 1.5rem;
+  --h2-weight: 700;
+
+  --body-size: 17px;
+  --body-leading: 1.7;
+
+  --section-gap: 4rem;
+  --para-gap: 1rem;
+  --content-max: 66ch;
+
+  --transition-fast: 120ms ease;
+  --transition-slow: 260ms ease;
+
+  /* numbered figure caption — "Figure 3.1: ..." style */
+  --figure-number-size: 12px;
+  --figure-number-weight: 600;
+  --figure-number-tracking: 0.1em;
+  --figure-number-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-slow: 0ms;
+  }
+}

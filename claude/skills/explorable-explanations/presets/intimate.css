@@ -1,0 +1,83 @@
+/*
+ * Intimate overlay
+ * Applied on top of any genre preset when the topic is personal,
+ * health-related, grief-adjacent, or trauma-adjacent.
+ *
+ * Mood: softer palette, restrained motion, generous spacing,
+ * content warnings as a default (not afterthoughts).
+ *
+ * Apply by appending this file's :root block AFTER the genre preset's :root.
+ *
+ * IMPORTANT — the relative-color CSS approach (oklch(from var(--accent) ...))
+ * is a TRAP. Redeclaring --accent and self-referencing it via from var(--accent)
+ * is invalid-at-computed-value-time per the CSS cascade — the variable resolves
+ * to an empty string and every consumer (chart strokes, slider thumbs, link
+ * colors) silently falls back to defaults. We learned this the painful way; an
+ * earlier version of this file used that pattern and broke every consumer.
+ *
+ * Instead: this file declares ABSOLUTE desaturated values calibrated for the
+ * editorial preset's red-leaning accent. If your genre preset uses a different
+ * hue family (academic blue, gamified yellow, etc.), override --accent and
+ * --deep in the inlined HTML's <style> block AFTER pasting both presets,
+ * matching your genre's hue but with the desaturated chroma below (~0.10 max).
+ *
+ * Future improvement: split each genre preset's accent into --accent-l/
+ * --accent-c/--accent-h vars; then this overlay can desaturate by overriding
+ * only --accent-c (no self-reference, cascade works). Not yet refactored.
+ */
+:root {
+  /* desaturated reference accents — calibrated for editorial-preset hue (red, ~25);
+     override per-genre if base hue differs significantly */
+  --accent:      oklch(0.5225 0.108 25);
+  --accent-bg:   oklch(0.94 0.025 25);
+  --deep:        oklch(0.5225 0.084 240);
+  --deep-bg:     oklch(0.94 0.025 240);
+
+  /* widen rhythm */
+  --section-gap: 6rem;
+  --para-gap: 1.5rem;
+  --body-leading: 1.8;
+
+  /* slow motion */
+  --transition-fast: 220ms ease;
+  --transition-slow: 480ms ease;
+
+  /* content warning styling — visible, not hidden */
+  --cw-bg:           oklch(0.97 0.012 60);
+  --cw-border:       oklch(0.80 0.05 60);
+  --cw-text:         oklch(0.30 0.04 60);
+  --cw-padding:      1.25rem 1.5rem;
+  --cw-radius:       8px;
+  --cw-icon-color:   oklch(0.62 0.14 60);  /* warm amber, not red */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-slow: 0ms;
+  }
+}
+
+/* Recommended HTML markup for content warnings:
+ *
+ * <aside class="content-warning">
+ *   <strong>Content note</strong>
+ *   <p>This piece discusses ...</p>
+ *   <p><a href="#summary">Skip to the summary</a></p>
+ * </aside>
+ *
+ * The skill must include at least one content-warning aside near the top
+ * AND a "skip to summary" anchor when this overlay is active.
+ *
+ * Important: when using this overlay, charts that need vivid distinguishable
+ * lines (e.g. a 2-line plot where the prose says "the red line vs. the purple
+ * line") MUST declare chart-local color overrides in their inlined CSS —
+ * the desaturated --accent / --deep above will leave a chart-line at near-
+ * indistinguishable muted tones. This is by design (intimate register) but
+ * can betray prose claims that name colors. Run the color-claim audit from
+ * the Final hand-off checklist before declaring done.
+ *
+ * Example chart-local overrides:
+ *   svg#my-chart .line-a { stroke: oklch(0.55 0.20 25); }      // vivid red
+ *   svg#my-chart .line-b { stroke: oklch(0.55 0.22 305); }     // vivid purple
+ */
