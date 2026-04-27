@@ -283,6 +283,86 @@ The skill consults this during Round 5 (after picking mechanics, also consider p
 - **CSS scroll-snap** — step-based scrolling (one section per snap point). Powerful but invasive — fights the browser's natural feel. Use only when the explorable is genuinely slide-like, not for editorial scroll narratives.
 - **`prefers-reduced-motion`** — every motion technique above must check this. Animations skip; transitions become instant; `IntersectionObserver`-driven state changes still happen but without the smooth interpolation.
 
+## Libraries to reach for
+
+The skill ships nothing — single HTML, no build step. But ESM imports + import maps make a remarkable slice of the modern JS ecosystem available via one-line URLs from `cdn.jsdelivr.net/npm/<pkg>/+esm` or `esm.sh/<pkg>`. Pick libraries that serve the topic; resist reaching for whichever has the biggest brand.
+
+The categories below are organized by **capability**, not popularity. The point is to know what becomes *possible* at each scale of ambition.
+
+### Standard 2D visualization (the canon)
+
+- **D3 v7** — `cdn.jsdelivr.net/npm/d3@7/+esm`. The reach-for-everything choice for custom 2D viz: scales, axes, paths, transitions, force layouts, hierarchies, geo projections. Heavy for simple charts; overkill for a static bar chart.
+- **Observable Plot** — `cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm`. Declarative chart library on top of D3 (`Plot.lineY`, `Plot.dot`, `Plot.binX`). One-line API for standard shapes; reach for it before D3 when the chart fits its grammar.
+
+### 2D high-throughput rendering (when SVG/canvas can't keep up)
+
+- **PixiJS v8** — `cdn.jsdelivr.net/npm/pixi.js@8/+esm`. WebGL-backed 2D renderer. The Polygons mechanic with 100 shapes works fine in SVG; with 10,000+ shapes it needs PixiJS. Reach when emergent-behavior sims have many agents at 60fps, or when a particle system carries the visual.
+- **regl** — `cdn.jsdelivr.net/npm/regl@2/+esm`. Thin functional WebGL wrapper. For shader-heavy custom rendering (raymarching, fluid sims, distance-field art) where PixiJS's scene graph is overkill.
+
+### 3D scenes and physics intuition
+
+- **Three.js** — `cdn.jsdelivr.net/npm/three@0.160/+esm`. The standard for 3D meshes, lights, cameras, post-processing. Reach when the topic genuinely benefits from a third dimension (planetary motion, molecular structure, depth-of-field as part of the mechanic). Skip when 3D is decorative — it almost always is, and a 2D version is more honest.
+- **Babylon.js** — `cdn.jsdelivr.net/npm/@babylonjs/core@7/+esm`. Alternative to Three.js with a more game-engine flavor (built-in physics integration, GUI system). Reach when Three.js's lower-level model wastes time on game-shaped problems.
+
+### Physics simulation
+
+- **matter-js** — `cdn.jsdelivr.net/npm/matter-js@0.20/+esm`. 2D rigid-body engine. Use when collisions, gravity, springs, or constraints are part of the explanation (market-microstructure visualizations, ball-and-spring intuitions, supply-chain bottleneck metaphors).
+- **Rapier (3D and 2D)** — `cdn.jsdelivr.net/npm/@dimforge/rapier3d-compat@0.13/+esm`. WebAssembly-backed physics; faster and more accurate than matter-js. Reach only when matter-js's performance or feature set runs out.
+
+### Networks and graphs
+
+- **Cytoscape.js** — `cdn.jsdelivr.net/npm/cytoscape@3/+esm`. Graph viz with rich layout algorithms (force-directed, hierarchical, concentric, breadth-first). Reach for relational topics where node+edge structure carries the argument and you want layout algorithms that aren't in D3.
+- **D3-force** (already in D3) — for simpler force-directed layouts. The default before Cytoscape.
+
+### Maps and geography
+
+- **MapLibre GL JS** — `cdn.jsdelivr.net/npm/maplibre-gl@4/+esm`. Open-source vector-tile maps. Reach when geographic explorables need real basemaps with pan/zoom.
+- **D3-geo** (in D3) — for stylized choropleths and custom projections without basemap tiles. Reach when the geography is illustrative, not navigable.
+- **deck.gl** — `cdn.jsdelivr.net/npm/deck.gl@9/+esm`. Layered large-scale geospatial viz (hexbins, heatmaps, arcs, paths). Heavy; reach only when data scale demands it.
+
+### Animation engine (for state morphs, camera moves, scrollytelling)
+
+- **GSAP v3** — `cdn.jsdelivr.net/npm/gsap@3/+esm`. The industry standard for tween/timeline animation. Reach for scroll-driven state morphs, camera moves, multi-step choreographed sequences.
+- **GSAP ScrollTrigger** — `cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js`. The canonical scrollytelling driver: scroll-position-bound timelines, sticky pinning, scrubbing. Pairs with GSAP timelines for full editorial scroll choreography.
+- **Motion One** — `cdn.jsdelivr.net/npm/motion@10/+esm`. Lightweight alternative to GSAP, built on Web Animations API. Reach when GSAP's timeline grammar is more than the piece needs.
+- **Lottie-web** — `cdn.jsdelivr.net/npm/lottie-web@5/+esm`. Plays After Effects animations exported as JSON. Reach when a designer has hand-tuned an animation; never for data-driven motion (it's not parametric).
+
+### Scrollytelling driver (lightweight alternative to GSAP)
+
+- **Scrollama** — `cdn.jsdelivr.net/npm/scrollama@3/+esm`. The most-used pure scrollytelling library: IntersectionObserver-based step events that pair naturally with `position: sticky`. Reach when the toolbox calls for sticky-visual scrollytelling without the rest of GSAP's timeline machinery.
+
+### Audio (when sound is the evidence)
+
+- **Tone.js** — `cdn.jsdelivr.net/npm/tone@15/+esm`. Web Audio framework: synthesizers, sequencers, sampled instruments, effects chains. Required for the audio-trigger ladder rung when the topic is music, signal processing, acoustics, or rhythmic phenomena.
+
+### Math and statistics (beyond `Math.*`)
+
+- **simple-statistics** — `cdn.jsdelivr.net/npm/simple-statistics@7/+esm`. Mean, median, regression, t-test, kernel density. Light; reach when the model needs more than what's in stdlib.
+- **math.js** — `cdn.jsdelivr.net/npm/mathjs@13/+esm`. Comprehensive: complex numbers, matrices, units, symbolic math. Heavier; reach when math.js's surface is the actual subject (a linear algebra explainer, a units-and-dimensions piece).
+
+### Diagrams from text grammars
+
+- **Mermaid** — `cdn.jsdelivr.net/npm/mermaid@11/+esm`. Sequence diagrams, flowcharts, state machines, ER diagrams from a markdown-like syntax. Reach for protocol-shaped supporting figures inside a larger explorable; weak as the spine because the diagrams aren't reader-driven.
+
+### Generative / creative coding
+
+- **p5.js** — `cdn.jsdelivr.net/npm/p5@1/+esm`. Processing-flavored creative-coding API. Reach when the explorable wants a hand-drawn / generative-art register that D3's discipline would erase.
+
+### Skip these (anti-imports for this skill)
+
+- **React / Vue / Svelte / SolidJS** — frameworks. Single HTML + ESM means no virtual DOM. Use vanilla DOM or web components.
+- **jQuery** — solved problem. `document.querySelector` + `addEventListener` exist.
+- **Lodash** — most of what people use is now built into JS. Reach for a single utility from `lodash-es` if you genuinely need one.
+- **Tailwind / Bootstrap / Bulma / similar CSS frameworks** — the skill's genre presets are the design system; don't paste a competing one.
+- **Moment.js** — deprecated. Use Day.js or date-fns if you really need date logic.
+
+### Library-selection rules of thumb
+
+- **Default to vanilla** for any one-time chart or interaction; reach for a library only when its capability genuinely buys something.
+- **Pin versions** in URLs (`@7`, `@8`, etc.); resolve to latest is a future-breaking trap.
+- **One library per capability slot.** If you've imported D3 don't also import Observable Plot for a single chart; pick one.
+- **Bundle size matters** (this is a single page, often read on mobile). PixiJS + Three.js + GSAP + Cytoscape together is ~2 MB of JS — that's a reading-experience problem.
+
 ## Anti-patterns (the skill warns about all of these; some block via G5)
 
 1. **Lookup-not-model** — reader inputs themselves but learns no causal mechanism (NPR Jobs)
