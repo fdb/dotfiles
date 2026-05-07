@@ -1,427 +1,421 @@
 ---
 name: code-explainer
-description: Use when the user asks to create an interactive HTML explainer, visual walkthrough, or "making of" page for a codebase, feature, protocol, spec, architecture, commit history, board design, or technical documentation. Triggered by requests like "explain this code visually", "create an explainer", "make an interactive walkthrough", "explain this protocol", "visualize the architecture". Defaults to a long-form scrolling layout with inline SVG; supports a slideshow mode when the user explicitly asks for slides.
+description: Use when the user asks to create an interactive HTML explainer, visual walkthrough, or "making of" page for a codebase, feature, protocol, spec, architecture, commit history, board design, or technical documentation. Triggered by requests like "explain this code visually", "create an explainer", "make an interactive walkthrough", "explain this protocol", "visualize the architecture". Produces a long-form, top-to-bottom scrolling page in which interactive diagrams carry the explanation and prose threads them together.
 ---
 
 # Interactive Code Explainer
 
-Generate a self-contained HTML file that visually explains how a system works — a codebase, a protocol, a board design, an architecture — with diagrams, optional animations, and a clear narrative a non-expert reader can follow top to bottom.
+Generate a self-contained HTML file that explains how a system works — a codebase, a protocol, a board design, an architecture — by building the reader's understanding from primitives upward, with diagrams the reader can manipulate as the load-bearing element of each section.
 
-## What you're producing
+## What you are producing
 
-One `.html` file. All CSS inline. All JS inline except CDN imports. No build step. No external fonts unless the "Typography: polished mode" block is explicitly enabled. Still readable in a decade, still printable, still searchable.
+One `.html` file. All CSS inline. All JS inline except CDN imports. No build step, no framework. Still readable in a decade, still printable, still searchable.
+
+The visual register is a **1970s engineering textbook**: cream paper, dark warm-gray ink, one bold accent for emphasis, no decoration that doesn't earn its place. Diagrams look like figures from a service manual — flat, labelled, technical. No drop shadows, no gradients, no glassmorphism, no glow.
+
+## A note on scope
+
+Long-form interactive technical writing at its best takes its authors months per piece — bespoke renderers, hand-tuned typography, dozens of revisions per figure, real research into the artifact. Those pieces are a craft tradition; do not pretend a model can match them in one sitting. **The skill borrows the structural choices that make that tradition work — concept-dependency ordering, figures the reader can manipulate, prose that points at the figures, vocabulary introduced in passing — and applies them honestly to a one-sitting artifact.** Tell the user up front: this is a structurally faithful first draft in the same family, not a finished piece in the lineage.
 
 ## When to use
 
-- The user asks for a "walkthrough," "explainer," "why page," "making-of," or visual teaching document.
+- The user asks for a "walkthrough," "explainer," "why page," "making-of," or visual teaching document for a technical artifact.
 - The user has written down a set of decisions (README, docs, commits, spec) and wants them illustrated for a broader audience.
 - A README is too dry for the audience (non-engineers, new teammates, investors, interns, curious users).
 
-Do **not** use for API reference pages, changelogs, or pure marketing pages — those have their own skills (see `landing-page`).
-
-## Process
-
-1. **Read the source thoroughly** — code, specs, protocol docs, commit history, architecture docs, README, or whatever the user points you at. Spend more time here than feels comfortable.
-2. **Pick the layout mode**: scroll (default) or slides (only when user explicitly asks for a presentation).
-3. **Identify sections** from the source material (see Sections table). Pick only what fits — not every section applies to every explainer.
-4. **Write the page**, section by section, in the voice below.
+Do **not** use for API reference pages, changelogs, or marketing pages — those have their own skills (see `landing-page`). For non-code conceptual topics (civic, scientific, social, geopolitical), use `explorable-explanations`.
 
 ## Audience
 
-Target audience baseline: a reader who understands the domain (networking, electronics, web, whatever) at a conceptual level but doesn't live in this particular code day-to-day. Think: a technical product manager, a new teammate in their first week, a bright undergrad who hasn't taken the specific course yet.
+Assume a reader who is **knowledgeable but not intimately familiar** with the artifact at hand. They've shipped code, soldered a board, used networking protocols at a conceptual level — but they haven't lived inside *this* particular system. The task they've set themselves on is a notch too challenging for cold comprehension; the explainer is there to break it down.
 
 Implications:
-- Lead with **diagrams and data**, not code listings.
-- Show code snippets only when they clarify a concept (a key struct, an enum of message types, a 5-line algorithm). Never dump full functions.
-- Explain *why* things are designed a way, not just *what* they are.
-- Every section states the question before answering it.
+- Don't talk down. No "don't worry if this seems complex." Trust the reader.
+- Lead with diagrams the reader can poke at. Code listings are rare and short.
+- Define new terms inline, in the sentence that first uses them, not in a glossary box.
+- Explain *why* things are the way they are, not only *what* they are.
 
 ## The voice (most important section)
 
-This is what separates a skill-driven explainer from a generic AI writeup. Follow it exactly.
+This is what carries the explainer above a generic AI writeup. Follow it exactly.
 
-- **Second person, present tense.** "You plug in USB, the charger wakes up…"
-- **Answer the reader's actual question first.** "Why this chip?" is answered in the first paragraph, not the fourth.
-- **Name the trade-off explicitly.** Every "we chose X" section contains a sentence of the form "X is worse at Y but the cost was worth it."
-- **State the problem in the reader's words before jargon.** Define any term the reader might not know, inline, the first time it appears.
-- **Forbidden phrases.** "Let's dive in," "In this article," "It's important to note," "As we all know." They add nothing. Cut them.
-- **Use footnotes sparingly.** If it matters, it's in a `<details>` block or a callout; if it doesn't, delete it.
-- **Numbers need units.** "15 mm," not "15." "300 mAh," not "300 mA." Ambiguity dissolves confidence.
-- **Address mistakes.** A single "this is where first-time <role> get burned" per page earns trust.
-- **Bold sparingly.** Use `<strong>` for the one sentence in a paragraph the reader must not miss. If everything is bold, nothing is.
-- **Italics for emphasis only**, not for titles of things. Titles go in quotes or `<code>`.
-- **Collapsibles reward curiosity without punishing the reader who just wants the story.** Pull formulas, edge cases, and "what-if" variants behind `<details>` blocks.
+- **Collaborative first-person plural for the system, second-person for the reader.** "Our parser walks the token stream and emits..." "We're going to use a hash map to..." "Drag the slider and watch the buffer fill." The author and reader are on the same side, examining the artifact together.
+- **Address the diagram as if pointing at it.** "As you can see, the request stops at the auth middleware — the token expired ten seconds ago." "Notice how this branch never fires until the queue saturates." "Drag the slider and watch the hit ratio climb as the working set shrinks below the cache size." After every interactive figure there is a paragraph that says, in effect, *here is what to look at and what it means*.
+- **Reintroduce vocabulary in passing the first time it's used.** Fold the definition into the sentence: "As the name implies, a *circular buffer* uses a fixed-size array as if its end joined back to its beginning, with two pointers tracking where to read and where to write." "The *epoll* call hands the kernel a list of file descriptors we care about and waits until at least one is ready." Don't break flow with a glossary unless the term will appear many sections away from where it was introduced.
+- **Answer the reader's actual question first.** "Why this chip?" is answered in the first paragraph of the section, not the fourth. The opening line of every section names the question the section will answer.
+- **Name the trade-off.** Every "we chose X" passage says, in plain words, what X is worse at. "A linked list trades random access for cheap insertion at any point — for our journal, where appends dominate, that's the right side of the trade."
+- **Numbers carry units.** "15 mm," not "15." "300 mAh," not "300 mA." "150 µs round-trip," not "150 µs." Ambiguity dissolves trust.
+- **Bold sparingly.** Use `<strong>` for the one sentence in a section the reader must not miss.
+- **Italics for emphasis only.** Titles of things go in quotes or `<code>`.
+- **Forbidden phrases.** "Let's dive in," "In this article," "It's important to note," "As we all know," "Without further ado." They add nothing.
 
-## Page skeleton (scroll mode, default)
+## Process
+
+1. **Read the source thoroughly.** Code, specs, protocol docs, commit history, architecture docs, README, schematics — whatever the user pointed at. Spend more time here than feels comfortable.
+2. **Build a concept-dependency map.** This is the load-bearing planning step. (See next section.)
+3. **Decide which concepts deserve a diagram.** Many will. Some won't — when prose carries the weight better than a picture would, use prose. Don't force a diagram into a section it doesn't fit.
+4. **Write the page top to bottom.** Each section: name the question, show the diagram, walk the reader through it, point at the next concept the section unlocks.
+5. **Verify the dependency chain.** A reader who has read sections 1 through N must be able to follow section N+1 with no outside reference. If they can't, an earlier primitive is missing.
+
+## The concept-dependency map
+
+Before writing any HTML, list every concept the reader needs to follow the piece end-to-end. For each concept, mark what it depends on. Topologically sort. The result is the spine of the page.
+
+The goal: by paragraph 40 the reader is manipulating something that would have been incomprehensible at paragraph 1, and the build-up feels effortless because every primitive got its own short, illustrated section earlier.
+
+A concrete shape (for an explainer about driving an LED matrix from a microcontroller):
 
 ```
-┌─────────────────────────────────────────┐
-│  HEADER                                 │
-│  · mono kicker (topic · date)           │
-│  · h1 (full thesis of the page)         │
-│  · p.lede (1–2 sentences, who it's for) │
-├─────────────────────────────────────────┤
-│  NAV.TOC  (numbered anchor links)       │
-├─────────────────────────────────────────┤
-│  SECTION 1 — glossary                   │
-│  · 4–8 terms the reader will need       │
-│                                         │
-│  SECTION 2 — the big picture            │
-│  · one SVG of the whole system          │
-│  · a table mapping its parts            │
-│                                         │
-│  SECTIONS 3–N — one topic each          │
-│  · h2 + mono subtitle                   │
-│  · plain-English framing of the problem │
-│  · inline SVG or chart                  │
-│  · explanation prose                    │
-│  · optional <details class="deeper">    │
-│  · optional <div class="callout">       │
-├─────────────────────────────────────────┤
-│  FOOTER                                 │
-│  · provenance, companion files, date    │
-└─────────────────────────────────────────┘
+1.  one LED + digitalWrite                 (depends on: nothing)
+2.  current-limiting resistor              (depends on: 1)
+3.  a row of LEDs on shared pins           (depends on: 1)
+4.  the row × column matrix layout         (depends on: 3)
+5.  multiplexing — one row lit at a time   (depends on: 4)
+6.  the framebuffer in RAM                 (depends on: 5)
+7.  a timer interrupt that drives the scan (depends on: 5, 6)
+8.  PWM brightness per pixel               (depends on: 7)
+9.  smooth scrolling text                  (depends on: 6, 8)
+...
 ```
 
-Scroll-mode requirements:
-- **Single column, centred, `max-width: 68ch`.** Lines must not exceed ~80 characters.
-- **Anchor links in the TOC** with `scroll-behavior: smooth`.
-- **No horizontal scroll at any viewport ≥ 360 px.**
-- SVG figures scale via `max-width: 100%; height: auto`.
-- Sections separated by `margin: 4rem 0` and optional `<hr class="divider">`.
+Save the map as a working scratch artifact (a comment block at the top of the HTML, or a separate `outline.md`). It's the answer to the question "why does the page have these sections in this order?" — and it's what you check against when a section feels like it's working too hard.
 
-## Sections (pick what fits)
+If the dependency map produces more than ~15 top-level concepts, the piece is too ambitious for one page. Either narrow the topic or split into multiple pages.
 
-| Section | What it shows | Usually scroll position |
-|---|---|---|
-| **Glossary** | 4–8 terms the reader will need repeatedly, as `<dl>`. Always near the top. | 1 |
-| **Big picture** | One diagram of the whole system, labelled, with a table mapping its parts. | 2 |
-| **Data model** | Core types/interfaces, annotated; ER diagram if applicable. | body |
-| **Data flow** | How data moves through the system — sankey, sequence diagram, or step-by-step annotated pipeline. | body |
-| **Components / architecture** | Component tree, module diagram, or layer diagram. | body |
-| **Protocol / wire format** | Packet structure, message type tables, handshake sequences. | body |
-| **Timeline / history** | For commit-based or changelog-based explainers, a visual timeline. | body |
-| **Design system / style** | Colour swatches, type scale, spacing system, annotated component showcase. | body |
-| **Validation / testing** | Test map (unit/integration/E2E), clickable paths through the system. | body |
-| **Decisions** | One section per non-obvious design choice, in the voice above. | body (often the bulk of the page) |
-| **Summary / next steps** | Key decisions as a card grid; "reversibility notes" pointing to what would change if you changed your mind. | last |
+## Diagrams are the core, not the illustration
 
-Add project-specific sections when warranted (e.g., "Dialog Tree" for a Yarn Spinner app, "API Routes" for a backend, "State Machine" for complex state, "Power Tree" for a board).
+Treat the diagram as the explanation; treat the prose around it as connective tissue. A section without a diagram is the exception, not the norm — but exceptions are fine when the topic is genuinely textual (a protocol's wire format described as a table, a tradeoff list, a piece of pseudo-code).
 
-## Design system
+A good diagram in this style:
 
-### Palette (OKLCH, dark mode, warm-cool tension)
+- **Is purpose-built for its prose context.** It is not reused from another section, not copied from documentation, not generic. The labels are exactly the terms the surrounding prose uses.
+- **Lets the reader manipulate something.** A slider that scrubs through time. A play/pause/step button on a state machine. A handle that rotates a 3D model. A toggle that flips between two modes. The interaction reveals a fact the static diagram could not.
+- **Is comprehensible cold but becomes richer with the prose.** Even without reading the surrounding paragraphs, the reader can squint at the figure and pick up its outline; reading the prose then deepens it.
+- **Is built from real values from the system.** If the diagram shows packet sizes, those are the actual sizes. If it shows a token stream, those are real tokens. Synthetic stand-in values teach the wrong thing.
 
-Copy this block into `:root` verbatim. It's tuned: warm text on cool dark surfaces, two accent families (one warm, one cool), never pure black or white.
+### Interactive patterns that earn their place
+
+| Pattern | When to reach for it |
+|---|---|
+| **Parameter slider** | A value in the system that has interesting threshold behaviour: latency vs throughput, buffer size vs drop rate, sample rate vs aliasing |
+| **Scrub-through-time** | A process with stages: a packet's life cycle, a request lifecycle, a build pipeline |
+| **Step / play / pause** | Algorithm walkthroughs, state machines, protocol handshakes |
+| **Rotation / camera handle** | 3D objects (PCB layouts, mechanical assemblies, molecular structures) where one viewpoint hides essential geometry |
+| **Before/after toggle** | A single switch flips a diagram between two equally-real states (with and without an optimization, before and after a refactor) |
+| **Drag-to-place** | The reader positions an input and the system computes a consequence (place a probe, place a constraint, place a node) |
+
+Each pattern has the same test: **what does the reader now know that they couldn't have known from a static figure?** If the answer is nothing, cut the interaction or replace it with a still.
+
+### Renderer choices
+
+Custom-written renderers in the canonical examples are part of why those pieces take so long. **In a single-file distillation, importing libraries is fine.** Pick by capability, not brand:
+
+- **Inline SVG** — first reach. Static labelled diagrams, two-pane comparisons, schematic figures, flowcharts, packet layouts, ER diagrams. Live `<text>` for every label.
+- **`<canvas>` + vanilla JS** — when the diagram has > ~200 moving elements or pixel-level rendering matters (heatmaps, particle systems, signal traces).
+- **Three.js** (`cdn.jsdelivr.net/npm/three@0.160/+esm`) — when 3D genuinely earns it: PCB layouts that need rotation, mechanical assemblies, planetary motion, molecular structures. Skip when 3D is decorative; the 2D version is more honest more often than not.
+- **PixiJS** (`cdn.jsdelivr.net/npm/pixi.js@8/+esm`) — high-throughput 2D when SVG can't keep up (10,000+ elements at 60 fps).
+- **p5.js** (`cdn.jsdelivr.net/npm/p5@1/+esm`) — generative or hand-drawn-feeling diagrams; sketch-quality figures where strict precision would feel wrong.
+- **D3 v7** (`cdn.jsdelivr.net/npm/d3@7/+esm`) — custom data-driven viz: scales, axes, force layouts, hierarchies, sankeys, geographic projections.
+- **Observable Plot** (`cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm`) — declarative charts on top of D3. Reach before D3 when the chart fits its grammar.
+- **Mermaid** (`cdn.jsdelivr.net/npm/mermaid@11/+esm`) — sequence diagrams, state machines, ER diagrams from text. Weak as a centerpiece (not reader-driven), strong as a supporting figure.
+
+Pin versions. Don't reach for React, Vue, Svelte, or any build-step framework — single-file means single-file.
+
+## Page skeleton
+
+```
+┌───────────────────────────────────────────────┐
+│  HEADER                                       │
+│  · small mono kicker (topic · date)           │
+│  · h1 (the question the page answers)         │
+│  · 1–2 sentence lede (who it's for, scope)    │
+├───────────────────────────────────────────────┤
+│  TOC (numbered anchor links)                  │
+├───────────────────────────────────────────────┤
+│  SECTION 1 — first primitive                  │
+│  · h2 + plain-English question                │
+│  · framing paragraph                          │
+│  · interactive figure                         │
+│  · prose pointing at the figure               │
+├───────────────────────────────────────────────┤
+│  SECTIONS 2..N — each builds on prior         │
+│  · same shape; primitives compound            │
+├───────────────────────────────────────────────┤
+│  CLOSING — back to the original question      │
+│  · what the reader can now do or build        │
+│  · pointers to the source                     │
+├───────────────────────────────────────────────┤
+│  FOOTER — provenance, date, companion files   │
+└───────────────────────────────────────────────┘
+```
+
+Layout requirements:
+
+- **Single column, centred, `max-width: 68ch`** for prose. Lines must not exceed ~80 characters.
+- Figures may break out wider when needed (`max-width: 84ch`), but never edge-to-edge unless the topic is geographic or a wide timeline.
+- Anchor TOC links with `scroll-behavior: smooth`.
+- No horizontal scroll at any viewport ≥ 360 px.
+- Sections separated by `margin: 4.5rem 0`.
+
+## Section template
+
+```html
+<section id="slug">
+  <h2>N. The concrete question, as a human asks it</h2>
+
+  <p>Open with the problem from the reader's perspective, in one paragraph.
+     Define any term the reader might not know inline.</p>
+
+  <figure>
+    <div class="fig-stage" id="fig-N">
+      <!-- inline SVG or canvas; controls (sliders, buttons) live next to or
+           below the stage, never floating over it. -->
+    </div>
+    <div class="fig-controls">
+      <label>Buffer size (KB)
+        <input type="range" min="1" max="64" value="8" />
+      </label>
+      <button type="button">Play</button>
+    </div>
+    <figcaption>One sentence. Say what the figure is showing.</figcaption>
+  </figure>
+
+  <p>Walk the reader through the figure. <em>"As you can see..."</em>,
+     <em>"Drag the slider and watch the hit ratio climb..."</em>,
+     <em>"Notice that misses cluster as soon as the working set passes
+     the cache size..."</em>. This paragraph is mandatory; the figure
+     does not stand alone.</p>
+
+  <p>One more paragraph if needed: the implication, the trade-off, the
+     bridge to the next section's primitive.</p>
+</section>
+```
+
+**No `<details>` for primary content.** Click-to-reveal as a body mechanic punishes linear reading. Use `<details>` only for true tangents — a derivation a curious reader might want, an edge-case footnote — never for the main thread.
+
+**No quizzes, no "test your understanding" boxes, no progress bars.** The page is self-paced. The reader sees the scrollbar and that is enough.
+
+## Visual style: 1970s engineering textbook
+
+### Palette (OKLCH, light paper)
 
 ```css
 :root {
-  /* surfaces (cool, almost-neutral) */
-  --bg:         oklch(0.18 0.008 250);   /* page background */
-  --surface:    oklch(0.22 0.010 250);   /* figures, cards */
-  --surface-2:  oklch(0.26 0.012 250);   /* code, inline chips, inset blocks */
-  --rule:       oklch(0.32 0.010 250);   /* borders, hairlines */
+  /* paper — warm cream, never pure white */
+  --bg:        oklch(0.97 0.012 90);    /* page background */
+  --surface:   oklch(0.94 0.014 90);    /* figure stage, inset blocks */
+  --surface-2: oklch(0.91 0.016 90);    /* code, callouts */
+  --rule:      oklch(0.30 0.020 60);    /* hairlines, axis lines, borders */
 
-  /* text (warm off-whites — never pure #fff) */
-  --ink:        oklch(0.94 0.006 85);    /* primary text */
-  --ink-muted:  oklch(0.74 0.010 85);    /* secondary text, captions */
-  --ink-faint:  oklch(0.58 0.010 85);    /* tertiary — labels, axis ticks */
+  /* ink — dark warm gray, never pure black */
+  --ink:        oklch(0.22 0.018 60);   /* primary text and figure strokes */
+  --ink-muted:  oklch(0.42 0.018 60);   /* secondary text */
+  --ink-faint:  oklch(0.55 0.014 60);   /* captions, axis ticks */
 
-  /* accent — warm, for highlights, kicker, the one emotional beat per section */
-  --accent:      oklch(0.80 0.16 50);    /* vivid warm orange */
-  --accent-bg:   oklch(0.30 0.08 50);    /* dark orange wash for callouts */
+  /* one bold accent — signal red, the emotional beat per section */
+  --accent:     oklch(0.55 0.20 28);
+  --accent-bg:  oklch(0.93 0.06 28);    /* tinted block for callouts */
 
-  /* deep — cool, for "go deeper" content, secondary highlight */
-  --deep:        oklch(0.80 0.10 200);   /* muted cyan */
-  --deep-bg:     oklch(0.28 0.05 200);   /* dark teal wash */
+  /* secondary accent — steel blue, for "deeper" / secondary thread */
+  --secondary:    oklch(0.50 0.12 215);
+  --secondary-bg: oklch(0.93 0.04 215);
 
-  /* extended palette — use one at a time for data series, never all at once */
-  --hue-green:   oklch(0.80 0.14 150);
-  --hue-pink:    oklch(0.78 0.14 0);
-  --hue-purple:  oklch(0.75 0.15 300);
-  --hue-yellow:  oklch(0.85 0.14 90);
-  --hue-red:     oklch(0.72 0.18 25);
+  /* third tier, used at most once per page — mustard */
+  --tertiary:   oklch(0.65 0.16 90);
 
-  /* semantic */
-  --warn:        oklch(0.82 0.14 85);
-
-  /* syntax highlighting */
-  --syn-keyword: oklch(0.75 0.15 300);
-  --syn-type:    oklch(0.80 0.10 200);
-  --syn-string:  oklch(0.80 0.14 150);
-  --syn-number:  oklch(0.80 0.16 50);
-  --syn-comment: oklch(0.58 0.010 85);
-  --syn-func:    oklch(0.78 0.14 0);
+  /* reserved data-series hues, one at a time, never all at once */
+  --hue-green:  oklch(0.55 0.14 145);
+  --hue-purple: oklch(0.45 0.16 305);
 }
 ```
 
-**Rules:**
-- Only **two** accents in active use for narrative (`--accent` and `--deep`). The extended hues are for multi-series charts, not prose callouts.
-- `--accent` is the single emotional beat per section: the answer, the pick, the warning.
-- `--deep` is for optional / deeper content — its muted-cool tone signals "not the main thread."
-- Never pure `#000` or `#fff`. Contrast `--ink` on `--bg` is ~14:1; that's the comfort zone for long reads.
+**Rules.**
 
-### Typography (the feature)
+- Ink on paper hits ~12:1 contrast — engineering-textbook readability for long sessions.
+- Two accents in active narrative use: `--accent` (red) and `--secondary` (steel blue). The reserved hues are for charts with multiple series, not for prose decoration.
+- One emotional beat per section. If a section has two callouts in red, split the section.
+- Never `#000` or `#fff`. The cream-and-warm-ink relationship is the whole point of the look.
+- No drop shadows. No gradients. No glassmorphism. No glow. Borders are 1px solid `--rule`, period.
 
-Default stack — system fonts, no downloads, instant:
+### Typography
+
+The textbook register is well-served by a **sans-serif heading paired with a serif body**, but a strict sans throughout is also fine and renders faster. Default to system fonts.
 
 ```css
 body {
   font-family:
-    'Inter', -apple-system, BlinkMacSystemFont,
-    'Segoe UI Variable Text', 'Segoe UI',
-    'Helvetica Neue', Helvetica, Arial, sans-serif;
+    'Source Serif 4', 'Source Serif Pro', Charter, 'Iowan Old Style',
+    'Apple Garamond', Cambria, Georgia, serif;
   font-size: 17px;
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--ink);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-feature-settings: "ss01", "cv11", "kern";
 }
 
-code, kbd, .mono {
+h1, h2, h3 {
   font-family:
-    ui-monospace, 'SF Mono', 'JetBrains Mono',
-    Menlo, Consolas, monospace;
+    'Inter Tight', 'Inter', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+code, kbd, .mono, .svg-label {
+  font-family: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
   font-size: 0.92em;
 }
 ```
 
-**Polished mode** (opt-in, only when the user explicitly wants web fonts and accepts the CDN dependency): add to `<head>`:
+**Polished mode** (opt-in only when the user accepts CDN font dependency): add to `<head>`:
 
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 ```
 
 ### Type scale
 
-| Element | Size | Line-height | Weight | Letter-spacing |
-|---|---|---|---|---|
-| `h1` | `clamp(2rem, 4vw + 1rem, 2.75rem)` | 1.1 | 700 | `-0.02em` |
-| `h2` | `1.65rem` | 1.2 | 600 | `-0.015em` |
-| `h3` | `1.2rem` | 1.3 | 600 | `-0.01em` |
-| body `p` | 17px | 1.65 | 400 | normal |
-| `.kicker`, `.subtitle`, `.tag` (small mono labels) | 12px | 1.4 | 600 | `0.12em`, uppercase |
-| `figcaption` | 15px | 1.5 | 400, italic | normal |
+| Element | Size | Line-height | Weight |
+|---|---|---|---|
+| `h1` | `clamp(2rem, 4vw + 1rem, 2.75rem)` | 1.15 | 600 |
+| `h2` | `1.6rem` | 1.25 | 600 |
+| `h3` | `1.2rem` | 1.3 | 600 |
+| body `p` | 17px serif | 1.7 | 400 |
+| `.kicker`, `.tag` (small mono labels) | 12px | 1.4 | 600, uppercase, `0.12em` tracking |
+| `figcaption` | 14px | 1.5 | 400 italic |
 
 ### Rhythm
 
-- Section margin: `4rem 0`.
-- `<hr class="divider">`: 1px, `var(--rule)`, `margin: 3rem 0`.
-- First line of every paragraph carries the weight — the reader should be able to skim just the openers.
-- Bold and italics are sparing; the type hierarchy carries most of the emphasis.
-
-## Section template (scroll mode)
-
-```html
-<section id="slug">
-  <h2>N. The concrete question, as a human asks it</h2>
-  <p class="section-subtitle">one-line sub-hook, same voice as the kicker</p>
-
-  <p>Open with the problem from the reader's perspective, in one paragraph.
-     Define any term the reader might not know, inline.</p>
-
-  <figure>
-    <svg viewBox="0 0 700 240" role="img" aria-label="…">
-      <!-- labelled diagram; see SVG Conventions -->
-    </svg>
-    <figcaption>One sentence. Say what the picture is showing.</figcaption>
-  </figure>
-
-  <p>Walk through the picture. Use <strong>bold</strong> only for the one
-     sentence the reader must not miss.</p>
-
-  <details class="deeper">
-    <summary>Deeper: the formula / the edge case</summary>
-    <p>Hidden by default. Rewards curiosity without punishing the reader
-       who just wants the story.</p>
-  </details>
-
-  <div class="callout">
-    <div class="tag">Tune this to your situation</div>
-    <p>Use callouts for "you might do this differently" notes. Warm accent
-       on the left edge.</p>
-  </div>
-</section>
-```
+- Section margin: `4.5rem 0`.
+- `<hr class="rule">`: 1 px solid `--rule`, `margin: 3rem 0`.
+- The first sentence of every paragraph carries the weight; a reader skimming only first sentences should still get the spine.
 
 ## SVG conventions
 
-- `viewBox="0 0 700 N"` — 700 wide fits the 68 ch content column. Vary N.
-- **Labels are real `<text>` elements**, not paths. Uses `.svg-label` class for readability, search, translation, and accessibility.
-- Rectangles for components, labelled in centre. Rounded corners `rx="6"` for chips, `rx="2"` for boards.
-- **Arrows carry meaning through colour**: neutral (`--ink`) for "flow of stuff," `--accent` for "the answer/highlight," `--deep` for "secondary concern/deeper."
-- Never use shadows or gradients. Flat, technical, blueprint-like.
-- Two-pane "before/after" or "option A vs B" should be visible in a single figure, side-by-side, both drawn at the same scale.
-
-Minimum SVG styles to include:
+- `viewBox="0 0 700 N"` — 700 wide fits the prose column.
+- **Labels are real `<text>` elements.** Never paths, never raster, never icon fonts. This buys readability, search, translation, and screen-reader support for free.
+- **Strokes are the same `--rule` ink as the prose hairlines.** A 1.25 px black line on cream is the textbook default. Reserve thicker strokes (2 px) for the one element the eye should land on first.
+- **Color carries meaning.** Black/`--rule` for structure, `--accent` (red) for the highlighted element or "what to notice," `--secondary` (steel blue) for a secondary thread.
+- **No shadows, no gradients, no glow.** A figure in this style looks like it could have been printed by offset lithography in 1973.
+- **Fills are restrained.** Most shapes are unfilled (transparent or surface-colored) with a 1.25 px stroke. Filled shapes are used only when the fill itself is the data (a heatmap cell, a state in a state diagram).
+- **Side-by-side comparisons live in one figure**, drawn at the same scale, separated by a hairline rule. Never "scroll to see the alternative."
 
 ```css
-svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
-.svg-label       { font-family: ui-monospace, 'SF Mono', monospace; font-size: 11px; fill: var(--ink); }
+svg { display: block; max-width: 100%; height: auto; background: var(--surface); }
+
+.svg-label       { font-family: ui-monospace, 'SF Mono', monospace;
+                   font-size: 11px; fill: var(--ink); }
 .svg-label-small { font-size: 9px; }
 .svg-faint       { fill: var(--ink-faint); }
 .svg-muted       { fill: var(--ink-muted); }
 .svg-accent      { fill: var(--accent); stroke: var(--accent); }
-.svg-deep        { fill: var(--deep); stroke: var(--deep); }
+.svg-secondary   { fill: var(--secondary); stroke: var(--secondary); }
+.svg-stroke      { fill: none; stroke: var(--ink); stroke-width: 1.25; }
 ```
 
-Give the SVG a background matching `--surface` so the figure frame looks intentional, and draw strokes against that, not against the page.
+The figure stage gets a hairline border — a thin black box around the whole diagram — to mirror the printed-figure look:
 
-## External libraries (CDN-only, optional)
+```css
+.fig-stage {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  padding: 1rem;
+}
+```
 
-Everything still ships as **one `.html` file** with no build step.
+## Code block style
 
-Recommended:
-- **Mermaid** — sequence diagrams, flowcharts, ER diagrams, state machines.
-- **Observable Plot** — declarative charts (histograms, scatterplots, bar, density, timelines). Good default for one-off data viz.
-- **D3.js** — custom interactive viz when Mermaid + Plot aren't enough (sankey, chord, sunburst, force-directed).
-- **Prism.js** or **highlight.js** — syntax highlighting when you'd rather not hand-annotate spans.
-
-### Mermaid dark-theme init
+Avoid the macOS-window chrome of the previous version (red/yellow/green dots) — it's pure decoration and out of register with the textbook look. A code block is just a typeset listing.
 
 ```html
-<script type="module">
-  import mermaid from 'https://esm.sh/mermaid@11';
-  mermaid.initialize({
-    startOnLoad: true,
-    theme: 'dark',
-    themeVariables: {
-      primaryColor: 'oklch(0.22 0.010 250)',
-      primaryBorderColor: 'oklch(0.32 0.010 250)',
-      primaryTextColor: 'oklch(0.94 0.006 85)',
-      lineColor: 'oklch(0.80 0.16 50)',
-      secondaryColor: 'oklch(0.26 0.012 250)',
-      tertiaryColor: 'oklch(0.18 0.008 250)'
-    }
-  });
-</script>
+<figure class="listing">
+  <pre><code><span class="cm">// dispatch.ts — line 42</span>
+<span class="kw">function</span> <span class="fn">dispatch</span>(<span class="pr">msg</span>: <span class="ty">Message</span>) {
+  <span class="kw">switch</span> (<span class="pr">msg</span>.<span class="pr">kind</span>) {
+    <span class="kw">case</span> <span class="st">"open"</span>: <span class="kw">return</span> <span class="fn">handleOpen</span>(<span class="pr">msg</span>);
+    <span class="kw">case</span> <span class="st">"close"</span>: <span class="kw">return</span> <span class="fn">handleClose</span>(<span class="pr">msg</span>);
+  }
+}</code></pre>
+  <figcaption>The dispatch loop reduces to a switch on <code>msg.kind</code>.</figcaption>
+</figure>
 ```
 
-### Observable Plot dark-theme example
-
-```html
-<div id="plot"></div>
-<script type="module">
-  import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
-  const chart = Plot.plot({
-    style: { background: "transparent", color: "oklch(0.94 0.006 85)" },
-    marks: [ Plot.rectY({length: 10000}, Plot.binX({y: "count"}, {x: Math.random})) ]
-  });
-  document.querySelector("#plot").append(chart);
-</script>
+```css
+figure.listing {
+  background: var(--surface-2);
+  border-left: 3px solid var(--ink);
+  padding: 1rem 1.25rem;
+}
+.listing pre   { font-family: ui-monospace, monospace; font-size: 14px;
+                 line-height: 1.55; color: var(--ink); margin: 0; overflow-x: auto; }
+.listing .kw   { color: var(--accent); font-weight: 600; }
+.listing .ty   { color: var(--secondary); }
+.listing .fn   { color: var(--ink); font-weight: 600; }
+.listing .st   { color: var(--hue-green); }
+.listing .nb   { color: var(--accent); }
+.listing .cm   { color: var(--ink-faint); font-style: italic; }
+.listing .pr   { color: var(--ink); }
 ```
 
-## Interactivity (optional, disciplined)
+Listings are short. Five to fifteen lines, almost always. If you need to show 80 lines, the reader needs a diagram of what those lines do, not the lines themselves.
 
-Interactivity should reveal something — never decorate.
+## Sections (pick what fits the artifact)
 
-### Animations must be functional, not decorative
+| Section | What it shows |
+|---|---|
+| **The question** | Open with the actual problem the system solves, in the reader's words |
+| **First primitive** | The smallest concept the rest will build on |
+| **Each subsequent primitive** | One per section, each unlocking the next |
+| **Composition** | The point where two or three primitives combine into something new |
+| **The full system** | A diagram of the whole, now comprehensible because every part has been introduced |
+| **Edge cases worth seeing** | One or two cases that illuminate the design — not exhaustive |
+| **Where to go next** | Pointers to source, related reading, the actual code |
 
-**Decorative animations are forbidden.** An animation that only sequentially highlights a row of boxes is noise. If removing the animation and replacing it with a single static diagram loses no information, the animation was decorative — cut it.
+Project-specific sections naturally appear: a "Power Tree" for a board, a "Wire Format" for a protocol, a "Dialog Tree" for a narrative-game system. Add them where the dependency map demands.
 
-A **functional** animation must reveal one of:
-- **State change** — values transforming (text field growing, counter incrementing, buffer draining).
-- **Data transformation** — input → output side by side as the process runs.
-- **Causality** — which node triggers which (a message travelling along an edge, a request fanning out).
-- **Comparison** — two approaches running side-by-side. *Both panes must render visibly different content at every step.* If the panes look identical at some point, you're showing the common outcome twice. Identify the exact axis of divergence before building the comparison.
-- **Traversal** — walking a real data structure in the order the algorithm visits it (BFS vs DFS on a real tree, not arbitrary box-lighting).
+## Visualization picker (match shape to data)
 
-### Interactive patterns
-
-- **Data-driven animation** bound to real values from the system being explained — token counts, packet sizes, actual message contents. The viewer must learn a fact they didn't know.
-- **Clickable component/module tree** — click a node to show its signature / responsibility in a side panel.
-- **Node-graph hover** — highlight connected edges and neighbours.
-- **Before/after toggle** — one button swaps between two states of the same diagram.
-- **Parameter sliders** — move a slider to see how a parameter affects the output.
-
-## Visualization picker (match chart to data shape)
-
-Picking the wrong shape makes the explainer look polished but teaches the wrong thing.
-
-| Data shape | Use | Library |
+| Shape of the thing | Use | Library |
 |---|---|---|
-| **Distribution** (how values spread) | histogram, density, hexbin, violin | Observable Plot, D3 |
-| **Individual points** (each item has attributes) | scatter, beeswarm, bubble, strip | Observable Plot, D3 |
-| **Time-based events** | sequence diagram, timeline, event stream, gantt | Mermaid, Plot, D3 |
-| **Hierarchies** | tree map, sunburst, icicle, indented tree | D3 |
-| **Networks / flows** (nodes + edges + volume) | DAG, sankey, chord, force-directed | D3 |
-| **State machines** | state diagram | Mermaid |
-| **Comparisons across categories** | bar, dot plot, grouped bar, slope | Observable Plot |
-| **Correlations** | scatter with regression, heatmap | Observable Plot, D3 |
-| **Rankings / ordered lists** | horizontal bar, dot plot with labels | Observable Plot |
-| **Geographic** | choropleth, dot map | D3 + geo |
+| **Mechanism with moving parts** | annotated SVG with sliders/play | hand-rolled SVG, sometimes Three.js for 3D |
+| **State machine** | nodes-and-edges with current-state highlight | hand-rolled SVG or Mermaid |
+| **Algorithm walking a structure** | snapshot stepper over the real data | hand-rolled SVG with step button |
+| **Distribution** | histogram, density, hexbin | Observable Plot |
+| **Time-based events** | sequence diagram, timeline | Mermaid, Observable Plot |
+| **Hierarchy** | indented tree, treemap, sunburst | D3 |
+| **Network / flow** | DAG, sankey, force-directed | D3 |
+| **Wire format** | byte-grid table with field labels | hand-rolled HTML table |
+| **Performance breakdown** | stacked bar, flamegraph | Observable Plot or D3 |
+| **Geographic** | choropleth, dot map | D3 + geo or MapLibre |
+| **3D mechanism / assembly** | rotatable mesh | Three.js |
 
-Code-behaviour pairings:
-- **Streaming / async flows** → sequence diagram.
-- **Data pipelines** → sankey or flow diagram.
-- **Module dependencies** → DAG or indented tree.
-- **Performance breakdowns** → stacked or horizontal bar per phase.
-- **Request lifecycles** → timeline with phases coloured.
-- **Algorithm steps** → snapshot animation walking the real data structure.
-
-If you can't map your concept to one of these, stop and reconsider — a table or static diagram may serve better than a chart.
-
-## Code block style (macOS chrome)
-
-```html
-<div class="code-block">
-  <div class="code-header">
-    <span class="code-dot red"></span>
-    <span class="code-dot yellow"></span>
-    <span class="code-dot green"></span>
-    <span>filename.ts</span>
-  </div>
-  <div class="code-body">
-    <!-- syntax-highlighted with span classes:
-         .kw (keyword) .ty (type) .st (string)
-         .nb (number) .cm (comment) .fn (function)
-         .pr (property) .pu (punctuation) .tg (tag)
-         .at (attr) .vl (value)
-    -->
-  </div>
-</div>
-```
-
-Colour spans via the `--syn-*` variables in the palette.
-
-## Slideshow mode (only when user explicitly asks)
-
-If — and only if — the user asks for "slides," "a deck," or "a presentation," switch to slideshow layout. Default is scroll.
-
-Slideshow requirements:
-- Each section becomes a `.slide` with `data-section` attribute.
-- Navigation: arrow keys, `space`, click nav dots at bottom centre, touch/swipe.
-- Active slide fades in from direction of travel; exiting slide fades out opposite.
-- Nav dots grouped by section with visual spacers between groups.
-- Slide counter top-left; section label top-right.
-- `.stagger` container animates children in sequentially on entry.
-- Responsive down to 900 px; two-/three-column grids collapse at that width.
-- All the voice, palette, typography, and SVG rules above still apply — only the layout changes.
+If a topic doesn't map to one of these, a still figure with strong labels often beats a forced chart.
 
 ## Pre-publish checklist
 
-- [ ] Single HTML file. No build step. External libs via CDN only (esm.sh / jsdelivr / unpkg).
-- [ ] All CSS inline in `<style>`, all JS inline in `<script>` (except CDN imports).
-- [ ] No remote fonts unless "polished mode" was explicitly enabled.
-- [ ] All SVG text is live `<text>`, not paths or raster.
-- [ ] Heading levels nest correctly; exactly one `<h1>`.
-- [ ] Palette is OKLCH throughout. No hex `#000` or `#fff`.
+- [ ] Single HTML file. CDN libraries via ESM imports only. No build step.
+- [ ] Concept-dependency map exists (in a comment block at the top of the HTML, or a sibling `outline.md`). Section order matches it.
+- [ ] Every section either has an interactive figure or is a deliberate prose interlude with a clear reason.
+- [ ] Every figure is followed by a paragraph that points at the figure ("as you can see," "drag the slider...," "notice that...").
+- [ ] Voice: collaborative "we" / "our system," second-person "you" for the reader's actions.
+- [ ] First time a term appears, it's defined in the same sentence.
+- [ ] Numbers carry units. "150 µs," not "150."
+- [ ] One emotional beat (red callout / `<strong>`) per section maximum.
+- [ ] Forbidden phrases absent: "let's dive in," "in this article," "it's important to note."
+- [ ] No `<details>` blocks holding primary content. (Tangential footnotes are fine.)
+- [ ] No quizzes. No progress bars. No completion indicators.
+- [ ] No decorative animation. Every motion reveals state, transformation, causality, comparison, or traversal.
+- [ ] Palette is OKLCH cream-and-ink. No `#000` or `#fff`.
 - [ ] Contrast: `--ink` on `--bg` ≥ 12:1; `--ink-muted` on `--bg` ≥ 7:1.
 - [ ] Content column clamps at `max-width: 68ch`. No horizontal scroll at 360 px.
-- [ ] Every decision section answers the reader's actual question in its first paragraph.
-- [ ] Every "we chose X" section names the tradeoff explicitly.
-- [ ] Numbers have units. No "15"; always "15 mm" or "15 ms."
-- [ ] Forbidden phrases absent: "let's dive in," "in this article," "it's important to note."
-- [ ] One emotional beat per section. If a section has two, split it.
-- [ ] Interactive elements, if present, are **functional** (state change, transformation, causality, comparison, traversal). No decorative sequential highlighting.
-- [ ] Viz choices match data shape (see picker).
-- [ ] Footer carries generation date and list of companion files.
+- [ ] All SVG text is live `<text>`, not paths.
+- [ ] All sliders/play buttons/toggles are keyboard-operable. `prefers-reduced-motion` respected.
+- [ ] Footer carries generation date, source link, list of companion files.
 
-## Reference examples
+## Reference register
 
-- `hands-badge` repo → `docs/design_choices.html` — scroll mode, pure SVG, no CDN libs, non-EE reader audience, strong use of `<details>` for depth gating.
+The shape and voice this skill targets — short, illustrated sections that compound; diagrams that reward manipulation; a tone that walks the reader through what they're looking at — is the register of long-form engineering writers who treat the figure as the explanation. We're producing a one-sitting distillation of that style, not a months-long opus. Set the user's expectations accordingly.

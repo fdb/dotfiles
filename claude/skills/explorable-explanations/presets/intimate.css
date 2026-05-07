@@ -1,12 +1,12 @@
 /*
  * Intimate overlay
- * Applied on top of any genre preset when the topic is personal,
- * health-related, grief-adjacent, or trauma-adjacent.
+ * Applied on top of the engineering-textbook base preset when the topic is
+ * personal, health-related, grief-adjacent, or trauma-adjacent.
  *
  * Mood: softer palette, restrained motion, generous spacing,
  * content warnings as a default (not afterthoughts).
  *
- * Apply by appending this file's :root block AFTER the genre preset's :root.
+ * Apply by appending this file's :root block AFTER the base preset's :root.
  *
  * IMPORTANT — the relative-color CSS approach (oklch(from var(--accent) ...))
  * is a TRAP. Redeclaring --accent and self-referencing it via from var(--accent)
@@ -16,22 +16,21 @@
  * earlier version of this file used that pattern and broke every consumer.
  *
  * Instead: this file declares ABSOLUTE desaturated values calibrated for the
- * editorial preset's red-leaning accent. If your genre preset uses a different
- * hue family (academic blue, gamified yellow, etc.), override --accent and
- * --deep in the inlined HTML's <style> block AFTER pasting both presets,
- * matching your genre's hue but with the desaturated chroma below (~0.10 max).
- *
- * Future improvement: split each genre preset's accent into --accent-l/
- * --accent-c/--accent-h vars; then this overlay can desaturate by overriding
- * only --accent-c (no self-reference, cascade works). Not yet refactored.
+ * engineering-textbook preset's red-leaning accent (hue ~28). If a future base
+ * preset shifts the accent hue significantly, override --accent and --secondary
+ * in the inlined HTML's <style> block AFTER pasting both presets, matching the
+ * base hue but with the desaturated chroma below (~0.10 max).
  */
 :root {
-  /* desaturated reference accents — calibrated for editorial-preset hue (red, ~25);
-     override per-genre if base hue differs significantly */
-  --accent:      oklch(0.5225 0.108 25);
-  --accent-bg:   oklch(0.94 0.025 25);
-  --deep:        oklch(0.5225 0.084 240);
-  --deep-bg:     oklch(0.94 0.025 240);
+  /* desaturated reference accents — calibrated for engineering-textbook
+     red-leaning accent (hue 28); the steel-blue secondary stays close to its
+     base hue (215) but loses chroma */
+  --accent:       oklch(0.52 0.108 28);
+  --accent-bg:    oklch(0.94 0.025 28);
+  --secondary:    oklch(0.52 0.084 215);
+  --secondary-bg: oklch(0.94 0.025 215);
+  --deep:         var(--secondary);    /* alias for compat */
+  --deep-bg:      var(--secondary-bg);
 
   /* widen rhythm */
   --section-gap: 6rem;

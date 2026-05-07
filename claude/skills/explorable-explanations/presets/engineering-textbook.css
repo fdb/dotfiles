@@ -1,0 +1,89 @@
+/*
+ * Engineering-textbook preset
+ * Default visual register for explorable-explanations.
+ *
+ * Mood: 1970s engineering textbook. Cream paper, dark warm-gray ink, one
+ * bold accent for emphasis, no decoration that doesn't earn its place.
+ * Figures look like they could have been printed by offset lithography.
+ *
+ * Rules baked into the values below:
+ *   - Never pure #000 or #fff. Cream paper + warm dark ink is the look.
+ *   - Strokes are 1.25px hairlines on cream; thicker only for the one
+ *     element the eye should land on first.
+ *   - Two narrative accents (red + steel blue). Reserved hues are for
+ *     multi-series charts, not prose decoration.
+ *   - No drop shadows, no gradients, no glow, no glassmorphism.
+ *
+ * Inline this file's :root{} block into the <style> tag of the generated
+ * HTML at P4 (design pass).
+ */
+:root {
+  /* paper — warm cream, never pure white */
+  --bg:        oklch(0.97 0.012 90);     /* page background */
+  --surface:   oklch(0.94 0.014 90);     /* figure stage, inset blocks */
+  --surface-2: oklch(0.91 0.016 90);     /* code listings, callouts */
+  --rule:      oklch(0.30 0.020 60);     /* hairlines, axis lines, borders */
+
+  /* ink — dark warm gray, never pure black */
+  --ink:        oklch(0.22 0.018 60);    /* primary text, figure strokes */
+  --ink-muted:  oklch(0.42 0.018 60);    /* secondary text */
+  --ink-faint:  oklch(0.55 0.014 60);    /* captions, axis ticks */
+
+  /* one bold accent — signal red, the emotional beat per section */
+  --accent:     oklch(0.55 0.20 28);
+  --accent-bg:  oklch(0.93 0.06 28);     /* tinted block for callouts */
+
+  /* secondary accent — steel blue, "deeper" / secondary thread */
+  --secondary:    oklch(0.50 0.12 215);
+  --secondary-bg: oklch(0.93 0.04 215);
+  --deep:         var(--secondary);      /* alias for code-explainer compat */
+  --deep-bg:      var(--secondary-bg);
+
+  /* third tier, used at most once per page — mustard */
+  --tertiary:   oklch(0.65 0.16 90);
+
+  /* reserved data-series hues; one at a time, never all at once */
+  --hue-green:  oklch(0.55 0.14 145);
+  --hue-purple: oklch(0.45 0.16 305);
+  --hue-warn:   oklch(0.62 0.16 25);
+
+  /* type families */
+  --font-display: 'Inter Tight', 'Inter', -apple-system, BlinkMacSystemFont,
+                  'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-body:    'Source Serif 4', 'Source Serif Pro', Charter,
+                  'Iowan Old Style', Cambria, Georgia, serif;
+  --font-mono:    ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo,
+                  Consolas, monospace;
+
+  /* type scale */
+  --h1-size:    clamp(2rem, 4vw + 1rem, 2.75rem);
+  --h1-weight:  600;
+  --h1-tracking: -0.015em;
+
+  --h2-size:    1.6rem;
+  --h2-weight:  600;
+
+  --body-size:    17px;
+  --body-leading: 1.7;
+
+  /* rhythm */
+  --section-gap: 4.5rem;
+  --para-gap:    1.1rem;
+  --content-max: 68ch;
+
+  /* motion (still subtle — engineering textbooks didn't move) */
+  --transition-fast: 120ms ease;
+  --transition-slow: 260ms ease;
+
+  /* figure caption styling — small, technical */
+  --caption-size:    14px;
+  --caption-leading: 1.5;
+  --caption-color:   var(--ink-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-slow: 0ms;
+  }
+}
