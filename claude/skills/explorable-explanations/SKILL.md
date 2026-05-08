@@ -11,7 +11,7 @@ Build a single self-contained interactive web page that helps a reader understan
 
 One `.html` file. All CSS inline. All page logic inline (`<script type="module">`). External libraries only via ESM imports or import maps — no build step, no React, no Vite, no webpack. Total reading time ≤1 hour.
 
-The visual register is a **1970s engineering textbook** rendered on a neutral palette: off-white paper (`#f7f7f7`), off-black ink (`#444`), one bold accent for emphasis, no decoration that doesn't earn its place. Diagrams look like figures from a service manual or a physics text — flat, labelled, technical, no glow, no glassmorphism, no drop shadows.
+The visual register is a **1970s engineering textbook** rendered on a neutral palette: off-white paper (`#f7f7f7`), off-black ink (`#444`), one bold accent for emphasis, no decoration that doesn't earn its place. Diagrams look like figures from a service manual or a physics text — flat, labelled, technical, no glow, no glassmorphism, no drop shadows. **No graph-paper or grid-ruled backgrounds** on the body, the figure stage, or anywhere else — the page is plain off-white paper, not engineering pad. Grid lines belong inside a figure when the figure is genuinely a coordinate plot, never as page or section decoration.
 
 ## When to use
 
@@ -408,12 +408,15 @@ Playwright catches functional and structural bugs. It does not catch what the re
 - [ ] **Source provenance walk**. Every numeric claim in visible prose either cites a source by name or is labeled `(assumption)`. No bare numbers.
 - [ ] **No click-to-reveal on the spine.** Every primary concept is reachable by scrolling alone. `<details>` blocks contain only tangents.
 - [ ] **No quizzes, no progress bars, no completion indicators** anywhere in the piece.
+- [ ] **No graph-paper background.** Inspect `<body>`, `<main>`, every `<section>`, and every figure-stage container's computed `background-image`. If any of them resolves to a `repeating-linear-gradient`, an SVG grid `<pattern>`, or any other ruled texture, remove it. The page is plain off-white paper.
 
 This checklist is not Playwright-replaceable. The failures it catches are visual, perceptual, and pedagogical — exactly the failure modes automated DOM testing is structurally blind to.
 
 ## Design system
 
 **Default visual register: 1970s engineering textbook on a neutral palette.** Off-white paper (`#f7f7f7`), off-black ink (`#444`), sans-serif body, one bold accent, no decoration that doesn't earn its place. Inline `presets/engineering-textbook.css` as the `:root{}` block at P4 (design pass).
+
+**The page is paper, not engineering pad.** Do not add graph-paper or grid-ruled backgrounds via `background-image`, repeating linear-gradients, SVG `<pattern>`, or CSS `background: ... grid ...` on `<body>`, `<main>`, `<section>`, or any figure-stage container. The "engineering textbook" cue is about typography, hairline strokes, and figure discipline — not literal squared paper. Grid lines are allowed only *inside* a figure that is genuinely a coordinate plot, and even then only as faint axis ticks, never as a full ruled background. If you find yourself writing `repeating-linear-gradient` for a "subtle grid texture," delete it.
 
 **Cross-cutting overlay:** `presets/intimate.css` — applied AFTER the base preset's `:root{}` block when the topic is personal, health-related, grief-adjacent, or trauma-adjacent. Auto-suggested when Round 1 surfaces harm/identity/trauma sensitivity. Desaturates accents, widens spacing, slows motion, defines content-warning chrome.
 

@@ -15,6 +15,14 @@
  *   - Two narrative accents (red + steel blue). Reserved hues are for
  *     multi-series charts, not prose decoration.
  *   - No drop shadows, no gradients, no glow, no glassmorphism.
+ *   - NO GRAPH-PAPER OR GRID-RULED BACKGROUNDS. The body, sections, and
+ *     figure stages render on plain off-white paper — never on engineering
+ *     pad. Do not add background-image, repeating-linear-gradient, SVG
+ *     <pattern>, or any other texture that produces a grid behind text or
+ *     figures. The "engineering textbook" cue is about typography and
+ *     figure discipline, not literal squared paper. Grid lines may appear
+ *     INSIDE a figure if it is genuinely a coordinate plot, and only as
+ *     faint axis ticks — never as a full ruled background.
  *
  * Inline this file's :root{} block into the <style> tag of the generated
  * HTML at P4 (design pass).
