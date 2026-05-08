@@ -1,0 +1,4 @@
+interface:
+  display_name: "Landing Page"
+  short_description: "Help with Landing Page tasks"
+  default_prompt: "Use $landing-page for a relevant task."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Docs to Kindle"
+  short_description: "Help with Docs to Kindle tasks"
+  default_prompt: "Use $docs-to-kindle for a relevant task."

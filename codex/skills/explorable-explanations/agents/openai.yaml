@@ -1,0 +1,4 @@
+interface:
+  display_name: "Explorable Explanations"
+  short_description: "Help with Explorable Explanations tasks"
+  default_prompt: "Use $explorable-explanations for a relevant task."

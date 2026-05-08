@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prototype"
+  short_description: "Help with Prototype tasks"
+  default_prompt: "Use $prototype for a relevant task."

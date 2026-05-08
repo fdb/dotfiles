@@ -8,6 +8,19 @@ rm -rf ~/.vim
 # Create new directories.
 mkdir -p ~/.ssh
 
+link_dotfile() {
+  src=$1
+  dest=$2
+
+  [ ! -e "$src" ] && return
+  if [ -e "$dest" ] && [ ! -L "$dest" ]; then
+    echo "WARNING: $dest already exists and is not a symlink — skipping (won't overwrite)"
+  else
+    rm -f "$dest"
+    ln -s "$src" "$dest"
+  fi
+}
+
 # Symlink all config files.
 ln -sfn ~/dotfiles/bashrc ~/.bashrc
 ln -sfn ~/dotfiles/bash_profile ~/.bash_profile
@@ -27,13 +40,35 @@ mkdir -p ~/.claude
 for item in CLAUDE.md skills commands settings.json keybindings.json; do
   src=~/dotfiles/claude/$item
   dest=~/.claude/$item
-  [ ! -e "$src" ] && continue
-  if [ -e "$dest" ] && [ ! -L "$dest" ]; then
-    echo "WARNING: ~/.claude/$item already exists and is not a symlink — skipping (won't overwrite)"
-  else
-    ln -sfn "$src" "$dest"
-  fi
+  link_dotfile "$src" "$dest"
 done
+
+# Symlink versioned Codex config items into ~/.codex/ (don't replace the whole directory).
+mkdir -p ~/.codex
+for item in AGENTS.md; do
+  src=~/dotfiles/codex/$item
+  dest=~/.codex/$item
+  link_dotfile "$src" "$dest"
+done
+mkdir -p ~/.codex/skills
+if [ -d ~/dotfiles/codex/skills ]; then
+  for dest in ~/.codex/skills/*; do
+    [ ! -L "$dest" ] && continue
+    target=$(readlink "$dest")
+    case "$target" in
+      "$HOME"/dotfiles/codex/skills/*)
+        [ -e "$target" ] || rm -f "$dest"
+        ;;
+    esac
+  done
+
+  for src in ~/dotfiles/codex/skills/*; do
+    [ ! -e "$src" ] && continue
+    item=$(basename "$src")
+    dest=~/.codex/skills/$item
+    link_dotfile "$src" "$dest"
+  done
+fi
 
 if [[ $OSTYPE == darwin* ]];
 then

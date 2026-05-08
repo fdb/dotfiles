@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shell Scripts"
+  short_description: "Help with Shell Scripts tasks"
+  default_prompt: "Use $shell-scripts for a relevant task."

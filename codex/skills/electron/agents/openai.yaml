@@ -1,0 +1,4 @@
+interface:
+  display_name: "Electron"
+  short_description: "Help with Electron tasks and workflows"
+  default_prompt: "Use $electron for a relevant task."

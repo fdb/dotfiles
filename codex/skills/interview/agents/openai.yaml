@@ -1,0 +1,4 @@
+interface:
+  display_name: "Interview"
+  short_description: "Help with Interview tasks"
+  default_prompt: "Use $interview for a relevant task."

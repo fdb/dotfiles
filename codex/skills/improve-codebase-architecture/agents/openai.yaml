@@ -1,0 +1,4 @@
+interface:
+  display_name: "Improve Codebase Architecture"
+  short_description: "Help with Improve Codebase Architecture tasks"
+  default_prompt: "Use $improve-codebase-architecture for a relevant task."

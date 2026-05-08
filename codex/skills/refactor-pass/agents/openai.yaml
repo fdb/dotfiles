@@ -1,0 +1,4 @@
+interface:
+  display_name: "Refactor Pass"
+  short_description: "Help with Refactor Pass tasks"
+  default_prompt: "Use $refactor-pass for a relevant task."

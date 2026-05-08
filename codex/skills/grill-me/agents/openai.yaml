@@ -1,0 +1,4 @@
+interface:
+  display_name: "Grill Me"
+  short_description: "Help with Grill Me tasks and workflows"
+  default_prompt: "Use $grill-me for a relevant task."

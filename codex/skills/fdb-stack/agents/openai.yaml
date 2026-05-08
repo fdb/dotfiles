@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fdb Stack"
+  short_description: "Help with Fdb Stack tasks"
+  default_prompt: "Use $fdb-stack for a relevant task."

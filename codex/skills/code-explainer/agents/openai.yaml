@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Explainer"
+  short_description: "Help with Code Explainer tasks"
+  default_prompt: "Use $code-explainer for a relevant task."

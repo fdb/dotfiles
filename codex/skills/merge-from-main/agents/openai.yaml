@@ -1,0 +1,4 @@
+interface:
+  display_name: "Merge From Main"
+  short_description: "Help with Merge From Main tasks"
+  default_prompt: "Use $merge-from-main for a relevant task."

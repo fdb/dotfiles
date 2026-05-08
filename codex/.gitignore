@@ -1,0 +1,19 @@
+# Ignore everything by default
+*
+
+# Whitelist global guidance
+!AGENTS.md
+
+# Whitelist user skills and their bundled resources
+!skills/
+!skills/**
+
+# Exclude Codex-managed system skills even if they appear locally
+skills/.system/
+skills/.system/**
+
+# Keep this gitignore
+!.gitignore
+
+# Ignore OS files everywhere
+.DS_Store
