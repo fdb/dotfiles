@@ -22,10 +22,23 @@ Commit pending changes and publish them.
 
 ## Rules for the PR body
 
-Write it as if a human wrote it. Do **not** include:
+The goal is a PR body that earns its keep — concise, specific, and useful to a reviewer who has not seen the diff yet. The same standards apply whether a human or Claude is drafting; we are not disguising authorship, we are avoiding the patterns that make AI-written PRs tedious to review.
 
-- "Generated with Claude Code", "Made with Claude", or similar attribution footers.
-- Links to `claude.ai/...` sessions or transcripts — they return 403 for anyone but the author.
-- Robot-emoji footers tied to Claude attribution.
+**Structure**:
+- `## Summary` — lead with *why* (the problem, the trigger, the linked issue), then *what* the change does at a high level. Not a file-by-file enumeration; the diff already shows that.
+- `## Test plan` — concrete commands or steps a reviewer can run, or what was verified locally. If genuinely not applicable (e.g. docs-only), say so in one line rather than padding.
 
-The `Co-Authored-By: Claude` trailer in the *commit message* is fine — it's git-native metadata that GitHub renders as a co-author badge, not body decoration.
+**Style**:
+- Match length to the change. A one-line fix gets a one-line summary; a cross-module refactor deserves more. Don't pad small PRs with ceremony.
+- Be specific about behavior: "Fixes flicker when hovering disabled buttons" beats "improves UX".
+- Be honest about scope and gaps. Call out what was *not* tested, known follow-ups, and breaking changes prominently. Don't claim verification you didn't perform.
+- No filler preambles ("This PR makes the following changes:"), no restating the diff, no marketing language.
+- Match the project's PR vocabulary and conventions. When unsure of tone or section structure, skim recent merged PRs first: `gh pr list --state merged --limit 5` then `gh pr view <n>`.
+- Link to the issue, ADR, prior PR, or commit the change is responding to — but only links that actually resolve for the reviewer.
+
+**Do not include**:
+- Links to `claude.ai/...` sessions, chats, or transcripts. These URLs are scoped to the author's account and return 403 for everyone else, so they are dead links in a PR — worse than no link at all.
+- "Generated with Claude Code" / "Made with Claude" / robot-emoji attribution footers in the PR body. The `Co-Authored-By: Claude` trailer on the commit itself is the canonical place for authorship signal; the PR body should be about the change, not the tool that helped write it.
+- Marketing links to `claude.com/claude-code` or similar.
+
+This explicitly overrides the default harness footer for PR bodies. The commit trailer (`Co-Authored-By: ...`) stays.
