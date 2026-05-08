@@ -1,6 +1,6 @@
 ---
 name: explorable-explanations
-description: Use when creating interactive scrollytelling pages, playable essays, model-driven explanations, or explorable explanations for concepts, phenomena, societal issues, geopolitical situations, scientific research, or public-interest themes. Triggered by "make an explorable explanation", "build a playable essay", "explain this interactively", "scrollytelling piece for X", references to Parable of the Polygons, Bret Victor, Nicky Case, or explorabl.es.
+description: Use when creating interactive scrollytelling pages, playable essays, model-driven explanations, or explorable explanations for concepts, phenomena, societal issues, geopolitical situations, scientific research, or public-interest themes. Triggered by "make an explorable explanation", "build a playable essay", "explain this interactively", "scrollytelling piece for X", or references to authors and projects in the lineage — Bartosz Ciechanowski, Nicky Case, Vi Hart, Bret Victor, Parable of the Polygons, Distill, Mathigon, explorabl.es.
 ---
 
 # Explorable Explanations
@@ -11,11 +11,7 @@ Build a single self-contained interactive web page that helps a reader understan
 
 One `.html` file. All CSS inline. All page logic inline (`<script type="module">`). External libraries only via ESM imports or import maps — no build step, no React, no Vite, no webpack. Total reading time ≤1 hour.
 
-The visual register is a **1970s engineering textbook**: cream paper, dark warm-gray ink, one bold accent for emphasis, no decoration that doesn't earn its place. Diagrams look like figures from a service manual or a physics text — flat, labelled, technical, no glow, no glassmorphism, no drop shadows.
-
-## A note on scope
-
-The standard-bearing pieces in this register — long-form interactive essays where every figure is bespoke and every paragraph compounds on the last — take their authors months per piece, with deep research, hand-tuned figures, and dozens of revisions. Those pieces are a craft tradition; do not pretend a model can match them in one sitting. **The skill borrows the structural choices that make that tradition work — concept-dependency ordering, reader-manipulable figures, prose that points at each figure, vocabulary introduced in passing — and applies them honestly to a one-sitting artifact.** Tell the user up front: this is a structurally faithful first draft in the same family, not a finished piece in the lineage.
+The visual register is a **1970s engineering textbook** rendered on a neutral palette: off-white paper (`#f7f7f7`), off-black ink (`#444`), one bold accent for emphasis, no decoration that doesn't earn its place. Diagrams look like figures from a service manual or a physics text — flat, labelled, technical, no glow, no glassmorphism, no drop shadows.
 
 ## When to use
 
@@ -330,7 +326,7 @@ Pick techniques that serve the topic. **Overdoing it is a worse failure than und
 
 - **Layered reveal** — a complex visual builds up layer-by-layer as the prose introduces each layer (axis → data → reference line → annotations → conclusion). Use when the finished diagram would be overwhelming if shown all at once.
 - **Camera moves** — zoom in on a focal point as the story narrows, zoom out as it widens. Use sparingly to mirror the prose's rhetorical scope-change.
-- **Deliberate silence** — a large empty space between sections, or a section that is just a single short blockquote on the cream paper. Use to mark a beat the reader needs to feel before moving on. Don't use more than once per piece — it stops working.
+- **Deliberate silence** — a large empty space between sections, or a section that is just a single short blockquote on the off-white paper. Use to mark a beat the reader needs to feel before moving on. Don't use more than once per piece — it stops working.
 
 ### What we don't use
 
@@ -376,7 +372,7 @@ Five build phases (P1–P5), then a Playwright E2E verification pass. Phase orde
 | **P1 — Scaffold** | HTML skeleton; sections stubbed (one per concept in the dependency map) with placeholder text; mechanic stub elements present but not wired; aesthetic preset CSS inlined | Does the page render top-to-bottom without errors? Does the section order match the dependency map? |
 | **P2 — Core mechanic in isolation** | The mechanic actually produces the phenomenon. Crude visuals OK; no narrative persuasion yet. | **Can a cold reader, with only the minimal rules and labels needed to operate the model — no narrative persuasion, no framing prose — produce the phenomenon by interacting? If no, fix the mechanic, not the prose, before continuing.** |
 | **P3 — Narrative wiring** | Prose written into sections; mechanic-prose handoffs wired; **every figure has a paragraph after it that points at the figure**; scroll/step transitions in place; **Toolbox techniques implemented where Round 5 selected them** | Does the piece flow if you read it top to bottom *without* touching the mechanic? Does it flow if you only touch the mechanic and never read prose? Does each Toolbox technique earn its complexity? |
-| **P4 — Design pass** | Engineering-textbook preset applied (cream paper, ink strokes, one accent, no decoration); figure styling; responsive | Do the figures look like they could have been printed by offset lithography in 1973? |
+| **P4 — Design pass** | Engineering-textbook preset applied (off-white paper, ink strokes, one accent, no decoration); figure styling; responsive | Do the figures look like they could have been printed by offset lithography in 1973? |
 | **P5 — Polish** | Reduced-motion, keyboard nav, mobile, state-on-scroll-back, content warnings if applicable, source/provenance section, model-limits section | Is there a single accessibility or UX bug a first-time reader will hit? |
 
 **Verification — Playwright E2E** (post-build, separate from build phases):
@@ -417,7 +413,7 @@ This checklist is not Playwright-replaceable. The failures it catches are visual
 
 ## Design system
 
-**Default visual register: 1970s engineering textbook.** Cream paper, dark warm-gray ink, one bold accent, no decoration that doesn't earn its place. Inline `presets/engineering-textbook.css` as the `:root{}` block at P4 (design pass).
+**Default visual register: 1970s engineering textbook on a neutral palette.** Off-white paper (`#f7f7f7`), off-black ink (`#444`), sans-serif body, one bold accent, no decoration that doesn't earn its place. Inline `presets/engineering-textbook.css` as the `:root{}` block at P4 (design pass).
 
 **Cross-cutting overlay:** `presets/intimate.css` — applied AFTER the base preset's `:root{}` block when the topic is personal, health-related, grief-adjacent, or trauma-adjacent. Auto-suggested when Round 1 surfaces harm/identity/trauma sensitivity. Desaturates accents, widens spacing, slows motion, defines content-warning chrome.
 
@@ -450,6 +446,8 @@ User can override the preset; if the topic genuinely demands a different registe
 - No decorative animation
 - No horizontal scroll at 360 px viewport
 - Exactly one `<h1>`; correct heading order
+- Audio is reader-triggered; no autoplay
+- The piece reads the same whether the reader scrolls or interacts — one path, not a story-mode/explorer-mode toggle
 - **Source/provenance section near the end**
 - **Model limits section visible to readers**
 - **Final section connects the model to what the reader can do, decide, or question next**
@@ -469,19 +467,9 @@ Point readers at these by name. They have been hand-picked from the explorabl.es
 - **Mathigon** (https://mathigon.org/) — textbook-with-interactives canonical
 - **Social Security Retirement Benefits, Explained Visually** (https://lewis500.github.io/socialsecurity/) — persistent-canvas scrollytelling
 - **Up and Down the Ladder of Abstraction** (http://worrydream.com/LadderOfAbstraction/) — canonical Ladder-of-abstraction device
-- **Long-form interactive science writing** in the engineering-textbook register — bespoke figures, slow concept compounding, every section building on primitives the reader saw earlier. The published examples in this lineage are the work of writers who spend months per piece on hand-tuned figures and prose; this skill borrows the *structure* and the *voice*, not the polish. Don't promise the user a piece at that level.
+- **Bartosz Ciechanowski** (https://ciechanow.ski/) — the contemporary bar for figure-rich, slowly-compounding interactive science writing. *Internal Combustion Engine*, *Sound*, *GPS*, *Mechanical Watch* — read one before starting if the voice is unfamiliar.
+- **Vi Hart** (https://vihart.com/) — Polygons co-author; the canonical reference for "doodle-pace" math exploration where the reader plays with the medium itself.
+- **Distill** (https://distill.pub/) — peer-reviewed interactive ML explainers. Figures that compound; prose that points at them.
+- **Nicky Case's broader catalog** (https://ncase.me/) — beyond Polygons and Ballot: *Anxiety*, *Crowds*, *We Become What We Behold*. Range across civic, social, and personal topics.
 
 When recommending a starting point for the user, point at the closest exemplar: "for this topic, the closest published exemplar is X — read it before you start."
-
-## What the skill will not do
-
-- No frameworks (React, Vue, Svelte, Vite, webpack)
-- No `npm init` ceremony, no scripts section, no lockfile — `package.json` is one line declaring `@playwright/test` as a devDep; `node_modules` is gitignored ephemera
-- No marketing copy (defer to `landing-page`)
-- No code/protocol explainers (defer to `code-explainer`)
-- No autoplay audio
-- No "story-mode" toggles — the piece works the same whether you scroll or interact
-- No anti-pattern bypass without a logged warning comment in the HTML
-- No invented citations or fabricated data — if a parameter has no source, it is labeled `(assumption)`
-- No multi-session workshop curricula or 3-day events — single-page only
-- No quizzes, progress bars, or click-to-reveal on the spine — those belong to a different teaching tradition

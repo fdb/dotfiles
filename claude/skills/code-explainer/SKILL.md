@@ -11,11 +11,7 @@ Generate a self-contained HTML file that explains how a system works — a codeb
 
 One `.html` file. All CSS inline. All JS inline except CDN imports. No build step, no framework. Still readable in a decade, still printable, still searchable.
 
-The visual register is a **1970s engineering textbook**: cream paper, dark warm-gray ink, one bold accent for emphasis, no decoration that doesn't earn its place. Diagrams look like figures from a service manual — flat, labelled, technical. No drop shadows, no gradients, no glassmorphism, no glow.
-
-## A note on scope
-
-Long-form interactive technical writing at its best takes its authors months per piece — bespoke renderers, hand-tuned typography, dozens of revisions per figure, real research into the artifact. Those pieces are a craft tradition; do not pretend a model can match them in one sitting. **The skill borrows the structural choices that make that tradition work — concept-dependency ordering, figures the reader can manipulate, prose that points at the figures, vocabulary introduced in passing — and applies them honestly to a one-sitting artifact.** Tell the user up front: this is a structurally faithful first draft in the same family, not a finished piece in the lineage.
+The visual register is a **1970s engineering textbook** rendered on a neutral palette: off-white paper (`#f7f7f7`), off-black ink (`#444`), one bold accent for emphasis, no decoration that doesn't earn its place. Diagrams look like figures from a service manual — flat, labelled, technical. No drop shadows, no gradients, no glassmorphism, no glow.
 
 ## When to use
 
@@ -201,16 +197,16 @@ Layout requirements:
 
 ```css
 :root {
-  /* paper — warm cream, never pure white */
-  --bg:        oklch(0.97 0.012 90);    /* page background */
-  --surface:   oklch(0.94 0.014 90);    /* figure stage, inset blocks */
-  --surface-2: oklch(0.91 0.016 90);    /* code, callouts */
-  --rule:      oklch(0.30 0.020 60);    /* hairlines, axis lines, borders */
+  /* paper — off-white, never pure white */
+  --bg:        oklch(0.97 0 0);         /* #f7f7f7 — page background */
+  --surface:   oklch(0.94 0 0);         /* figure stage, inset blocks */
+  --surface-2: oklch(0.91 0 0);         /* code, callouts */
+  --rule:      oklch(0.40 0 0);         /* hairlines, axis lines, borders */
 
-  /* ink — dark warm gray, never pure black */
-  --ink:        oklch(0.22 0.018 60);   /* primary text and figure strokes */
-  --ink-muted:  oklch(0.42 0.018 60);   /* secondary text */
-  --ink-faint:  oklch(0.55 0.014 60);   /* captions, axis ticks */
+  /* ink — off-black, never pure black */
+  --ink:        oklch(0.32 0 0);        /* #444 — primary text and figure strokes */
+  --ink-muted:  oklch(0.50 0 0);        /* secondary text */
+  --ink-faint:  oklch(0.62 0 0);        /* captions, axis ticks */
 
   /* one bold accent — signal red, the emotional beat per section */
   --accent:     oklch(0.55 0.20 28);
@@ -231,23 +227,23 @@ Layout requirements:
 
 **Rules.**
 
-- Ink on paper hits ~12:1 contrast — engineering-textbook readability for long sessions.
+- Ink on paper hits ~6.4:1 contrast — well above WCAG AA, restful for long reading sessions.
 - Two accents in active narrative use: `--accent` (red) and `--secondary` (steel blue). The reserved hues are for charts with multiple series, not for prose decoration.
 - One emotional beat per section. If a section has two callouts in red, split the section.
-- Never `#000` or `#fff`. The cream-and-warm-ink relationship is the whole point of the look.
+- Never `#000` or `#fff`. Off-white paper and off-black ink (#f7f7f7 / #444) are the whole point of the look — pure black on pure white is jarring at long reading lengths.
 - No drop shadows. No gradients. No glassmorphism. No glow. Borders are 1px solid `--rule`, period.
 
 ### Typography
 
-The textbook register is well-served by a **sans-serif heading paired with a serif body**, but a strict sans throughout is also fine and renders faster. Default to system fonts.
+Strict sans throughout — system fonts, default to whatever the reader's OS gives them. The textbook register is carried by the figures, the restraint, and the rhythm; the body type stays out of the way.
 
 ```css
 body {
   font-family:
-    'Source Serif 4', 'Source Serif Pro', Charter, 'Iowan Old Style',
-    'Apple Garamond', Cambria, Georgia, serif;
-  font-size: 17px;
-  line-height: 1.7;
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui,
+    Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.2em;
+  line-height: 1.6em;
   color: var(--ink);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
@@ -274,8 +270,10 @@ code, kbd, .mono, .svg-label {
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 ```
+
+In polished mode, set `body { font-family: 'Inter', -apple-system, ... }` so body type uses Inter while headings stay on Inter Tight.
 
 ### Type scale
 
@@ -284,7 +282,7 @@ code, kbd, .mono, .svg-label {
 | `h1` | `clamp(2rem, 4vw + 1rem, 2.75rem)` | 1.15 | 600 |
 | `h2` | `1.6rem` | 1.25 | 600 |
 | `h3` | `1.2rem` | 1.3 | 600 |
-| body `p` | 17px serif | 1.7 | 400 |
+| body `p` | 1.2em sans | 1.6em | 400 |
 | `.kicker`, `.tag` (small mono labels) | 12px | 1.4 | 600, uppercase, `0.12em` tracking |
 | `figcaption` | 14px | 1.5 | 400 italic |
 
@@ -298,7 +296,7 @@ code, kbd, .mono, .svg-label {
 
 - `viewBox="0 0 700 N"` — 700 wide fits the prose column.
 - **Labels are real `<text>` elements.** Never paths, never raster, never icon fonts. This buys readability, search, translation, and screen-reader support for free.
-- **Strokes are the same `--rule` ink as the prose hairlines.** A 1.25 px black line on cream is the textbook default. Reserve thicker strokes (2 px) for the one element the eye should land on first.
+- **Strokes are the same `--rule` ink as the prose hairlines.** A 1.25 px ink line on off-white is the textbook default. Reserve thicker strokes (2 px) for the one element the eye should land on first.
 - **Color carries meaning.** Black/`--rule` for structure, `--accent` (red) for the highlighted element or "what to notice," `--secondary` (steel blue) for a secondary thread.
 - **No shadows, no gradients, no glow.** A figure in this style looks like it could have been printed by offset lithography in 1973.
 - **Fills are restrained.** Most shapes are unfilled (transparent or surface-colored) with a 1.25 px stroke. Filled shapes are used only when the fill itself is the data (a heatmap cell, a state in a state diagram).
@@ -409,7 +407,7 @@ If a topic doesn't map to one of these, a still figure with strong labels often 
 - [ ] No `<details>` blocks holding primary content. (Tangential footnotes are fine.)
 - [ ] No quizzes. No progress bars. No completion indicators.
 - [ ] No decorative animation. Every motion reveals state, transformation, causality, comparison, or traversal.
-- [ ] Palette is OKLCH cream-and-ink. No `#000` or `#fff`.
+- [ ] Palette is OKLCH neutral off-white-and-ink. No `#000` or `#fff`.
 - [ ] Contrast: `--ink` on `--bg` ≥ 12:1; `--ink-muted` on `--bg` ≥ 7:1.
 - [ ] Content column clamps at `max-width: 68ch`. No horizontal scroll at 360 px.
 - [ ] All SVG text is live `<text>`, not paths.
@@ -418,4 +416,11 @@ If a topic doesn't map to one of these, a still figure with strong labels often 
 
 ## Reference register
 
-The shape and voice this skill targets — short, illustrated sections that compound; diagrams that reward manipulation; a tone that walks the reader through what they're looking at — is the register of long-form engineering writers who treat the figure as the explanation. We're producing a one-sitting distillation of that style, not a months-long opus. Set the user's expectations accordingly.
+The shape and voice this skill targets — short, illustrated sections that compound; diagrams that reward manipulation; a tone that walks the reader through what they're looking at — is the register of long-form engineering writers who treat the figure as the explanation. Read one piece from this list before starting if the voice is unfamiliar; the closest published exemplar is the answer to "what should this look like?"
+
+- **Bartosz Ciechanowski** (https://ciechanow.ski/) — the canonical contemporary practitioner. *Internal Combustion Engine*, *GPS*, *Mechanical Watch*, *Bicycle*, *Gears*, *Sound* — every piece is a master class in concept-dependency ordering and figures the reader operates.
+- **Distill** (https://distill.pub/) — peer-reviewed interactive explainers for machine-learning research. The same register applied to papers.
+- **Mathigon** (https://mathigon.org/) — textbook material rebuilt as interactive primitives; the closest exemplar when the artifact is mathematical.
+- **Julia Evans's zines** (https://wizardzines.com/) — the same voice in print form. Concept-dependency ordering at small scale, on a single page.
+
+When recommending a starting point, point at the closest exemplar and ask the user to read its first three sections before the writing begins.
