@@ -43,26 +43,26 @@ for item in CLAUDE.md skills commands settings.json keybindings.json; do
   link_dotfile "$src" "$dest"
 done
 
-# Symlink versioned .agents config items into ~/.agents/ (don't replace the whole directory).
+# Symlink versioned agents config items into ~/.agents/ (don't replace the whole directory).
 mkdir -p ~/.agents
 for item in AGENTS.md; do
-  src=~/dotfiles/.agents/$item
+  src=~/dotfiles/agents/$item
   dest=~/.agents/$item
   link_dotfile "$src" "$dest"
 done
 mkdir -p ~/.agents/skills
-if [ -d ~/dotfiles/.agents/skills ]; then
+if [ -d ~/dotfiles/agents/skills ]; then
   for dest in ~/.agents/skills/*; do
     [ ! -L "$dest" ] && continue
     target=$(readlink "$dest")
     case "$target" in
-      "$HOME"/dotfiles/.agents/skills/*)
+      "$HOME"/dotfiles/agents/skills/*)
         [ -e "$target" ] || rm -f "$dest"
         ;;
     esac
   done
 
-  for src in ~/dotfiles/.agents/skills/*; do
+  for src in ~/dotfiles/agents/skills/*; do
     [ ! -e "$src" ] && continue
     item=$(basename "$src")
     dest=~/.agents/skills/$item
