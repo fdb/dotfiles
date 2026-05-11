@@ -8,7 +8,7 @@
 !skills/
 !skills/**
 
-# Exclude Codex-managed system skills even if they appear locally
+# Exclude agent-managed system skills even if they appear locally
 skills/.system/
 skills/.system/**
 
