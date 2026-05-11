@@ -37,22 +37,20 @@ ln -sfn ~/dotfiles/radare2rc ~/.radare2rc
 ln -sfn ~/dotfiles/zshrc ~/.zshrc
 # Symlink versioned Claude config items into ~/.claude/ (don't replace the whole directory).
 mkdir -p ~/.claude
-for item in CLAUDE.md skills commands settings.json keybindings.json; do
+for item in CLAUDE.md commands settings.json keybindings.json; do
   src=~/dotfiles/claude/$item
   dest=~/.claude/$item
   link_dotfile "$src" "$dest"
 done
 
-# Symlink versioned agents config items into ~/.agents/ (don't replace the whole directory).
-mkdir -p ~/.agents
-for item in AGENTS.md; do
-  src=~/dotfiles/agents/$item
-  dest=~/.agents/$item
-  link_dotfile "$src" "$dest"
-done
-mkdir -p ~/.agents/skills
-if [ -d ~/dotfiles/agents/skills ]; then
-  for dest in ~/.agents/skills/*; do
+# Symlink skills from agents/ into ~/.agents/skills/ and ~/.claude/skills/.
+# agents/skills/ is the single source of truth for all skills.
+skill_src=~/dotfiles/agents/skills
+
+for dest_dir in ~/.agents/skills ~/.claude/skills; do
+  mkdir -p "$dest_dir"
+  # Prune stale symlinks pointing at our skills source
+  for dest in "$dest_dir"/*; do
     [ ! -L "$dest" ] && continue
     target=$(readlink "$dest")
     case "$target" in
@@ -62,13 +60,17 @@ if [ -d ~/dotfiles/agents/skills ]; then
     esac
   done
 
-  for src in ~/dotfiles/agents/skills/*; do
+  for src in $skill_src/*; do
     [ ! -e "$src" ] && continue
     item=$(basename "$src")
-    dest=~/.agents/skills/$item
+    dest="$dest_dir/$item"
     link_dotfile "$src" "$dest"
   done
-fi
+done
+
+# Symlink agents AGENTS.md into ~/.agents/.
+mkdir -p ~/.agents
+link_dotfile ~/dotfiles/agents/AGENTS.md ~/.agents/AGENTS.md
 
 if [[ $OSTYPE == darwin* ]];
 then

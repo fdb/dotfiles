@@ -7,8 +7,8 @@
 # Whitelist these directories and their contents
 !commands/
 !commands/**
-!skills/
-!skills/**
+
+# Skills now live in agents/skills/ — single source of truth
 
 # Whitelist settings files
 !settings.json
