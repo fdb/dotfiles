@@ -1,0 +1,19 @@
+#!/bin/sh
+# Usage: convert_gif input.mov
+#
+# Convert a video to a high-quality GIF using a generated palette
+# (palettegen + paletteuse). Output filename is the input with the extension
+# swapped to .gif.
+
+if [ $# -ne 1 ]; then
+    echo "Usage: convert_gif input.mov" >&2
+    exit 2
+fi
+
+input_file="$1"
+output_file="${input_file%.*}.gif"
+palette=$(mktemp /tmp/palette.XXXXXX.png)
+trap 'rm -f "$palette"' EXIT
+
+ffmpeg -y -i "$input_file" -vf "format=rgb24,palettegen" "$palette"
+ffmpeg -y -i "$input_file" -i "$palette" -lavfi "format=rgb24[x];[x][1:v]paletteuse" "$output_file"
