@@ -2,19 +2,6 @@
 	name = Frederik De Bleser
 	email = frederik@debleser.be
 
-[alias]
-  st = status
-  ci = commit
-  co = checkout
-  di = diff
-  dc = diff --cached
-  count = shortlog -sn
-  latest = for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname:short)'
-  incoming = !(git fetch --quiet && git log --pretty=format:'%C(yellow)%h %C(white)- %C(red)%an %C(white)- %C(cyan)%d%Creset %s %C(white)- %ar%Creset' ..origin/master)
-  outgoing = !(git fetch --quiet && git log --pretty=format:'%C(yellow)%h %C(white)- %C(red)%an %C(white)- %C(cyan)%d%Creset %s %C(white)- %ar%Creset' origin/master..)
-  hash = rev-parse --short HEAD
-  longhash = rev-parse HEAD
-
 [format]
   pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
 
@@ -39,8 +26,8 @@
 [init]
 	defaultBranch = main
 [credential "https://github.com"]
-	helper = 
+	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
+	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
