@@ -79,7 +79,6 @@ function gwtrm() {
 
 # Claude alias
 alias ccc='claude --permission-mode auto'
-alias crc='claude remote-control --permission-mode auto --spawn=same-dir'
 
 # Directory navigation
 alias ..="cd .."
