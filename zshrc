@@ -30,7 +30,7 @@ alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 alias llama='llama-server -hf ggml-org/gpt-oss-20b-GGUF --ctx-size 0 --jinja -ub 2048 -b 2048 -ngl 99 -fa'
 
 # PATH additions
-export PATH=~/.local/bin:/opt/homebrew/bin:/go/bin:$PATH
+export PATH=~/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/go/bin:$PATH
 
 # Herd injected PHP 8.4 configuration.
 export HERD_PHP_84_INI_SCAN_DIR="/Users/fdb/Library/Application Support/Herd/config/php/84/"
