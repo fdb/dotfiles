@@ -20,6 +20,15 @@ alias gss='git stash'
 alias gsp='git stash pop'
 alias gdmb='git branch --merged | egrep -v "(^\*|master|main|dev)" | xargs git branch -d'
 
+# Git plumbing primitives — shared between bash and zsh prompts.
+function git_current_branch() {
+  git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null
+}
+
+function git_is_dirty() {
+  ! { git diff --quiet HEAD -- 2>/dev/null && git diff --cached --quiet HEAD -- 2>/dev/null; }
+}
+
 # Git worktree helpers
 function _git_main_root() {
   local common_dir

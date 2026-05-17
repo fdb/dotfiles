@@ -8,15 +8,15 @@ autoload -Uz compinit && compinit
 # zsh-specific settings
 [ -f /opt/homebrew/bin/fzf ] && source <(fzf --zsh)
 
-# Git prompt: branch name + clean/dirty indicator (⋅)
-# White ⋅ = clean, orange ⋅ = dirty
+# Git prompt: branch + clean/dirty indicator (⋅).
+# White ⋅ = clean, orange ⋅ = dirty. Uses primitives from shell_common.
 git_prompt_info() {
   local branch
-  branch=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null) || return
-  if git diff --quiet HEAD -- 2>/dev/null && git diff --cached --quiet HEAD -- 2>/dev/null; then
-    echo " %F{white}${branch} ⋅%f"
-  else
+  branch=$(git_current_branch) || return
+  if git_is_dirty; then
     echo " %F{208}${branch} ⋅%f"
+  else
+    echo " %F{white}${branch} ⋅%f"
   fi
 }
 setopt PROMPT_SUBST
