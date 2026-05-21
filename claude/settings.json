@@ -28,7 +28,7 @@
       }
     }
   },
-  "outputStyle": "Explanatory",
+  "outputStyle": "Proactive",
   "alwaysThinkingEnabled": true,
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-daltonized",
