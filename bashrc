@@ -24,9 +24,11 @@ export HISTCONTROL=erasedups
 export HISTSIZE=10000
 shopt -s histappend
 
-# Custom prompt with git branch
+# Custom prompt with git branch (uses primitives from shell_common).
 parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+    local b
+    b=$(git_current_branch) || return
+    echo " ($b)"
 }
 export PS1='\[\033[01;28m\]\w\[\033[00;32m\]$(parse_git_branch) \[\033[0m\]$ '
 
@@ -59,7 +61,7 @@ export LC_TIME="en_US.UTF-8"
 export LC_ALL=
 
 # PATH
-export PATH="/usr/local/bin:${HOME}/bin:${GOPATH}/bin:${HOME}/.cargo/bin:${HOME}/google-cloud-sdk/bin:${QTPATH}/bin:$HOME/.yarn/bin:${PATH}"
+export PATH="/usr/local/bin:${HOME}/bin:${HOME}/.local/bin:${GOPATH}/bin:${HOME}/.cargo/bin:${HOME}/google-cloud-sdk/bin:${QTPATH}/bin:$HOME/.yarn/bin:${PATH}"
 
 # Cargo/Rust
 if [ -f $HOME/.cargo/env ]; then

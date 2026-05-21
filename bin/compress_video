@@ -1,0 +1,17 @@
+#!/bin/sh
+# Usage: compress_video input.mov
+#
+# Re-encode a video as a compressed MP4 (1080p, 15fps, crf 28) suitable for
+# sharing in chat or embedding in docs. Output filename is the input with the
+# extension swapped to .mp4.
+
+if [ $# -ne 1 ]; then
+    echo "Usage: compress_video input.mov" >&2
+    exit 2
+fi
+
+input_file="$1"
+output_file="${input_file%.*}.mp4"
+ffmpeg -y -i "$input_file" \
+    -vf "scale=-2:1080" -r 15 -crf 28 -pix_fmt yuv420p \
+    -movflags +faststart "$output_file"
