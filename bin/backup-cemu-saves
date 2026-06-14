@@ -1,0 +1,50 @@
+#!/bin/bash
+set -euo pipefail
+
+# Back up Cemu save data to Google Drive as timestamped .tar.gz snapshots.
+# Skips when nothing has changed and keeps only the newest $KEEP backups.
+#
+# Operates entirely on absolute paths, so it does NOT cd to its own directory
+# (the shell-scripts convention is intentionally omitted here).
+
+SRC="$HOME/Library/Application Support/Cemu/mlc01/usr/save"
+DRIVE_ROOT="$HOME/Library/CloudStorage/GoogleDrive-frederik@debleser.be/My Drive"
+DEST="$DRIVE_ROOT/SaveGames/Cemu"
+KEEP=30   # number of recent snapshots to retain
+
+# --- sanity checks ---
+if [[ ! -d "$SRC" ]]; then
+  echo "error: Cemu save folder not found: $SRC" >&2
+  exit 1
+fi
+
+# Google Drive must actually be mounted; otherwise bail rather than write a
+# stray local folder that would never sync to the cloud.
+if [[ ! -d "$DRIVE_ROOT" ]]; then
+  echo "error: Google Drive is not mounted at: $DRIVE_ROOT" >&2
+  echo "       (sign in to Google Drive and try again)" >&2
+  exit 1
+fi
+
+mkdir -p "$DEST"
+
+# --- skip if the save tree is identical to the last backup ---
+checksum="$(cd "$SRC" && find . -type f -exec shasum {} + | sort | shasum | cut -d' ' -f1)"
+stamp_file="$DEST/.last-checksum"
+if [[ -f "$stamp_file" && "$(cat "$stamp_file")" == "$checksum" ]]; then
+  echo "No save changes since last backup — nothing to do."
+  exit 0
+fi
+
+# --- create the snapshot ---
+ts="$(date +%Y-%m-%d_%H%M%S)"
+archive="$DEST/cemu-saves-$ts.tar.gz"
+tar -czf "$archive" -C "$SRC" .
+echo "$checksum" > "$stamp_file"
+echo "Backed up Cemu saves -> $archive ($(du -h "$archive" | cut -f1))"
+
+# --- prune old snapshots, keep the newest $KEEP ---
+ls -1t "$DEST"/cemu-saves-*.tar.gz | tail -n +$((KEEP + 1)) | while read -r old; do
+  rm -f "$old"
+  echo "Pruned old backup: $(basename "$old")"
+done
