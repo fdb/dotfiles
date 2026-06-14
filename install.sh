@@ -45,6 +45,7 @@ link_dotfile ~/dotfiles/agents/skills ~/.agents/skills
 mkdir -p ~/.claude
 link_dotfile ~/dotfiles/claude/settings.json ~/.claude/settings.json
 link_dotfile ~/dotfiles/agents/AGENTS.md ~/.claude/CLAUDE.md
+link_dotfile ~/dotfiles/agents/skills ~/.claude/skills
 
 # Install Claude Code plugins if claude is available.
 if command -v claude &> /dev/null; then
