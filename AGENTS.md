@@ -17,5 +17,6 @@ This script symlinks all dotfiles to `~/` (e.g., `bashrc` → `~/.bashrc`). It a
 - **Git**: `gitconfig`, `global-gitignore`
 - **Utilities**: `bin/` - helper scripts (gif2mp4, gifit, git-completion.bash, mvim)
 - **Other**: `tmux.conf`, `screenrc`, `ssh-config` (macOS only), `radare2rc`, `sqliterc`
+- **pi**: `pi/models.json` - provider config for the pi agent (symlinked to `~/.pi/agent/models.json`)
 - **Agents**: `agents/`, `claude/` - coding agents skills etc
 

@@ -1,0 +1,25 @@
+#!/bin/bash
+# Start a local llama.cpp server hosting Qwen3 for use with the pi agent.
+#
+# Serves an OpenAI-compatible API on http://127.0.0.1:8080. The matching pi
+# provider config lives in this repo at pi/models.json (symlinked to
+# ~/.pi/agent/models.json by install.sh).
+#
+# Sampler settings follow Qwen3's recommended defaults for thinking mode.
+set -euo pipefail
+
+exec llama-server \
+  -hf unsloth/Qwen3.6-35B-A3B-GGUF:UD-Q4_K_M \
+  --host 127.0.0.1 \
+  --port 8080 \
+  --ctx-size 32768 \
+  --parallel 1 \
+  --jinja \
+  --flash-attn on \
+  --temp 0.6 \
+  --top-p 0.95 \
+  --top-k 20 \
+  --min-p 0.0 \
+  --presence-penalty 0.0 \
+  --repeat-penalty 1.0 \
+  --chat-template-kwargs '{"preserve_thinking":true}'

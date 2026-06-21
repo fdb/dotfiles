@@ -41,6 +41,10 @@ mkdir -p ~/.agents
 link_dotfile ~/dotfiles/agents/AGENTS.md ~/.agents/AGENTS.md
 link_dotfile ~/dotfiles/agents/skills ~/.agents/skills
 
+# Symlink pi agent config files.
+mkdir -p ~/.pi/agent
+link_dotfile ~/dotfiles/pi/models.json ~/.pi/agent/models.json
+
 # Symlink Claude config files.
 mkdir -p ~/.claude
 link_dotfile ~/dotfiles/claude/settings.json ~/.claude/settings.json
