@@ -11,6 +11,8 @@ Start answers immediately, no filler. Conceptual principles over step-by-step. C
 - Write short paragraphs. Keep one topic in each paragraph.
 The goal is easy reading. Many readers are not native English speakers. Clear text helps them the work in a safe and correct way.
 
+When writing PRs, don't write "created with Claude Code", since it always passes manual review before we do the PR.
+
 
 ## Python
 
