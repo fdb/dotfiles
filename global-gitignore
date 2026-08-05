@@ -11,6 +11,7 @@
 .idea/
 *.iml
 .vscode/
+tmp/
 
 # Windows
 Thumbs.db
