@@ -72,6 +72,12 @@ The test: Every changed line should trace directly to the user's request.
 
 **In our own repos, you can bend this rule.** If the code needs a refactor, do it properly. Say what you refactored and why.
 
+To tell the two apart, run `git remote -v` and read the owner. These owners are ours:
+
+`fdb`, `nodebox`, `algorithmicgaze`, `figmentapp`, `codespacehelp`, `opentypejs`, `cityinabottle`, `tree-company`, `studio-data`, `studiosla`, `cdalabo`, `gandelve`, `ciebarbarie`, `pattern3`
+
+Any other owner is upstream. If the owner is not in this list, or there is no remote, treat the repo as upstream and keep the diff small.
+
 ### 4. Goal-Driven Execution
 
 **Define success criteria. Loop until verified.**
