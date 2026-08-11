@@ -1,6 +1,6 @@
 ---
 name: ship
-description: Commit pending changes, push to remote, and create a pull request when appropriate. Use when the user asks to ship, publish, commit and push, or open a PR for local work.
+description: Commit pending changes, push to remote, and draft a pull request message for the user to open. Use when the user asks to ship, publish, commit and push, or open a PR for local work.
 ---
 
 # Ship
@@ -9,13 +9,11 @@ Commit pending changes and publish them.
 
 1. **Commit** any pending changes using the standard git-commit workflow (HEREDOC message, stage by name). Skip if nothing to commit.
 
-2. **Decide whether to open a PR**:
-   - Feature branch → yes.
-   - Default branch (`git symbolic-ref refs/remotes/origin/HEAD`) → no, *unless* the user asked for one in their `/ship` invocation (e.g. `/ship make a pr for this`).
+2. **Decide whether to open a PR**: only if the user asked for one in their `/ship` invocation (e.g. `/ship make a pr for this`). A bare `/ship` never creates a PR.
 
-3. **No PR** → push the current branch to `origin` (use `-u origin HEAD` if no upstream). Done.
+3. **No PR** → push the current branch to `origin` (use `-u origin HEAD` if no upstream). Then draft the PR title and body to the rules below, print them for the user, and stop. The user opens the PR.
 
-4. **PR**:
+4. **PR** (only when asked):
    - If on the default branch, first move the new commits to a fresh feature branch — do not push them to the default branch.
    - Push the feature branch.
    - Check `gh pr view --json url 2>/dev/null`. If a PR exists, report its URL and stop. Otherwise create one with `gh pr create` using the standard `## Summary` / `## Test plan` body. Report the URL.

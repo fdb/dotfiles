@@ -11,7 +11,15 @@ Conceptual principles over step-by-step. Use ASD-STE100 Simplified Technical Eng
 - Write short paragraphs. Keep one topic in each paragraph.
 The goal is easy reading. Many readers are not native English speakers. Clear text helps them the work in a safe and correct way.
 
-When writing PRs, don't write "created with Claude Code", since it always passes manual review before we do the PR.
+## Pull requests
+
+I open the pull request. You never do.
+
+- Do not run `gh pr create`, or any equivalent, on your own.
+- Commit and push when I ask. Then stop.
+- Give me a proposed PR title and body. I review it and open the PR myself.
+- Only create the PR if I ask for it directly in that message. A general "ship this" is not enough.
+- Never write "created with Claude Code" in the PR. Every PR passes my manual review first.
 
 
 ## Python
