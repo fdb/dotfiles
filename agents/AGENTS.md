@@ -68,6 +68,10 @@ When your changes create orphans:
 
 The test: Every changed line should trace directly to the user's request.
 
+**In other people's repos, this rule is absolute.** For pull requests to upstream libraries and projects we do not own, change only what the fix needs. Match the surrounding style exactly. A reviewer must see a small, focused diff.
+
+**In our own repos, you can bend this rule.** If the code needs a refactor, do it properly. Say what you refactored and why.
+
 ### 4. Goal-Driven Execution
 
 **Define success criteria. Loop until verified.**
@@ -89,6 +93,18 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 ### 5. Testing
 
 Use TDD with red/green workflow when fixing bugs.
+
+### 6. Comments
+
+**Comments describe the code as it is now. Never as it was before.**
+
+- Do not write "previously", "used to", "now also", "changed from", or "instead of the old".
+- Do not explain your edit. Explain the code.
+- The git history holds the before. Readers who want it can look there.
+- If the code is obvious, write no comment at all.
+
+Bad: `// We no longer cache here, we compute directly`
+Good: no comment, or `// Recompute each call: the input changes every frame.`
 
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
