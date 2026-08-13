@@ -20,6 +20,7 @@ I open the pull request. You never do.
 - Give me a proposed PR title and body. I review it and open the PR myself.
 - Only create the PR if I ask for it directly in that message. A general "ship this" is not enough.
 - Never write "created with Claude Code" in the PR. Every PR passes my manual review first.
+- Don't add a link to a Claude sessions or anything from https://claude.ai.
 
 
 ## Python
