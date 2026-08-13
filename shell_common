@@ -10,7 +10,12 @@ alias gco='git checkout'
 alias gc='git commit'
 alias gca='git commit --amend'
 alias gcm='git commit -m'
-alias gl='git log --oneline --graph'
+# One-line graph log; show the committer name only when it is not me.
+function gl() {
+  git log --color=always --graph --pretty=format:'%C(auto)%h%d %s%C(dim) (%cn)%C(reset)' "$@" \
+    | sed "s/ ($(git config user.name))//" \
+    | less -RFX
+}
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gf='git fetch'
