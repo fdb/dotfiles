@@ -119,17 +119,25 @@ Instance — resource lifetime across a memory-safety boundary (C heap under a G
 
 Origin: MicroPythonOS PR #248 freed cached TTF fonts when an activity finished, guarded by a widget-tree "in use" walk. The MeshCore app kept its font in a module global and reapplied it on the next screen: use-after-free crash, full revert. The walk, the tests, and the AI review all shared one model — "in use means drawn by a widget" — and nobody asked who held a reference the walk could not see. MeshCore's source was public. One code search over the OS's known apps would have found the global before the merge.
 
-### 7. Comments
+### 7. Write the Present, Not the Past
 
-**Comments describe the code as it is now. Never as it was before.**
+**Every artifact has one timeline. Write only in its timeline. Git holds the past; readers who want it can look there.**
 
-- Do not write "previously", "used to", "now also", "changed from", or "instead of the old".
-- Do not explain your edit. Explain the code.
-- The git history holds the before. Readers who want it can look there.
-- If the code is obvious, write no comment at all.
+State-artifacts describe the repo as it is now: code, comments, docstrings, names, docs, READMEs. Change-artifacts describe one step: commit messages, PR bodies, CHANGELOG entries — and their "before" is the published baseline, never your own earlier drafts. The path you took — designs tried and dropped, wordings revised, bugs you almost shipped — belongs to neither. For every reader it never existed.
+
+- Comments and docstrings: no "previously", "used to", "now also", "changed from", "no longer", "instead of the old". Do not explain your edit. Explain the code. If the code is obvious, write no comment at all.
+- Reasons too, not just facts: justify a decision by what is true now, not by contrast with a rejected alternative. "Private because nothing needs it publicly" stands alone; "private because it is no longer dangerous" leans on a past the reader cannot see.
+- Names: no `new_`, `_v2`, `old_`, `legacy_`. A name that dates the code is stale the day after merge.
+- PR bodies and commit messages: describe the change against the target branch. Reviewers see baseline → result; your intermediate iterations never existed for them.
+- CHANGELOG: the released difference. No development detours.
+- Docs and READMEs: current behavior only. Migration notes are the exception, and they name concrete versions.
+- Exception: a regression test may name the historical bug it pins. Anchor it with an issue or PR number, so the reference points into git history instead of retelling it.
 
 Bad: `// We no longer cache here, we compute directly`
 Good: no comment, or `// Recompute each call: the input changes every frame.`
+
+Bad: "made private because it can no longer corrupt memory"
+Good: "private: it has one caller, the OS teardown path"
 
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
