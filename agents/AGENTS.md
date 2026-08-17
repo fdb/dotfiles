@@ -97,7 +97,27 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 Use TDD with red/green workflow when fixing bugs.
 
-### 6. Comments
+### 6. Attack Your Own Model Before You Ship
+
+**Every change encodes a model of how the system is used. Bugs live where the model is incomplete. Reviews and tests that share the model cannot find them.**
+
+Before a PR, run an explicit adversarial pass. Do not verify that the code implements the design — verify that the design survives contact with consumers you did not think of.
+
+- Separate the two questions. "Did I build it right?" is implementation review. "Is the premise right?" is model review. Most review effort flows to the first; most shipped bugs come from the second.
+- Enumerate who touches the changed surface: callers, subclasses, background threads, scheduled callbacks, persisted state, out-of-tree apps and plugins. The dangerous consumer is the one you cannot grep. If the surface is public, assume consumers you will never see.
+- Ask "what is the dumbest reasonable caller?" Callers cache results, keep references across time, call twice, call at the worst moment, ignore your intended sequence. That is normal behavior, not abuse. Design for it or reject it explicitly.
+- Hunt for state that outlives your check. Any validation that scans the present (a liveness walk, an "is it in use" query, a lock check) is blind to the past that consumers carry forward in variables, globals, closures, caches, and queues. Ask: "what if X kept a reference?"
+- Attack every guarantee you claim. For each "safe at any time", "idempotent", "thread-safe", "cannot happen" — in your docs, comments, or PR description — write the test that tries hardest to break it. A claim without an adversarial test is a hypothesis, not a guarantee.
+- Write at least one test from the consumer's side, doing what real consumers do — not from the implementation's side, restating what the code already believes. Symptoms surface far from causes (the second use, the next screen, the retry); tests placed at the cause miss them.
+- Name the residual risk in the PR. "This breaks if a consumer does X" found by you is engineering; found by the maintainer after merge, it is a revert.
+
+Then leave your head and check the field. The adversarial pass runs on your own model. Real clients falsify the model. Find clients in the wild: in-tree apps, known client repos, GitHub code search, registry reverse-dependencies. Read their call sites. Do not run their code. Track what they store, how long they keep it, and which shapes, errors, and call orders they assume. Hyrum's Law: clients depend on every observable behavior, documented or not. Chrome tests releases against real websites. Rust runs crater across crates.io. We read the clients we can find before we ship. One real counterexample beats ten imagined ones. The `/due-diligence` skill runs both passes in full.
+
+Instance — resource lifetime across a memory-safety boundary (C heap under a GC language, handles, fds): freeing anything a public API returned means assuming every past caller kept the reference. Free only where no caller code can ever run again, tie lifetime to GC, or make handles revocable.
+
+Origin: MicroPythonOS PR #248 freed cached TTF fonts when an activity finished, guarded by a widget-tree "in use" walk. The MeshCore app kept its font in a module global and reapplied it on the next screen: use-after-free crash, full revert. The walk, the tests, and the AI review all shared one model — "in use means drawn by a widget" — and nobody asked who held a reference the walk could not see. MeshCore's source was public. One code search over the OS's known apps would have found the global before the merge.
+
+### 7. Comments
 
 **Comments describe the code as it is now. Never as it was before.**
 
