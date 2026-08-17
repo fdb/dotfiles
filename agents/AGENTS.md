@@ -71,6 +71,8 @@ The test: Every changed line should trace directly to the user's request.
 
 **In other people's repos, this rule is absolute.** For pull requests to upstream libraries and projects we do not own, change only what the fix needs. Match the surrounding style exactly. A reviewer must see a small, focused diff.
 
+**Never edit another project's instruction or meta files.** AGENTS.md, CLAUDE.md, .cursorrules, contributor docs, CI config: these belong to the maintainers. Do not change them in a fix PR, even when the fix shows they are wrong. Suggest the change in the PR body, or propose it in a separate PR. A surgical PR is easier to review and easier to accept.
+
 **In our own repos, you can bend this rule.** If the code needs a refactor, do it properly. Say what you refactored and why.
 
 To tell the two apart, run `git remote -v` and read the owner. These owners are ours: fdb, codespacehelp, algorithmicgaze, figmentapp,  gandelve, nodebox. Any other owner is upstream. If the owner is not in this list, or there is no remote, treat the repo as upstream and keep the diff small.
