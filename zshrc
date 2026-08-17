@@ -43,3 +43,8 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/fdb/Library/Application Support/Herd/con
 
 # GNU Radio Companion fix
 export GSETTINGS_SCHEMA_DIR=/opt/homebrew/share/glib-2.0/schemas
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/fdb/.lmstudio/bin"
+# End of LM Studio CLI section
+
