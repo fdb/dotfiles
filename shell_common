@@ -23,7 +23,8 @@ alias gpush='git push'
 alias gp='git pull'
 alias gss='git stash'
 alias gsp='git stash pop'
-alias gdmb='git branch --merged | egrep -v "(^\*|master|main|dev)" | xargs git branch -d'
+# Delete merged branches. Skip the ones a worktree has checked out (marked "+").
+alias gdmb='git branch --merged | grep -Ev "(^[*+]|master|main|dev)" | xargs git branch -d'
 
 # Git plumbing primitives — shared between bash and zsh prompts.
 function git_current_branch() {
@@ -34,22 +35,28 @@ function git_is_dirty() {
   ! { git diff --quiet HEAD -- 2>/dev/null && git diff --cached --quiet HEAD -- 2>/dev/null; }
 }
 
-# Git worktree helpers
+# Git worktree helpers — worktrees live in ~/.worktrees/<repo>/<branch>
 function _git_main_root() {
   local common_dir
   common_dir=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null) || { echo "Not in a git repo" >&2; return 1; }
   echo "${common_dir%/.git}"
 }
 
+function _git_worktree_base() {
+  local root
+  root=$(_git_main_root) || return 1
+  echo "$HOME/.worktrees/${root##*/}"
+}
+
 function gwt() {
-  if [ -z "$1" ]; then
+  if [ -z "${1:-}" ]; then
     git worktree list
     return
   fi
   local name="$1"
-  local root
-  root=$(_git_main_root) || return 1
-  local wt_dir="$root/.worktrees/$name"
+  local base
+  base=$(_git_worktree_base) || return 1
+  local wt_dir="$base/$name"
   if [ -d "$wt_dir" ]; then
     cd "$wt_dir"
   elif git show-ref --verify --quiet "refs/heads/$name"; then
@@ -65,21 +72,25 @@ function gwt() {
 }
 
 function gwtrm() {
-  local root
+  local root wt_dir
   root=$(_git_main_root) || return 1
 
-  local name="$1"
-  if [ -z "$name" ]; then
-    local toplevel
-    toplevel=$(git rev-parse --show-toplevel 2>/dev/null)
-    if [ "$toplevel" = "$root" ]; then
-      echo "Not in a worktree. Usage: gwtrm [branch-name]"
+  if [ -n "${1:-}" ]; then
+    local base
+    base=$(_git_worktree_base) || return 1
+    wt_dir="$base/$1"
+  else
+    wt_dir=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [ "$wt_dir" = "$root" ]; then
+      echo "Not in a worktree. Usage: gwtrm [branch-name]" >&2
       return 1
     fi
-    name=$(basename "$toplevel")
   fi
 
-  cd "$root" && git worktree remove "$root/.worktrees/$name"
+  # git refuses to remove a worktree with uncommitted or untracked files.
+  cd "$root" && git worktree remove "$wt_dir" || return 1
+  # Drop the per-repo directory once its last worktree is gone.
+  rmdir "${wt_dir%/*}" 2>/dev/null || true
 }
 
 # Claude alias
