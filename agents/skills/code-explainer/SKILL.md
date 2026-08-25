@@ -85,7 +85,7 @@ Treat the diagram as the explanation; treat the prose around it as connective ti
 A good diagram in this style:
 
 - **Is purpose-built for its prose context.** It is not reused from another section, not copied from documentation, not generic. The labels are exactly the terms the surrounding prose uses.
-- **Lets the reader manipulate something.** A slider that scrubs through time. A play/pause/step button on a state machine. A handle that rotates a 3D model. A toggle that flips between two modes. The interaction reveals a fact the static diagram could not.
+- **Lets the reader manipulate something — only when the manipulation changes the figure.** A slider that scrubs through time. A play/pause/step button on a state machine. A handle that rotates a 3D model. A toggle that flips between two modes. The interaction reveals a fact the static diagram could not. If the figure is already fully visible and the control only moves attention around it, the figure should be static. See "The interaction must change what the figure shows" below.
 - **Is comprehensible cold but becomes richer with the prose.** Even without reading the surrounding paragraphs, the reader can squint at the figure and pick up its outline; reading the prose then deepens it.
 - **Is built from real values from the system.** If the diagram shows packet sizes, those are the actual sizes. If it shows a token stream, those are real tokens. Synthetic stand-in values teach the wrong thing.
 
@@ -101,6 +101,23 @@ A good diagram in this style:
 | **Drag-to-place** | The reader positions an input and the system computes a consequence (place a probe, place a constraint, place a node) |
 
 Each pattern has the same test: **what does the reader now know that they couldn't have known from a static figure?** If the answer is nothing, cut the interaction or replace it with a still.
+
+### The interaction must change what the figure shows
+
+The most common failure is interaction for its own sake: a control that moves attention around a figure that is already fully visible. Buttons that highlight one row of a list. Tabs that select one node of a diagram. A "next" button that walks through items the reader can already read top to bottom. In each case, the reader could have seen everything at a glance. The control adds a step and adds nothing else.
+
+Ask three questions before adding a control. All three must be yes:
+
+1. **Does the figure change state?** The control must change the content, the values, or the geometry of the figure. Not the emphasis. If the only effect is a highlight, a colour change, or a scroll, the answer is no.
+2. **Does the change carry information?** The reader must learn something from the new state that the old state did not show. A slider that recomputes a curve does. A tab that reveals one of four already-visible panels does not.
+3. **Would the static version lose something?** Lay every state of the figure side by side on the page. If that static layout teaches the same thing, use the static layout.
+
+Concrete rules that follow:
+
+- **Highlight is not state.** Do not add buttons whose only effect is a highlight on an already-visible element. Use the prose to point at the element instead ("look at the second row").
+- **Enumeration is not interaction.** If the control walks through a fixed list of N items, show the N items. A ladder of four levels is a four-row table, not a four-button stepper.
+- **One control, one consequence.** Each control changes one thing, and the figure shows a consequence of that change. If a control has no visible consequence beyond itself, cut it.
+- **Prefer a still.** A static figure with good labels is not a failure. It is the default. Interaction is the exception, and it must earn its place by the three questions above.
 
 ### Renderer choices
 
@@ -398,6 +415,7 @@ If a topic doesn't map to one of these, a still figure with strong labels often 
 - [ ] Single HTML file. CDN libraries via ESM imports only. No build step.
 - [ ] Concept-dependency map exists (in a comment block at the top of the HTML, or a sibling `outline.md`). Section order matches it.
 - [ ] Every section either has an interactive figure or is a deliberate prose interlude with a clear reason.
+- [ ] Every control changes the state of its figure, and the new state carries information the old state did not. No highlight-only buttons. No steppers over a list that fits on the page. When in doubt, the figure is static.
 - [ ] Every figure is followed by a paragraph that points at the figure ("as you can see," "drag the slider...," "notice that...").
 - [ ] Voice: collaborative "we" / "our system," second-person "you" for the reader's actions.
 - [ ] First time a term appears, it's defined in the same sentence.

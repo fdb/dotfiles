@@ -244,7 +244,7 @@ Treat the interactive figure as the explanation; treat the prose around it as co
 A good interactive figure in this style:
 
 - **Is purpose-built for its prose context.** It is not reused from another section, not generic. The labels are the exact terms the surrounding prose uses.
-- **Lets the reader manipulate something.** A slider, a play/pause/step button, a rotation handle, a drag-to-place handle, a scrub-through-time scrubber. The interaction reveals a fact a static diagram could not.
+- **Lets the reader manipulate something — only when the manipulation changes the figure.** A slider, a play/pause/step button, a rotation handle, a drag-to-place handle, a scrub-through-time scrubber. The interaction reveals a fact a static diagram could not. If the figure is already fully visible and the control only moves attention around it, the figure should be static. See "The interaction must change what the figure shows" below.
 - **Is comprehensible cold but becomes richer with the prose.** A reader who only looks at the figures should still get the spine. A reader who only reads the prose should still understand the argument. Together they should compound.
 - **Is built from real values.** If the figure shows infection rates, those are calibrated to a cited paper. If it shows ballot tallies, those are real or labeled `(assumption)`.
 
@@ -261,6 +261,23 @@ A good interactive figure in this style:
 | **Sandbox** | Closer-only: after the argument lands, an open-ended playground for self-directed exploration |
 
 Each pattern's test: **what does the reader now know that they couldn't have known from a static figure?** If the answer is nothing, cut the interaction or replace it with a still.
+
+### The interaction must change what the figure shows
+
+The most common failure is interaction for its own sake: a control that moves attention around a figure that is already fully visible. Buttons that highlight one row of a list. Tabs that select one node of a diagram. A "next" button that walks through items the reader can already read top to bottom. In each case, the reader could have seen everything at a glance. The control adds a step and adds nothing else.
+
+Ask three questions before adding a control. All three must be yes:
+
+1. **Does the figure change state?** The control must change the content, the values, or the geometry of the figure. Not the emphasis. If the only effect is a highlight, a colour change, or a scroll, the answer is no.
+2. **Does the change carry information?** The reader must learn something from the new state that the old state did not show. A slider that recomputes a curve does. A tab that reveals one of four already-visible panels does not.
+3. **Would the static version lose something?** Lay every state of the figure side by side on the page. If that static layout teaches the same thing, use the static layout.
+
+Concrete rules that follow:
+
+- **Highlight is not state.** Do not add buttons whose only effect is a highlight on an already-visible element. Use the prose to point at the element instead ("look at the second row").
+- **Enumeration is not interaction.** If the control walks through a fixed list of N items, show the N items. A ladder of four levels is a four-row table, not a four-button stepper.
+- **One control, one consequence.** Each control changes one thing, and the figure shows a consequence of that change. If a control has no visible consequence beyond itself, cut it.
+- **Prefer a still.** A static figure with good labels is not a failure. It is the default. Interaction is the exception, and it must earn its place by the three questions above.
 
 ### Renderer choices
 
@@ -345,7 +362,7 @@ Pick techniques that serve the topic. **Overdoing it is a worse failure than und
 ## Anti-patterns (the skill warns about all of these; some block via G5)
 
 1. **Lookup-not-model** — reader inputs themselves but learns no causal mechanism (NPR Jobs)
-2. **Decorative interaction** — moves on screen but contributes nothing
+2. **Decorative interaction** — moves on screen but contributes nothing. Includes highlight-only buttons and steppers over an already-visible list: the control moves attention but does not change what the figure shows
 3. **Symbolic-only action** — interaction collapses to a token (Trolley single keypress)
 4. **On-rails stepper** — reader can't author or stress-test
 5. **Closed simulation** — once guided beats end, exploration yields nothing
@@ -407,6 +424,7 @@ Playwright catches functional and structural bugs. It does not catch what the re
 - [ ] **Override-comment audit**. The HTML waiver comments at the top of the file (from gates that warn-and-logged) accurately list every override taken.
 - [ ] **Source provenance walk**. Every numeric claim in visible prose either cites a source by name or is labeled `(assumption)`. No bare numbers.
 - [ ] **No click-to-reveal on the spine.** Every primary concept is reachable by scrolling alone. `<details>` blocks contain only tangents.
+- [ ] **Every control changes figure state.** Click every button and tab. If the only effect is a highlight, a colour change, or a scroll to an element that was already visible, remove the control and lay the states out statically. No steppers over a list that fits on the page.
 - [ ] **No quizzes, no progress bars, no completion indicators** anywhere in the piece.
 
 This checklist is not Playwright-replaceable. The failures it catches are visual, perceptual, and pedagogical — exactly the failure modes automated DOM testing is structurally blind to.
