@@ -1,6 +1,6 @@
 /*
  * Engineering-textbook preset
- * Default visual register for explorable-explanations.
+ * Default visual register for code-explainer and explorable-explanations.
  *
  * Mood: 1970s engineering textbook rendered on a neutral palette.
  * Off-white paper (#f7f7f7), off-black ink (#444), sans-serif body,
@@ -17,7 +17,7 @@
  *   - No drop shadows, no gradients, no glow, no glassmorphism.
  *
  * Inline this file's :root{} block into the <style> tag of the generated
- * HTML at P4 (design pass).
+ * HTML.
  */
 :root {
   /* paper — off-white, never pure white */
@@ -38,8 +38,6 @@
   /* secondary accent — steel blue, "deeper" / secondary thread */
   --secondary:    oklch(0.50 0.12 215);
   --secondary-bg: oklch(0.93 0.04 215);
-  --deep:         var(--secondary);      /* alias for code-explainer compat */
-  --deep-bg:      var(--secondary-bg);
 
   /* third tier, used at most once per page — mustard */
   --tertiary:   oklch(0.65 0.16 90);
