@@ -1,24 +1,12 @@
----
-name: explorable-explanations
-description: Use when creating interactive scrollytelling pages, playable essays, model-driven explanations, or explorable explanations for concepts, phenomena, societal issues, geopolitical situations, scientific research, or public-interest themes. Triggered by "make an explorable explanation", "build a playable essay", "explain this interactively", "scrollytelling piece for X", or references to authors and projects in the lineage — Bartosz Ciechanowski, Nicky Case, Vi Hart, Bret Victor, Parable of the Polygons, Distill, Mathigon, explorabl.es.
----
+# Concept track
 
-# Explorable Explanations
+For a concept or phenomenon: scientific, social, political, economic, historical, or public-interest. Read `SKILL.md` first.
 
-**First, read `../explainer-common/core.md`** (fallback: `~/dotfiles/agents/skills/explainer-common/core.md`). It holds the voice, figure rules, style, and verification checklist. This file adds the editorial process, the gates, and the mechanic design.
-
-One self-contained HTML page in which the reader **produces the phenomenon** with their own hands, then understands it with more confidence than prose could give. Reading time ≤ 1 hour.
-
-## When to use
-
-- The user asks for an explorable explanation, playable essay, scrollytelling piece, or "something like Parable of the Polygons".
-- The topic is conceptual, scientific, social, political, economic, historical, or public-interest.
-
-Defer: codebase or protocol → `code-explainer`. Marketing → `landing-page`. Multi-session workshop → decline; this skill builds one page.
+The reader **produces the phenomenon** with their own hands, then understands it with more confidence than prose could give. Reading time ≤ 1 hour. Multi-session workshops are out of scope; decline them.
 
 ## Core principle
 
-Every interaction must answer: **what can the reader now prove, challenge, or understand that prose could not give them?** The figure rules in core apply. In this skill one figure, the core mechanic, must be interactive. The rest are static unless they pass the three questions.
+Every interaction must answer: **what can the reader now prove, challenge, or understand that prose could not give them?** In this track one figure, the core mechanic, must be interactive. The rest are static unless they pass the three questions.
 
 ## Process: 6 rounds, then 5 build phases
 
@@ -46,7 +34,7 @@ Draft a pick and ask. If the user picks expert, warn: expert-tier pieces are the
 
 ### Round 3 — Concept-dependency map
 
-Per core. Section order follows the map.
+Per `SKILL.md`. Section order follows the map.
 
 ### Round 4 — Stand-in or domain-faithful, and which device
 
@@ -72,7 +60,7 @@ The mechanic ladder, strongest implication first:
 9. freeform-sandbox    closer only, after the argument lands
 ```
 
-Pick the **core mechanic from rungs 1–4**. Add lower rungs only where they pass the three questions in core. One strong mechanic beats four weak ones.
+Pick the **core mechanic from rungs 1–4**. Add lower rungs only where they pass the three questions. One strong mechanic beats four weak ones.
 
 Composite devices when the topic has the shape: map, timeline, network/flow, ladder of abstraction (concrete and aggregate side by side), role-based negotiation.
 
@@ -117,7 +105,7 @@ Process order (rounds before code, P2 before P3) and output format (one HTML fil
 
 ## Ethics
 
-Explorables persuade because they feel self-evident. So: say "here is what this model shows", never "this proves". Show limits on the page. Do not present contested history as certainty. Do not build a proof when the evidence supports scenarios. For sensitive topics, apply `../explainer-common/intimate.css` after the base preset, add a content warning near the top, and add a skip-to-summary link.
+Explorables persuade because they feel self-evident. So: say "here is what this model shows", never "this proves". Show limits on the page. Do not present contested history as certainty. Do not build a proof when the evidence supports scenarios. For sensitive topics, apply `intimate.css` (this directory) after the base preset, add a content warning near the top, and add a skip-to-summary link.
 
 ## Patterns
 
@@ -196,7 +184,7 @@ Tests:
 - Layout stability: drag each slider through its range; a reference element's `top` varies by a few pixels at most
 - Contrast: render each colour to a 1×1 canvas and read sRGB back (do not regex-parse oklch); ≥ 4.5:1 body, ≥ 3:1 large text
 
-**Then the full "Verify before hand-off" list from core**, plus:
+**Then the full "Verify before hand-off" list from `SKILL.md`**, plus:
 
 - [ ] Waiver comments at the top of the file list every override taken.
 - [ ] Every number in prose cites a source or is labelled `(assumption)`.
@@ -205,6 +193,6 @@ Tests:
 
 ## Exemplars
 
-Beyond the core list: Parable of the Polygons (https://ncase.me/polygons/), Outbreak (https://meltingasphalt.com/interactive/outbreak/), What Happens Next? (https://ncase.me/covid-19/), How ETFs Work (https://www.bloomberg.com/features/2016-etf-files/toy/), Something Fishy in American Politics (https://johnaustin.io/articles/2018/voting-systems), To Build a Better Ballot (https://ncase.me/ballot/), Sight & Light (https://ncase.me/sight-and-light/), Social Security Explained Visually (https://lewis500.github.io/socialsecurity/), Ladder of Abstraction (http://worrydream.com/LadderOfAbstraction/), Vi Hart (https://vihart.com/).
+Beyond the list in `SKILL.md`: Parable of the Polygons (https://ncase.me/polygons/), Outbreak (https://meltingasphalt.com/interactive/outbreak/), What Happens Next? (https://ncase.me/covid-19/), How ETFs Work (https://www.bloomberg.com/features/2016-etf-files/toy/), Something Fishy in American Politics (https://johnaustin.io/articles/2018/voting-systems), To Build a Better Ballot (https://ncase.me/ballot/), Sight & Light (https://ncase.me/sight-and-light/), Social Security Explained Visually (https://lewis500.github.io/socialsecurity/), Ladder of Abstraction (http://worrydream.com/LadderOfAbstraction/), Vi Hart (https://vihart.com/).
 
 Name the closest exemplar to the user before you start: "for this topic, read X first."

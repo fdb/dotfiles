@@ -1,6 +1,20 @@
-# Explainer core
+---
+name: explainer
+description: Use when the user asks for a visual explainer, interactive walkthrough, explorable explanation, playable essay, or scrollytelling page. Covers two kinds of subject. Technical artifacts — a codebase, feature, protocol, spec, architecture, board design, commit history. Concepts and phenomena — scientific, social, political, economic, historical, or public-interest topics. Triggered by "explain this code visually", "create an explainer", "make an interactive walkthrough", "visualize the architecture", "make an explorable explanation", "build a playable essay", "scrollytelling piece for X", or references to Bartosz Ciechanowski, Nicky Case, Bret Victor, Parable of the Polygons, Distill, Mathigon, explorabl.es. Produces one self-contained HTML page in which figures carry the explanation and prose threads them together.
+---
 
-Shared rules for `code-explainer` and `explorable-explanations`. Read this file fully before you write any HTML.
+# Explainer
+
+One self-contained HTML page that explains how something works. Figures carry each section. Prose connects them. The reader builds from primitives up.
+
+## Pick the track
+
+Read this file fully. Then read one track file from this directory:
+
+- **`technical.md`** — the subject is a codebase, protocol, spec, architecture, board, or other artifact with source you can read and run.
+- **`concept.md`** — the subject is a concept or phenomenon: scientific, social, political, economic, historical, or public-interest. The reader should produce the phenomenon with a model.
+
+Not for API reference, changelogs, or marketing pages (`landing-page`).
 
 ## Output
 
@@ -10,7 +24,7 @@ Visual register: **1970s engineering textbook**. Off-white paper, off-black ink,
 
 ## Audience
 
-The reader is knowledgeable but has not lived inside this system. Do not talk down. Define each new term in the sentence that first uses it. Explain *why*, not only *what*.
+The reader is knowledgeable but has not lived inside this subject. Do not talk down. Define each new term in the sentence that first uses it. Explain *why*, not only *what*.
 
 ## Voice
 
@@ -112,7 +126,7 @@ Do not import React, Vue, Svelte, jQuery, Tailwind, Bootstrap, Lottie, or Moment
 
 ## Layout and style
 
-Inline the `:root{}` block from `engineering-textbook.css` (same directory as this file). Then:
+Inline the `:root{}` block from `engineering-textbook.css` (this directory). Then:
 
 - Prose column `max-width: 68ch`, centred. Figures may widen to `84ch`.
 - Section gap `4.5rem`. Hairlines `1px solid var(--rule)`.
@@ -138,7 +152,7 @@ Section shape: `h2` as a question → framing paragraph → `<figure>` with stag
 
 ## Verify before hand-off
 
-Automated checks miss perceptual and pedagogical failures. Do both.
+Automated checks miss perceptual and pedagogical failures. Do all three parts. The track file may add more.
 
 **Look at it.** Open the page in a browser.
 
