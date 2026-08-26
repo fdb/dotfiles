@@ -1,0 +1,4 @@
+interface:
+  display_name: "Explainer"
+  short_description: "Build a visual explainer or explorable explanation as one HTML page"
+  default_prompt: "Use $explainer for a relevant task."
