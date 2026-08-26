@@ -72,6 +72,3 @@ fi
 if [ -f "${HOME}/.ghcup/env" ]; then
     source "${HOME}/.ghcup/env"
 fi
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/fdb/.lmstudio/bin"
