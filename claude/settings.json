@@ -6,7 +6,6 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "claude-fable-5[1m]",
   "statusLine": {
     "type": "command",
     "command": "input=$(cat); cwd=$(echo \"$input\" | jq -r '.workspace.current_dir'); branch=$(git -C \"$cwd\" --no-optional-locks branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \\(.*\\)/ (\\1)/'); printf \"\\033[01;28m%s\\033[00;32m%s\\033[0m\" \"$cwd\" \"$branch\""
@@ -19,13 +18,20 @@
     "rust-analyzer-lsp@claude-plugins-official": true,
     "explanatory-output-style@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
-    "clangd-lsp@claude-plugins-official": true
+    "clangd-lsp@claude-plugins-official": true,
+    "eli5@claude-community": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
       "source": {
         "source": "github",
         "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "claude-community": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-community"
       }
     }
   },
@@ -38,7 +44,6 @@
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true,
   "autoMode": {
     "environment": [
       "### Org-wide",
@@ -66,5 +71,6 @@
       "**Org-specific CLIs**: None configured",
       "No routine-under-<user>/-prefix qualifiers found in evidence"
     ]
-  }
+  },
+  "voiceEnabled": true
 }
