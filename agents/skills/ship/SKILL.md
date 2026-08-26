@@ -1,6 +1,6 @@
 ---
 name: ship
-description: Commit pending changes, push to remote, and draft a pull request message for the user to open. Use when the user asks to ship, publish, commit and push, or open a PR for local work.
+description: Commit pending changes and push to the remote, creating a pull request only when explicitly requested. Use when the user asks to ship, publish, commit and push, or open a PR for local work.
 ---
 
 # Ship
@@ -11,7 +11,7 @@ Commit pending changes and publish them.
 
 2. **Decide whether to open a PR**: only if the user asked for one in their `/ship` invocation (e.g. `/ship make a pr for this`). A bare `/ship` never creates a PR.
 
-3. **No PR** → push the current branch to `origin` (use `-u origin HEAD` if no upstream). Then draft the PR title and body to the rules below, print them for the user, and stop. The user opens the PR.
+3. **No PR** → push the current branch to `origin` (use `-u origin HEAD` if no upstream). Do not draft or print a PR title or body. Report the pushed commit in one compact line using its short hash and exact commit subject, then stop.
 
 4. **PR** (only when asked):
    - If on the default branch, first move the new commits to a fresh feature branch — do not push them to the default branch.
@@ -19,6 +19,8 @@ Commit pending changes and publish them.
    - Check `gh pr view --json url 2>/dev/null`. If a PR exists, report its URL and stop. Otherwise create one with `gh pr create` using the standard `## Summary` / `## Test plan` body. Report the URL.
 
 ## Rules for the PR body
+
+These rules apply only when the user explicitly asked for a PR.
 
 The goal is a PR body that earns its keep — concise, specific, and useful to a reviewer who has not seen the diff yet. The same standards apply whether a human or Claude is drafting; we are not disguising authorship, we are avoiding the patterns that make AI-written PRs tedious to review.
 
