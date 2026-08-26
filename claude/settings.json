@@ -38,7 +38,6 @@
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true,
   "autoMode": {
     "environment": [
       "### Org-wide",
@@ -66,5 +65,6 @@
       "**Org-specific CLIs**: None configured",
       "No routine-under-<user>/-prefix qualifiers found in evidence"
     ]
-  }
+  },
+  "voiceEnabled": true
 }

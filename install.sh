@@ -45,7 +45,9 @@ link_dotfile ~/dotfiles/agents/skills ~/.agents/skills
 mkdir -p ~/.pi/agent
 link_dotfile ~/dotfiles/pi/models.json ~/.pi/agent/models.json
 
-# Symlink Claude config files.
+# Symlink Claude config files. ~/.claude itself is a real directory holding
+# local state (credentials, sessions); only these files are versioned.
+# If ~/.claude is still a symlink into this repo, run ./migrate-claude-dir.sh.
 mkdir -p ~/.claude
 link_dotfile ~/dotfiles/claude/settings.json ~/.claude/settings.json
 link_dotfile ~/dotfiles/agents/AGENTS.md ~/.claude/CLAUDE.md
