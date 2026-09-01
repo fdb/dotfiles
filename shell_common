@@ -72,23 +72,34 @@ function gwt() {
 }
 
 function gwtrm() {
-  local root wt_dir
+  local root wt_dir name force arg
   root=$(_git_main_root) || return 1
 
-  if [ -n "${1:-}" ]; then
+  for arg in "$@"; do
+    case "$arg" in
+      -f|--force) force=1 ;;
+      -*) echo "gwtrm: unknown option: $arg" >&2; return 1 ;;
+      *) name="$arg" ;;
+    esac
+  done
+
+  if [ -n "${name:-}" ]; then
     local base
     base=$(_git_worktree_base) || return 1
-    wt_dir="$base/$1"
+    wt_dir="$base/$name"
   else
     wt_dir=$(git rev-parse --show-toplevel 2>/dev/null)
     if [ "$wt_dir" = "$root" ]; then
-      echo "Not in a worktree. Usage: gwtrm [branch-name]" >&2
+      echo "Not in a worktree. Usage: gwtrm [-f|--force] [branch-name]" >&2
       return 1
     fi
   fi
 
   # git refuses to remove a worktree with uncommitted or untracked files.
-  cd "$root" && git worktree remove "$wt_dir" || return 1
+  # Stay in the worktree when that happens, so the files remain reachable.
+  git -C "$root" worktree remove ${force:+--force} "$wt_dir" || return 1
+  # Leave the removed directory, but keep the shell in any other worktree.
+  case "$PWD/" in "$wt_dir"/*) cd "$root" ;; esac
   # Drop the per-repo directory once its last worktree is gone.
   rmdir "${wt_dir%/*}" 2>/dev/null || true
 }
