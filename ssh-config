@@ -9,3 +9,10 @@ Host codespace-4090
 Host *
     UseKeychain yes
     IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+Host runpod-4090
+    HostName 47.47.180.47
+    Port 19754
+    User root
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
