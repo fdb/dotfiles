@@ -1,6 +1,3 @@
-# Source common shell configuration
-source ~/dotfiles/shell_common
-
 # Linux-specific settings
 if [[ $OSTYPE == linux* ]]; then
     alias ls='ls -G --color=auto'
@@ -72,3 +69,7 @@ fi
 if [ -f "${HOME}/.ghcup/env" ]; then
     source "${HOME}/.ghcup/env"
 fi
+
+# Source common shell configuration last: it loads nvm, whose node must sit
+# in front of Homebrew/system node on PATH. The lines above prepend to PATH.
+source ~/dotfiles/shell_common

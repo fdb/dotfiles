@@ -1,6 +1,3 @@
-# Source common shell configuration
-source ~/dotfiles/shell_common
-
 # Enable zsh completion system (for git, etc.)
 fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 autoload -Uz compinit && compinit
@@ -43,3 +40,10 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/fdb/Library/Application Support/Herd/con
 
 # GNU Radio Companion fix
 export GSETTINGS_SCHEMA_DIR=/opt/homebrew/share/glib-2.0/schemas
+
+# Added by Antigravity IDE
+export PATH="/Users/fdb/.antigravity-ide/antigravity-ide/bin:$PATH"
+
+# Source common shell configuration last: it loads nvm, whose node must sit
+# in front of Homebrew/system node on PATH. The lines above prepend to PATH.
+source ~/dotfiles/shell_common

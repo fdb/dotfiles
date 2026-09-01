@@ -53,6 +53,17 @@ link_dotfile ~/dotfiles/claude/settings.json ~/.claude/settings.json
 link_dotfile ~/dotfiles/agents/AGENTS.md ~/.claude/CLAUDE.md
 link_dotfile ~/dotfiles/agents/skills ~/.claude/skills
 
+# nvm + Node LTS. PROFILE=/dev/null keeps the installer from appending to the
+# symlinked rc files; shell_common loads nvm at shell start.
+export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+if [ ! -s "$NVM_DIR/nvm.sh" ]; then
+  curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.7/install.sh | PROFILE=/dev/null bash
+fi
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  . "$NVM_DIR/nvm.sh"
+  [ "$(nvm version default)" = "N/A" ] && nvm install --lts
+fi
+
 # Install Claude Code plugins if claude is available.
 if command -v claude &> /dev/null; then
   claude plugin marketplace add anthropics/claude-plugins-official 2>/dev/null
