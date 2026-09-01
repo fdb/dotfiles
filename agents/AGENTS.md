@@ -14,7 +14,7 @@ Run Python through `uv run`, and tools outside the project through `uvx`. Standa
 
 ## Coding
 
-Keep changes surgical: every changed line traces to my request. Mention dead code, do not delete it. Fix a bug with a failing test first.
+Keep changes surgical: every changed line traces to my request. Fix a bug red/green: a failing test first, then the fix.
 
 Repos owned by fdb, codespacehelp, algorithmicgaze, figmentapp, gandelve, or nodebox are ours; refactor there when the code needs it. Every other owner is upstream: minimal diff, and never edit their AGENTS.md, CI, or contributor docs.
 
