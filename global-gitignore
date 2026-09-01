@@ -7,7 +7,6 @@
 # Editors
 *.swp
 *.swo
-*~
 .idea/
 *.iml
 .vscode/
