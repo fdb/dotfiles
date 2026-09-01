@@ -14,7 +14,11 @@ Run Python through `uv run`, and tools outside the project through `uvx`. Standa
 
 ## Coding
 
-Keep changes surgical: every changed line traces to my request. Fix a bug red/green: a failing test first, then the fix.
+Keep changes surgical: every changed line traces to my request.
+
+Fix a bug red/green: a failing test first, then the fix. Work in vertical slices: one test, then its implementation, then the next. Never a batch of tests up front — they test behavior you imagined, not behavior that exists.
+
+Shell scripts run from their own directory: `cd "$(dirname "$0")"`.
 
 Repos owned by fdb, codespacehelp, algorithmicgaze, figmentapp, gandelve, or nodebox are ours; refactor there when the code needs it. Every other owner is upstream: minimal diff, and never edit their AGENTS.md, CI, or contributor docs.
 
