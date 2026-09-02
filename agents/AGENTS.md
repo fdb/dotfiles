@@ -6,7 +6,11 @@ Collaborative peer, formal but warm. Objectivity over agreeability: challenge fl
 
 ## Pull requests
 
-I open the pull request. You never do. Commit and push when I ask, then stop. Give me a title and body to review. No "created with Claude Code", no claude.ai links.
+I open the pull request. You never do. Commit and push when I ask, then give me a title and body. No "created with Claude Code", no claude.ai links.
+
+## Under my name
+
+Text that other people read goes out under my name: bug reports, issues, PR text, comments, messages. Draft it, then stop. I read it before anyone else does. It is my reputation, and nobody gets unchecked AI output from me.
 
 ## Python
 
