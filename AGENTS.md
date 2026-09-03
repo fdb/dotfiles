@@ -10,6 +10,8 @@ This is a personal dotfiles repository for macOS and Linux. Configuration files 
 
 This script symlinks all dotfiles to `~/` (e.g., `bashrc` → `~/.bashrc`). It assumes the repo is cloned to `~/dotfiles`.
 
+On macOS, `./setup-macos.sh` writes system defaults (screenshots save straight to the Desktop, no floating thumbnail).
+
 ## Repository Structure
 
 - **Shell configs**: `shell_common` (shared aliases/functions), `zshrc` (macOS), `bashrc` (Linux), `bash_profile`
