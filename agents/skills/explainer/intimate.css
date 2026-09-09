@@ -1,7 +1,7 @@
 /*
  * Intimate overlay
- * Append this :root block after the engineering-textbook :root block when
- * the topic is personal, health-related, grief-adjacent, or trauma-adjacent.
+ * Optional overlay after the engineering-textbook preset when a restrained
+ * palette and more space suit the content and audience.
  *
  * Softer palette, restrained motion, generous spacing, content-warning chrome.
  *
@@ -53,16 +53,14 @@
  *   <p><a href="#summary">Skip to the summary</a></p>
  * </aside>
  *
- * The skill must include at least one content-warning aside near the top
- * AND a "skip to summary" anchor when this overlay is active.
+ * Include a content note and a route around distressing material when the
+ * content warrants them, independently of the selected palette.
  *
  * Important: when using this overlay, charts that need vivid distinguishable
  * lines (e.g. a 2-line plot where the prose says "the red line vs. the purple
- * line") MUST declare chart-local color overrides in their inlined CSS —
- * the desaturated --accent / --secondary above will leave a chart-line at near-
- * indistinguishable muted tones. This is by design (intimate register) but
- * can betray prose claims that name colors. Run the color-claim audit from
- * the Final hand-off checklist before declaring done.
+ * line") need distinguishable marks. Check computed colors, contrast, and
+ * agreement with the prose; use chart-local overrides when needed. Add
+ * direct labels or line styles so color is not the only distinction.
  *
  * Example chart-local overrides:
  *   svg#my-chart .line-a { stroke: oklch(0.55 0.20 25); }      // vivid red

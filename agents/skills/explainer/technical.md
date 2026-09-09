@@ -1,53 +1,35 @@
 # Technical track
 
-For a codebase, feature, protocol, spec, architecture, board design, or commit history. Read `SKILL.md` first.
+For codebases, features, protocols, specifications, architectures, boards, and commit histories. Apply the learner and verification principles in [SKILL.md](SKILL.md).
 
-## Process
+## Ground the explanation in the artifact
 
-1. **Read the source.** Code, specs, commits, schematics, docs. Spend more time here than feels comfortable.
-2. **Collect real values.** Run the code. Read test fixtures. Log a trace. Measure sizes and timings. Every number in a figure comes from this step.
-3. **Build the concept-dependency map.** Put it in a comment at the top of the HTML.
-4. **Pick each section's figure.** Static by default. Apply the three interaction questions before adding a control.
-5. **Write top to bottom.** Question, figure, pointing paragraph, bridge.
-6. **Verify.** Run the full "Verify before hand-off" list, plus the extra checks below.
+Read relevant source, tests, documentation, and design decisions. Identify the version or commit when behavior depends on it. Separate what the system does from why you infer it was designed that way. Explain a trade-off when evidence supports it; do not invent design intent.
 
-## Sections
+Choose a concrete task through which the reader can meet the system: one request, packet, edit, signal, or failure. Show its input, desired result, and main boundaries before internal names. Architectural layers are not automatically a teaching order.
 
-Pick what the artifact needs. Typical spine:
+A trace should connect input → state change → output using the actual implementation. Collect real fixture values or a reproducible small run when useful. Label simplified traces and synthetic inputs. Do not invent benchmarks, execute destructive paths, or expose credentials to make a diagram more concrete.
 
-| Section | Shows |
-|---|---|
-| The question | The problem the system solves, in the reader's words |
-| First primitive | The smallest concept the rest builds on |
-| Next primitives | One per section, each unlocking the next |
-| Composition | Where two or three primitives combine |
-| The full system | The whole, now readable because every part is known |
-| Edge cases | One or two that illuminate the design |
-| Where to go next | Source links, related reading |
+## Teach how to read the system
 
-Add artifact-specific sections where the map demands them: "Power tree" for a board, "Wire format" for a protocol.
+Establish the foundations the audience actually needs. For a retry explanation, an application developer may know HTTP but not idempotency. A beginner may also need requests, responses, and the difference between a missing response and an operation that did not happen. Teach these distinctions before showing a distributed trace.
 
-## Figure picker
+Carry the same example through code, state, and output. Use stable names and visual correspondence. Code listings should be as short as the explanation permits, with the relevant state nearby. Reveal detail when it helps follow the reasoning; do not truncate the part that explains a failure to meet a line-count rule.
 
-| Shape of the thing | Figure | Interaction only if |
+Useful learning moves include:
+
+| Capability | Example and supported task | Application with less support |
 |---|---|---|
-| Mechanism with moving parts | Annotated SVG | A parameter has a knee the reader should find |
-| State machine | Nodes and edges | A simulation drives the current state; never buttons that tint a node |
-| Algorithm over a structure | Sequence of stills over real data | More than ~6 steps; then a stepper |
-| Wire format | Byte-grid HTML table | Never |
-| Distribution | Histogram, density (Plot) | Never |
-| Time-based events | Sequence diagram, timeline | Many intermediate states; then a scrubber |
-| Hierarchy | Indented tree, treemap (D3) | Never |
-| Network / flow | DAG, sankey, force layout (D3) | The reader places a node and sees the effect |
-| Performance breakdown | Stacked bar, flamegraph | Never |
-| 3D assembly | Three.js mesh | One viewpoint hides geometry; then a rotation handle |
+| Trace execution | Step through one real input and explain state changes | Predict the output for a different input |
+| Understand a protocol | Follow one exchange and its fields | Locate an invalid transition or missing response |
+| Diagnose a failure | Show a successful path beside a failing trace | Identify the first divergence in an unseen trace |
+| Judge a trade-off | Compare two configurations on a stated workload | Construct a workload where the preferred choice loses |
+| Read a board | Trace one signal or power path with units | Explain a fault from a changed connection |
 
-## Code listings
+Use interaction only when it serves the capability. Linked highlighting can connect code to the state it changes. A stepper can make a short but difficult trace readable. A static byte table may be sufficient for a wire format. A distribution or performance view may benefit from filtering if the aggregate hides the relationship being taught. Pick from the reasoning task, not a list of forbidden chart controls.
 
-Rare and short: five to fifteen lines. Use a listing when the mechanism *is* those lines. Otherwise draw what the lines do.
+## Bound the result
 
-## Extra checks
+Locate simplifications where they matter: omitted concurrency, idealized hardware, synthetic traffic, or unsupported error paths. Provide source links near important claims and a route into the real artifact at the end. The reader should be able to orient themselves in the source, not just recall a diagram.
 
-- [ ] Every value in every figure traces to step 2 of the process.
-- [ ] Each "we chose X" names what X is worse at.
-- [ ] Listings are ≤ 15 lines and each has a caption.
+Verify that the trace agrees with the inspected version, controls preserve the system's rules, and any claimed measurement has its conditions attached. Include a failure or boundary case when that is necessary to understand the design.

@@ -1,198 +1,50 @@
 # Concept track
 
-For a concept or phenomenon: scientific, social, political, economic, historical, or public-interest. Read `SKILL.md` first.
+For scientific, social, political, economic, historical, and other concepts or phenomena. Apply the learner and verification principles in [SKILL.md](SKILL.md).
 
-The reader **produces the phenomenon** with their own hands, then understands it with more confidence than prose could give. Reading time ≤ 1 hour. Multi-session workshops are out of scope; decline them.
+## Choose what the evidence can support
 
-## Core principle
+Read the supplied sources and research the claims that require verification. Distinguish observations, mechanisms, interpretations, and value judgments. Look for prior concepts, likely misconceptions, alternative accounts, and limits on generalization.
 
-Every interaction must answer: **what can the reader now prove, challenge, or understand that prose could not give them?** In this track one figure, the core mechanic, must be interactive. The rest are static unless they pass the three questions.
+Select the teaching form to fit the subject. A causal simulation can explain a specified mechanism. An annotated source comparison can teach historical interpretation. A map and timeline can teach relationships without inventing a causal model. Do not force every topic into a deterministic toy, moral parable, or reader-produced phenomenon.
 
-## Process: 6 rounds, then 5 build phases
+For a model, record a compact contract in the learning-plan comment:
 
-Run the rounds in order before any code. Draft every answer yourself, then ask the user to confirm or change it. Offer concrete options where the choice is enumerable. Never ask "tell me about your topic" without a draft.
+- Question and rules
+- Inputs and outputs, with units where relevant
+- Evidence for the rules and parameters; teaching assumptions
+- What the reader can change or construct
+- What the model leaves out and which conclusions it cannot support
 
-When a subagent runs these rounds, it surfaces each choice to the controlling agent, which asks the user. A subagent that picks silently bypasses the editorial review.
+Put the relevant assumptions and limits on the visible page as well. Do not hide uncertainty in a footer or present adjustable parameters as measured facts.
 
-### Round 1 — Decode the topic
+## Develop several connected ideas
 
-Read every source the user supplies. Write a scratch file with: claims and counterclaims, causal mechanisms, variables and constraints, stakeholders and incentives, time scales, evidence quality, likely misconceptions, and any harm, identity, or trauma sensitivity.
+Use a concrete case to establish the objects and relationships. Work through a small example before asking the reader to investigate a complicated system. When a model has several interacting causes, introduce a manageable subset, then bring the causes together and revisit earlier predictions.
 
-If the topic cannot honestly support a deterministic model, say so. Offer scenario comparison, uncertainty ranges, timelines, or trade-off exploration instead. Do not force a model.
+Choose activities that deepen the topic, such as:
 
-If the topic is sensitive, flag it now. This triggers the intimate overlay and gate G4.
+- Compare cases that look similar but behave differently; explain which feature matters.
+- Construct two different examples that obey the same rule.
+- Change an assumption and inspect what still holds.
+- Test a plausible explanation against a counterexample or independent source.
+- Move between an individual case and an aggregate, identifying what each hides.
+- Design a case with a chosen outcome, then explain how it works.
 
-### Round 2 — Audience tier
+An unexpected result can motivate revision, but explain the mechanism after it. Do not engineer inevitable agreement. A reader who understands the evidence and still disputes an interpretation is not a failed learner.
 
-| Tier | Time | Disposition |
-|---|---|---|
-| Layperson, viral-share | 5–15 min | Wants the punchline |
-| Adjacent, deep-read | 15–60 min | Will follow nuance |
-| Expert, reference-toy | 5–60 min | Already convinced; wants the knobs |
+For open exploration, supply a workable starting point and suggested questions. Let readers choose a case that interests them or make a variation when the subject permits it. Exploration can appear throughout the page; it need not wait for an argument to “land.” Keep a visible explanation path for readers who choose not to manipulate anything.
 
-Draft a pick and ask. If the user picks expert, warn: expert-tier pieces are the weakest standalone explorables.
+## Use representations honestly
 
-### Round 3 — Concept-dependency map
+Prefer domain objects when they make the mechanism clear. Use analogies when they reduce an actual difficulty, and map their parts to the real subject. State where the analogy breaks. Do not use a metaphor that needs more explanation than the thing it replaces.
 
-Per `SKILL.md`. Section order follows the map.
+For civic or historical subjects, avoid turning people into interchangeable tokens when that hides agency, unequal power, institutions, or consequences. Label the units and assumptions of an aggregate. Do not score contested value judgments as right or wrong. Content notes and a route around distressing material are appropriate when the content warrants them; a sensitive topic does not require a special color scheme or an approval ritual.
 
-### Round 4 — Stand-in or domain-faithful, and which device
+## Verify claims and learning separately
 
-**Lane.** *Stand-in*: the rendering is a metaphor (shapes for people). Defuses defensiveness on civic topics. *Domain-faithful*: the rendering is the thing (vectors as vectors). Best when the math is the point.
+Check that the model follows its rules and that the rules have the stated evidential status. Then check whether the page teaches the reasoning needed to interpret its output. A functioning simulation can still be a poor lesson.
 
-**Device.** Propose 2–4 concrete candidates, for example: crowd-as-queue (shape of the mass carries the weight, no individual depicted), dot-on-a-grid (Polygons; G4 risk when dots are vulnerable people), balance beam (force balance), accumulating stack (growth over time), network as constellation (relations), literal charts (always available). For each, name what it implies, which gate it risks, and one published exemplar.
+Inspect an ordinary case, a boundary case, and a case that challenges the preferred interpretation where relevant. Stochastic models need repeatable runs for comparison and a view of variability. Never select only seeds or inputs that make the narrative work.
 
-**Check.** Stand-in → run G4. Domain-faithful → can the tier from Round 2 read the rendering cold? If not, add a primitives section or a "how to read this figure" preamble.
-
-### Round 5 — Mechanic
-
-The mechanic ladder, strongest implication first:
-
-```
-1. drag-and-arrange    reader places the inputs that yield the result
-2. parameter-slider    reader turns a knob, watches the consequence
-3. live-simulation     reader seeds it, emergence follows
-4. step-stepper        reader advances a simulation over a persistent canvas
-5. scrubbable-timeline reader moves through real data
-6. before-after-toggle reader switches two full states
-7. minigame            reader plays a mechanic with a moral payload
-8. audio-trigger       reader triggers sound as the evidence
-9. freeform-sandbox    closer only, after the argument lands
-```
-
-Pick the **core mechanic from rungs 1–4**. Add lower rungs only where they pass the three questions. One strong mechanic beats four weak ones.
-
-Composite devices when the topic has the shape: map, timeline, network/flow, ladder of abstraction (concrete and aggregate side by side), role-based negotiation.
-
-Then pick 1–3 presentation techniques from the Toolbox below.
-
-### Round 6 — Self-implication and model contract
-
-Draft the sentence *"the reader produces the phenomenon by doing X"* and confirm it with the user. This is gate G1. Then write the model contract next to the dependency map:
-
-```
-Claim:
-Mechanism:
-Reader action:
-Visible consequence:
-Evidence or assumption:
-Limit:
-```
-
-## Gates
-
-| Tier | Behaviour |
-|---|---|
-| warn-and-log | Name the failure. Ask the user to confirm. Log the waiver as an HTML comment at the top of the file: `<!-- WAIVED: G1 — user confirmed YYYY-MM-DD -->` |
-| pause-for-reframe | Stop. Propose a concrete alternative framing. The user accepts it, keeps the original with a logged reason, or abandons. |
-| hard-stop | Refuse. No override. |
-
-| Gate | Question | Tier |
-|---|---|---|
-| G1 Self-implication | Where does the reader produce the phenomenon? | warn-and-log |
-| G2 Mechanic on ladder | Is the core mechanic on rungs 1–4? Does every other control pass the three questions? | warn-and-log |
-| G3 Lane declared | Stand-in or domain-faithful, not mixed? | warn-and-log |
-| G4a Abstraction, mild | Does the metaphor imply things you do not intend, or erase nuance? | warn-and-log |
-| G4b Abstraction, severe | Cute stand-ins for war, oppression, trauma, identity, or death? | pause-for-reframe |
-| G5 Anti-patterns | Any item from the list below present? | warn-and-log |
-| G6 Inevitability | Can a skeptical reader finish and shrug it off? | warn-and-log |
-| G7a Provenance, soft | Every claim and parameter traces to a source or is labelled `(assumption)`? | warn-and-log |
-| G7b Provenance, hard | Would you need to invent a citation? | hard-stop |
-| G8 Limits visible | Are model limits in the page, not a footnote? | warn-and-log |
-| G9 Manipulative framing | Contested claim shown as physics? Value judgments hidden behind chrome? Symmetric visuals implying symmetric power? | pause-for-reframe |
-
-Process order (rounds before code, P2 before P3) and output format (one HTML file, ESM only) are not gates. They are fixed.
-
-## Ethics
-
-Explorables persuade because they feel self-evident. So: say "here is what this model shows", never "this proves". Show limits on the page. Do not present contested history as certainty. Do not build a proof when the evidence supports scenarios. For sensitive topics, apply `intimate.css` (this directory) after the base preset, add a content warning near the top, and add a skip-to-summary link.
-
-## Patterns
-
-- **Reader as cause** — drag or place produces the phenomenon (Polygons, Ballot)
-- **Persistent canvas** — one visual stays; each section transforms it (Social Security)
-- **Wrong solution first** — show the broken approach, then the fix (Sight & Light)
-- **One knob per section** — build the model parameter by parameter (Outbreak)
-- **Strip the loaded label** — sushi for candidates, shapes for people (Polygons)
-- **Claim paired with a sim** — every assertion has a reproducible model (What Happens Next?)
-- **Sandbox closer** — free play only after the argument lands
-- **Personal verdict** — the reader is the input (Social Security)
-
-## Toolbox: presentation
-
-Orthogonal to the mechanic. Use 1–3 per piece. Overdoing it is worse than underdoing it.
-
-- **Sticky-visual scrollytelling** — `position: sticky` visual; prose steps update it via `IntersectionObserver`. When one canvas tells the whole story. Once per piece.
-- **Inline interactive** — a draggable number or sparkline inside a sentence. Makes one sentence inspectable.
-- **Scroll-driven state morph** — interpolate between two states on scroll. Only for transformation that is not itself the mechanic.
-- **Big-number callout** — one number, tiny attribution, whitespace. Never three in a row.
-- **Isotype** — repeated unit shapes for counting. Watch G4b with human units.
-- **Layered reveal** — the figure builds as the prose introduces each layer. When the finished figure would overwhelm.
-- **Deliberate silence** — one empty beat. Once per piece.
-
-Native primitives: `IntersectionObserver`, `position: sticky`, `prefers-reduced-motion`. Avoid scroll-snap unless the piece is slide-like.
-
-## Anti-patterns
-
-1. **Lookup, not model** — reader inputs themselves but learns no mechanism
-2. **Decorative interaction** — highlight-only buttons, steppers over a visible list, motion without state change
-3. **Symbolic action** — the interaction collapses to one keypress
-4. **On-rails stepper** — the reader cannot author or stress-test
-5. **Closed simulation** — nothing to explore after the guided beats
-6. **Toys without a through-line** — no argument
-7. **Hidden affordance** — the control exists but the reader cannot find it
-8. **No on-ramp** — sliders that teach nothing without prior fluency
-9. **Metaphor over-flattens** — abstraction erases the contested thing
-10. **Parable clone** — copying Polygons' shape instead of finding this topic's device
-11. **False neutrality** — value judgments hidden behind interactive chrome
-12. **A page whose lesson is one paragraph**
-13. **A simulation whose assumptions the reader cannot inspect**
-14. **Sandbox without thesis**
-15. **Sliders that imply precision the evidence lacks**
-16. **Colour named in prose but absent on screen.** Check in this order: a CSS variable that resolves to empty (`getComputedStyle(root).getPropertyValue('--accent')`); the intimate overlay desaturating two accents into one tone; SVG strokes referencing undefined variables; missing legend swatches.
-17. **Layout shift under interaction** — variable-length text moves the figure. Fixed `min-height`.
-18. **Click-to-reveal on the spine**
-
-## Build phases
-
-Order is fixed.
-
-| Phase | Output | Checkpoint |
-|---|---|---|
-| P1 Scaffold | Skeleton; one stub section per map concept; mechanic stub unwired; preset CSS inlined | Renders top to bottom without errors; section order matches the map |
-| P2 Core mechanic alone | The mechanic produces the phenomenon with crude visuals and minimal labels; no narrative | **Can a cold reader, with only the labels needed to operate it, produce the phenomenon? If not, fix the mechanic, not the prose.** |
-| P3 Narrative | Prose in every section; pointing paragraph after every figure; toolbox techniques wired | Does it read top to bottom without touching the mechanic? Does the mechanic alone carry the spine? |
-| P4 Design | Preset applied; figures styled; responsive | Could it have been printed by offset lithography in 1973? |
-| P5 Polish | Reduced motion, keyboard, mobile, state on scroll-back, content warning if needed, sources section, limits section | Will a first-time reader hit any UX bug? |
-
-P2 is the red step. Narrative persuasion must not do the mechanic's work.
-
-## Verification
-
-**Playwright.** `package.json` is one line: `{ "devDependencies": { "@playwright/test": "^1" } }`. Install with `npm install --no-package-lock --no-audit --no-fund`. Run `npx playwright test`. Tree: `index.html`, `tests/e2e.spec.ts`, `package.json`, `.gitignore` (with `node_modules`). Nothing else.
-
-Tests:
-
-- No console errors on load
-- Exercise every slider, button, drag target, toggle, reset
-- The mechanical twist is visible; the conclusion is reachable
-- 360 px: no horizontal scroll
-- Keyboard operation
-- `prefers-reduced-motion`
-- Citations, assumptions, limits visible
-- Colour-claim audit: for every colour word in prose, an SVG element with a matching computed `stroke` or `fill` exists
-- Layout stability: drag each slider through its range; a reference element's `top` varies by a few pixels at most
-- Contrast: render each colour to a 1×1 canvas and read sRGB back (do not regex-parse oklch); ≥ 4.5:1 body, ≥ 3:1 large text
-
-**Then the full "Verify before hand-off" list from `SKILL.md`**, plus:
-
-- [ ] Waiver comments at the top of the file list every override taken.
-- [ ] Every number in prose cites a source or is labelled `(assumption)`.
-- [ ] Sources section, limits section, and a closing section on what the reader can do next are present.
-- [ ] Audio, if any, is reader-triggered.
-
-## Exemplars
-
-Beyond the list in `SKILL.md`: Parable of the Polygons (https://ncase.me/polygons/), Outbreak (https://meltingasphalt.com/interactive/outbreak/), What Happens Next? (https://ncase.me/covid-19/), How ETFs Work (https://www.bloomberg.com/features/2016-etf-files/toy/), Something Fishy in American Politics (https://johnaustin.io/articles/2018/voting-systems), To Build a Better Ballot (https://ncase.me/ballot/), Sight & Light (https://ncase.me/sight-and-light/), Social Security Explained Visually (https://lewis500.github.io/socialsecurity/), Ladder of Abstraction (http://worrydream.com/LadderOfAbstraction/), Vi Hart (https://vihart.com/).
-
-Name the closest exemplar to the user before you start: "for this topic, read X first."
+A useful closing task asks the reader to explain or investigate a new case and name a limit of their explanation. It need not end in one thesis, a conversion, or a universal prescription.

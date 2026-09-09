@@ -1,6 +1,6 @@
 /*
  * Engineering-textbook preset
- * Default visual register for the explainer skill.
+ * Optional visual preset for the explainer skill.
  *
  * Mood: 1970s engineering textbook rendered on a neutral palette.
  * Off-white paper (#f7f7f7), off-black ink (#444), sans-serif body,
@@ -8,16 +8,15 @@
  * Figures look like they could have been printed by offset lithography.
  *
  * Rules baked into the values below:
- *   - Never pure #000 or #fff. Off-white paper + off-black ink is the look —
- *     pure black on pure white is jarring at long reading lengths.
+ *   - Off-white paper and off-black ink give this preset its quiet register.
  *   - Strokes are 1.25px hairlines on off-white; thicker only for the one
  *     element the eye should land on first.
- *   - Two narrative accents (red + steel blue). Reserved hues are for
- *     multi-series charts, not prose decoration.
+ *   - Two accents (red + steel blue), with extra hues for data series.
  *   - No drop shadows, no gradients, no glow, no glassmorphism.
  *
- * Inline this file's :root{} block into the <style> tag of the generated
- * HTML.
+ * When using this preset, inline its CSS into the generated HTML.
+ * Check contrast at the actual text sizes and backgrounds; light palette
+ * entries are not necessarily suitable for text or meaningful marks.
  */
 :root {
   /* paper — off-white, never pure white */
@@ -31,7 +30,7 @@
   --ink-muted:  oklch(0.50 0 0);         /* secondary text */
   --ink-faint:  oklch(0.62 0 0);         /* captions, axis ticks */
 
-  /* one bold accent — signal red, the emotional beat per section */
+  /* primary accent — signal red */
   --accent:     oklch(0.55 0.20 28);
   --accent-bg:  oklch(0.93 0.06 28);     /* tinted block for callouts */
 
@@ -39,10 +38,10 @@
   --secondary:    oklch(0.50 0.12 215);
   --secondary-bg: oklch(0.93 0.04 215);
 
-  /* third tier, used at most once per page — mustard */
+  /* additional accent — mustard */
   --tertiary:   oklch(0.65 0.16 90);
 
-  /* reserved data-series hues; one at a time, never all at once */
+  /* additional data-series hues; pair color with labels or mark styles */
   --hue-green:  oklch(0.55 0.14 145);
   --hue-purple: oklch(0.45 0.16 305);
   --hue-warn:   oklch(0.62 0.16 25);
@@ -78,7 +77,7 @@
   /* figure caption styling — small, technical */
   --caption-size:    14px;
   --caption-leading: 1.5;
-  --caption-color:   var(--ink-faint);
+  --caption-color:   var(--ink);
 }
 
 @media (prefers-reduced-motion: reduce) {

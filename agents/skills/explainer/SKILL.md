@@ -1,187 +1,100 @@
 ---
 name: explainer
-description: Use when the user asks for a visual explainer, interactive walkthrough, explorable explanation, playable essay, or scrollytelling page. Covers two kinds of subject. Technical artifacts — a codebase, feature, protocol, spec, architecture, board design, commit history. Concepts and phenomena — scientific, social, political, economic, historical, or public-interest topics. Triggered by "explain this code visually", "create an explainer", "make an interactive walkthrough", "visualize the architecture", "make an explorable explanation", "build a playable essay", "scrollytelling piece for X", or references to Bartosz Ciechanowski, Nicky Case, Bret Victor, Parable of the Polygons, Distill, Mathigon, explorabl.es. Produces one self-contained HTML page in which figures carry the explanation and prose threads them together.
+description: Create visual explainers, interactive walkthroughs, explorable explanations, and playable essays as a single HTML page. Use when the user requests such an artifact for a technical system, concept, phenomenon, or evidence-based interpretation. Not for ordinary conversational explanations, API reference, or marketing pages.
 ---
 
 # Explainer
 
-One self-contained HTML page that explains how something works. Figures carry each section. Prose connects them. The reader builds from primitives up.
+Build understanding that the reader can use: explain a mechanism, make a prediction, interpret evidence, build something, or judge where a model fails. A memorable insight can help, but it is not a substitute for foundations, practice, and connections. Do not force the subject into a tipping point, surprise ending, or one persuasive toy.
 
-## Pick the track
+Read the relevant track: [technical.md](technical.md) for source-backed systems; [concept.md](concept.md) for concepts and phenomena. For teaching choices, examples, and their evidence, consult [learning-design.md](learning-design.md). These are design resources, not a fixed lesson script.
 
-Read this file fully. Then read one track file from this directory:
+## Start from the learner
 
-- **`technical.md`** — the subject is a codebase, protocol, spec, architecture, board, or other artifact with source you can read and run.
-- **`concept.md`** — the subject is a concept or phenomenon: scientific, social, political, economic, historical, or public-interest. The reader should produce the phenomenon with a model.
+Infer the audience, purpose, and scope from the request. If unspecified, use an interested adult with no specialist knowledge of this subject; state the important assumptions briefly. Ask only when missing context would materially change the result. Do not run an approval round for every editorial choice.
 
-Not for API reference, changelogs, or marketing pages (`landing-page`).
+Before building, make a compact learning plan in an HTML comment:
 
-## Output
+- **Starting point:** what the reader can already do; what is unknown about their background.
+- **Destination:** a few observable capabilities, appropriate to the requested length. Prefer “trace one request and locate a failure” to “understand the architecture.”
+- **Dependencies:** what each capability needs, where those foundations are taught or refreshed, and where they are used again.
+- **Evidence of understanding:** a prediction, explanation, construction, comparison, or new case that would exercise each capability.
+- **Scope and limits:** what the page leaves out and what its models cannot establish.
 
-One `.html` file. Inline CSS in `<style>`. Inline logic in `<script type="module">`. Libraries only via pinned ESM imports from a CDN. No build step. No framework.
+Scale this plan to the task. A short explanation can develop one useful capability; a long one needs several connected gains. The plan should shape the page, not appear as course-administration text.
 
-Visual register: **1970s engineering textbook**. Off-white paper, off-black ink, sans-serif body, one red accent. Figures look like they were printed by offset lithography: flat, labelled, 1 px strokes. No shadows, gradients, glow, or glassmorphism.
+### Prerequisites must exist on the page
 
-## Audience
+A sorted list of concepts is insufficient. Audit the first diagram, interaction, and explanation for hidden prerequisites: vocabulary, notation, units, graph reading, domain conventions, and causal assumptions. For each required idea, either establish it, give a usable refresher before it is needed, or explicitly place it in the reader's assumed background.
 
-The reader is knowledgeable but has not lived inside this subject. Do not talk down. Define each new term in the sentence that first uses it. Explain *why*, not only *what*.
+Open with a concrete situation and a reason to care. Give enough of the whole to orient the reader, then develop the parts. Avoid both an unexplained system diagram and a long glossary before anything happens.
 
-## Voice
+Introduce terms with an example and their role. Naming a variable does not teach its meaning. Before a reader operates a graph, explain what one mark, each axis, and a change represent. Link equations to the same objects and quantities in the example.
 
-- "We" for the author and system. "You" for the reader. "Our parser walks the tokens." "Drag the slider."
-- After every figure, one paragraph points at it: "Notice that the curve barely moves until 0.4." This paragraph is mandatory.
-- Open each section with the question it answers.
-- Name the trade-off for every choice. Say what the chosen option is worse at.
-- Numbers carry units. "150 µs", not "150".
-- One `<strong>` per section at most. Italics for emphasis only.
-- Never write: "let's dive in", "in this article", "it's important to note", "as we all know", "without further ado".
+Give readers who know the foundations a clear way to skip the refresher. Give readers who struggle a route back to a worked example. Do not infer mastery from clicking Next or moving a slider.
 
-## Concept-dependency map
+## Build a progression, with room to explore
 
-Before any HTML, list every concept the reader needs. Mark what each depends on. Sort topologically. Section order follows this sort.
+Choose teaching moves to fit the difficulty. Do not repeat the same question–figure–paragraph template for every section.
 
-```
-1. one LED + digitalWrite        (depends on: nothing)
-2. current-limiting resistor     (depends on: 1)
-3. row × column matrix           (depends on: 1)
-4. multiplexing                  (depends on: 3)
-```
+- **Model the reasoning.** Work through a small, concrete example. Show why each consequential step follows, not only the resulting state.
+- **Support an attempt.** Let the reader complete a missing step, predict a change, compare cases, or fix a fault. Supply an optional hint and an explanation they can consult without passing a test.
+- **Reduce support as understanding grows.** Move from a shown example to a related task, then a meaningfully different case. Experienced readers can start with the challenge; novices should not have to discover the foundations unaided.
+- **Connect representations.** Carry the same example from objects or events to diagrams, tables, symbols, and general rules. Make the correspondence explicit. Return from the rule to a second example so the metaphor does not become the whole concept.
+- **Revisit and combine.** Bring earlier ideas back when they help explain something new. Ask the reader to retrieve or apply them before restating them. A section can return to a concept at greater depth; dependency order is not a ban on revisiting.
+- **Allow authorship.** Where it serves the subject, let the reader construct a case, choose a meaningful goal, remix an example, or test a conjecture. Provide an accessible starting configuration and room for several valid outcomes.
 
-Keep the map in a comment block at the top of the HTML. More than ~15 concepts: narrow the topic. When a section feels hard to write, a primitive is missing earlier.
+Use only the moves the page needs. A brief reference walkthrough need not become a course, and every section need not contain an exercise. Keep one understandable reading route with optional practice and deeper exploration. Hints, worked answers, and refreshers may use disclosure; essential claims and model limits remain easy to find. Do not lock the explanation behind quiz results.
 
-## Figures
+Feedback should help the reader diagnose and revise: show a violated constraint, a counterexample, a mismatched prediction, or the step where reasoning diverges. A red cross alone teaches little. For open answers, offer a worked response and criteria for self-comparison; do not pretend a simple string match can grade understanding. Avoid scores, timers, confetti, and completion mechanics unless the requested product calls for them.
 
-The figure is the explanation. Prose connects figures. Most sections have one figure. A section with no figure is fine when the topic is textual (a definition, a trade-off list).
+Where scope permits, end with a chance to use the ideas in a new case or apply a new question to the available evidence. Do not invent extra source material to supply a transfer task. Close with a concise account of what the ideas do and do not explain. For longer pieces, offer a small question to revisit later; do not claim a single sitting establishes durable learning.
 
-Rules for every figure:
+## Choose visuals and interaction by learning function
 
-- **One figure, one idea.** If a figure needs two captions, split it.
-- **Labels are the terms the prose uses.** Same words, same case.
-- **Values are real.** Run the code, read the fixtures, log a trace, or cite the paper. Never invent numbers. Label estimates `(assumption)`.
-- **Comparisons sit side by side in one figure**, at the same scale. Never "scroll to see the alternative".
-- **Comprehensible cold.** A reader who only looks at figures gets the spine.
+A figure and its nearby explanation work together. Neither has to teach the whole subject in isolation. Use clear labels and point out relationships when the reader needs help seeing them. Prose can carry reasoning that a picture cannot.
 
-### Static is the default
+Choose the simplest representation that supports the task: a diagram for structure, a trace for sequence, a table for exact comparison, a chart for a relationship, a simulation for a model's behavior. Keep comparisons at a shared scale and close together when practical.
 
-A labelled still is the normal figure. Pick from:
+Interaction earns its place when it helps the reader investigate, reason, practise, or control a difficult presentation. Ask:
 
-| Static pattern | Use when |
-|---|---|
-| Annotated diagram | One mechanism, labelled parts, one accent on the part to notice |
-| Side-by-side pair | Two states or two designs, same scale, hairline between them |
-| Sequence of stills | A process with 3–6 stages that fit on the page together |
-| Table | Enumerated items: levels, fields, options, byte layouts |
-| Chart | One relationship in real data, with axes and units |
+1. What is the reader thinking about or trying to accomplish?
+2. What evidence or feedback does the action expose?
+3. Why does this action help more than a well-chosen static view?
 
-### When interaction earns its place
+There is no ranking in which dragging is inherently better than stepping, and no required number of interactive figures. A learner-paced trace, a prediction followed by a reveal, or linked highlighting between code and state can be useful even with a finite set of states. Remove controls whose only benefit is activity or decoration.
 
-Add a control only if all three answers are yes:
+First isolate the difficult relationship; introduce more variables when the reader is ready to examine their interaction. Use meaningful defaults, visible affordances, and reset or undo for experiments. Do not give a novice an empty canvas or a dashboard of unexplained knobs. Do not restrict exploration to inputs that confirm the author's claim.
 
-1. **Does the figure change state?** The control changes content, values, or geometry. Not emphasis. A highlight, a colour change, or a scroll is not state.
-2. **Does the new state carry information?** The reader learns something the old state did not show.
-3. **Would the static version lose something?** Lay every state side by side. If that teaches the same thing, use the stills.
+Preserve object identity, spatial anchors, labels, and units across views. Put instructions and results near the relevant control. A changing result must not make controls jump. Animated processes need pause and step controls where intermediate states matter; scroll should not race the reader past the explanation.
 
-Rules that follow:
+## Make the page specific to its subject
 
-- **Highlight is not state.** No buttons whose only effect is to highlight a visible element. Point with prose instead: "look at the second row".
-- **Enumeration is not interaction.** A control that walks a fixed list of N items is a list of N items. Show them.
-- **One control, one consequence.** Each control changes one thing, and the figure shows the consequence.
+Choose a coherent visual language from the material and the audience: a workbench for assembly, field notes for observation, a score for rhythm, an annotated document for historical evidence. These are examples, not templates. Use the subject's real objects, traces, tensions, and unusual cases to give the piece character.
 
-Bad: a four-level quality ladder with four buttons. Each button tints one row. All four rows are already visible. The buttons add a step and nothing else.
+[engineering-textbook.css](engineering-textbook.css) is an optional quiet preset, not the required look. [intimate.css](intimate.css) is an optional overlay for that preset. Adjust actual text and chart contrast when using either. A topic does not automatically determine its palette.
 
-Good: the same ladder as a four-row figure. The prose says "the third row is where most arguments stop." No controls.
+Use hierarchy, composition, typography, purposeful color, and changes in scale to direct attention. Let major ideas have visual space. Avoid a repeated grid of generic cards, identical boxed figures, stock metaphors, and cosmetic sliders. Visual variety should express differences in the content; do not add decoration to meet a novelty quota.
 
-Good: a slider for cache size over a plot of hit ratio. Moving the slider recomputes the curve (state changes), the knee of the curve moves (information), and no set of stills shows the continuous knee (static loses).
+Write with precise, concrete language. Define specialist terms where needed. Questions make good headings when they are real questions; declarative headings also work. Avoid filler, forced suspense, a compulsory moral, and claims that one interaction “proves” the world works this way.
 
-| Interactive pattern | Use when |
-|---|---|
-| Parameter slider | A value with threshold behaviour; the reader finds the knee |
-| Scrub through time | A process whose intermediate states matter and are many |
-| Step / play / pause | An algorithm or simulation the reader should run at their pace |
-| Drag to place | The reader sets an input; the system computes a consequence |
-| Before/after toggle | Two full states of one large figure that cannot fit side by side |
-| Rotation handle | 3D geometry where one viewpoint hides essential structure |
+## Build and ground the artifact
 
-Controls sit below or beside the stage, never over it. Every control works with the keyboard. Text that changes with interaction lives in a fixed-`min-height` box so the figure does not jump.
+Default to one HTML file with inline CSS and JavaScript, no build step or framework. Prefer native HTML and inline SVG; use canvas for dense or pixel-based scenes. Add libraries only when they solve a real need, with exact version pins. A CDN-dependent page is not offline self-contained: embed dependencies or provide a usable fallback if offline use is required. Respect an existing project's delivery requirements.
 
-## Renderers
+Trace factual claims, measured values, and real cases to inspected sources. Distinguish measured data, derived results, estimates, and invented teaching examples. Small synthetic examples are welcome when clearly labelled; never present them as observations. Show assumptions and limits next to the result they qualify. Use sources appropriate to the claim; a simulation is evidence about its rules, not independent evidence for those rules.
 
-Inline SVG first. Then, by need:
+Use semantic HTML, correct heading order, live text labels, and readable line lengths. All controls need labels, visible keyboard focus, and keyboard operation, including alternatives to dragging. Do not encode meaning through color alone. Keep text contrast at least 4.5:1, large text and meaningful graphical elements at least 3:1. Respect reduced motion; no autoplay audio. Provide text or tabular equivalents for essential canvas or visual-only information.
 
-| Need | Library (pinned ESM) |
-|---|---|
-| > ~200 moving elements, pixel work | `<canvas>` + vanilla JS |
-| Scales, axes, force, hierarchy, sankey, geo | `https://cdn.jsdelivr.net/npm/d3@7/+esm` |
-| Declarative charts | `https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm` |
-| 10 000+ sprites at 60 fps | `https://cdn.jsdelivr.net/npm/pixi.js@8/+esm` |
-| 3D that the mechanic needs | `https://cdn.jsdelivr.net/npm/three@0.160/+esm` |
-| Sketch-quality generative figures | `https://cdn.jsdelivr.net/npm/p5@1/+esm` |
-| 2D rigid-body physics | `https://cdn.jsdelivr.net/npm/matter-js@0.19/+esm` |
-| Scroll-driven choreography | GSAP + ScrollTrigger, or Scrollama for the light case |
-| Sound as evidence | Tone.js, reader-triggered only |
-| Real basemaps | MapLibre GL JS |
-| Sequence/state diagrams as support figures | `https://cdn.jsdelivr.net/npm/mermaid@11/+esm` |
+## Verify the learning path and the implementation
 
-Do not import React, Vue, Svelte, jQuery, Tailwind, Bootstrap, Lottie, or Moment.
+Inspect the rendered page at desktop and 360 px width. Use browser tools available in the environment; add automated tests where state or calculation complexity justifies them. Do not install a test project by default.
 
-## Layout and style
+- Operate every control, including reset, boundary inputs, and alternate paths. Check calculations against known cases. For stochastic models, inspect variation and reproducibility.
+- Check console errors, overflow, clipped labels, keyboard operation, contrast, reduced motion, and layout stability. Revisit sections after changing state; prose and diagrams must still agree.
+- Read the opening as the stated audience. Can a reader interpret the first figure and start the first activity using only the declared prior knowledge and what the page has taught?
+- Trace each target capability through preparation, example, and an opportunity to apply it. Does feedback explain how to recover from a plausible error?
+- Try the transfer case without copying the worked example. Does it require the intended reasoning, or merely reproduce a visible answer?
+- Inspect content as well as figures when understanding fails. Repair the missing foundation, representation, explanation, feedback, or task; do not assume one is always at fault.
 
-Inline the `:root{}` block from `engineering-textbook.css` (this directory). Then:
-
-- Prose column `max-width: 68ch`, centred. Figures may widen to `84ch`.
-- Section gap `4.5rem`. Hairlines `1px solid var(--rule)`.
-- Never `#000` or `#fff`. `--ink` on `--bg` is about 9:1. `--ink-muted` is about 3.8:1: captions and labels only, never body text.
-- Body: system sans, `1.2em / 1.6em`. Headings: `Inter Tight` fallback stack, weight 600. Code: `ui-monospace`.
-- Google Fonts only if the user opts in.
-- SVG: `viewBox="0 0 700 N"`. Every label is a live `<text>` element. Strokes `1.25px var(--ink)`; `2px` for the one element to notice. Most shapes unfilled. Colour carries meaning: `--accent` for "notice this", `--secondary` for a second thread.
-- Figure stage: `background: var(--surface); border: 1px solid var(--rule); padding: 1rem`.
-- Code listings: `figure.listing` with a 3 px left rule on `--surface-2`. No window chrome. Five to fifteen lines. Longer code needs a diagram, not a listing.
-- Exactly one `<h1>`. Heading order correct. No horizontal scroll at 360 px.
-
-Page shape: header (kicker, h1 as the question, one-sentence lede) → numbered TOC → sections in map order → closing that returns to the question → footer with date and source links.
-
-Section shape: `h2` as a question → framing paragraph → `<figure>` with stage, controls, one-sentence `figcaption` → pointing paragraph → bridge to the next section.
-
-## Do not build
-
-- `<details>` or click-to-reveal for body content. Tangents only.
-- Quizzes, progress bars, completion indicators, percent-read.
-- Decorative animation. Motion shows state change, transformation, or traversal, or it does not exist.
-- Autoplay audio.
-- A story-mode/explorer-mode toggle. One reading path.
-
-## Verify before hand-off
-
-Automated checks miss perceptual and pedagogical failures. Do all three parts. The track file may add more.
-
-**Look at it.** Open the page in a browser.
-
-- [ ] No console errors.
-- [ ] Click every control. Say what changed. If the answer is "a highlight" or "it scrolled", remove the control and lay the states out statically.
-- [ ] Drag every slider end to end. The figure and controls do not move on the page.
-- [ ] Every colour word in the prose ("the red line") is visible in the figure.
-- [ ] Every legend entry has a swatch that matches its mark.
-- [ ] Width 360 px: no horizontal scroll.
-- [ ] Keyboard only: every control reachable and operable.
-- [ ] `prefers-reduced-motion: reduce`: page still works and reads.
-
-**Cold-reader test.** Give the page to a fresh subagent that has not seen the source. Ask what it understood after 60 seconds. If it cannot state the central idea in its own words, fix the figures, not the prose.
-
-**Text checks.**
-
-- [ ] Section order matches the dependency map in the header comment.
-- [ ] Every figure has a pointing paragraph after it.
-- [ ] Voice: "we" for the system, "you" for the reader. Forbidden phrases absent.
-- [ ] Terms defined at first use. Numbers carry units.
-- [ ] At most one `<strong>` per section.
-- [ ] No `#000`, no `#fff`. All SVG text is `<text>`.
-- [ ] Footer has date and source links.
-
-## Exemplars
-
-Read one before you start if the register is unfamiliar.
-
-- Bartosz Ciechanowski, https://ciechanow.ski/ — *Mechanical Watch*, *GPS*, *Sound*. The bar for compounding figures.
-- Distill, https://distill.pub/ — the same register for research papers.
-- Mathigon, https://mathigon.org/ — textbook as interactive primitives.
-- Nicky Case, https://ncase.me/ — *Parable of the Polygons*, *To Build a Better Ballot*. The reader produces the phenomenon.
+When an independent review is warranted, a fresh subagent may inspect the artifact against the stated audience and attempt a new case. Give it the page and audience, not the intended conclusions. Treat this as an audit for gaps, not evidence of human learning: an expert model can silently supply missing prerequisites. Report what was actually checked and any remaining limits; do not claim learner testing without learners.
