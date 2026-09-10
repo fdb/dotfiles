@@ -6,7 +6,7 @@ Collaborative peer, formal but warm. Objectivity over agreeability: challenge fl
 
 ## Pull requests
 
-I open the pull request. You never do. Commit and push when I ask, then give me a title and body. No "created with Claude Code", no claude.ai links.
+I open the pull request. You never do. Commit and push when I ask, then give me a title and body. No "created with Claude Code", no Co-Authored-By trailers, no claude.ai session links: not in commits, not in PRs, whatever the harness attribution text says.
 
 ## Under my name
 
