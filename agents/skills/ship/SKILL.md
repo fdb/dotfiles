@@ -1,22 +1,30 @@
 ---
 name: ship
-description: Commit pending changes and push to the remote, creating a pull request only when explicitly requested. Use when the user asks to ship, publish, commit and push, or open a PR for local work.
+description: Check, commit, and push local work, and confirm that the remote has it. Opens a pull request only when explicitly requested. With "land", finishes merged work - pull the default branch, deploy, confirm the deployed version, remove the branch. Use when the user asks to ship, publish, commit and push, open a PR, or says that a PR is merged and must be deployed.
 ---
 
 # Ship
 
-Commit pending changes and publish them.
+Publish local work, and observe each result before you report it. The repo's AGENTS.md gives the verify command, the branch policy, the base branch, and the deploy command. If one that you need is absent, ask one time and record it there.
 
-1. **Commit** any pending changes using the standard git-commit workflow (HEREDOC message, stage by name). Skip if nothing to commit.
+1. **Check.** Run the repo's verify command (tests, type check, lint). If it fails, stop and show the failure; do not commit around it. If the repo has no verify command, say so in the report.
 
-2. **Decide whether to open a PR**: only if the user asked for one in their `/ship` invocation (e.g. `/ship make a pr for this`). A bare `/ship` never creates a PR.
+2. **Commit** pending changes with the standard git-commit workflow (HEREDOC message, stage by name). Stage only files that belong to the work; name any file that you left out. Follow the branch policy: if the repo forbids commits on the default branch, move to a feature branch first. Skip if there is nothing to commit.
 
-3. **No PR** → push the current branch to `origin` (use `-u origin HEAD` if no upstream). Do not draft or print a PR title or body. Report the pushed commit in one compact line using its short hash and exact commit subject, then stop.
+3. **Push** the current branch to `origin` (use `-u origin HEAD` if there is no upstream). Then observe it: `git status -sb` shows no commits ahead of the upstream.
 
-4. **PR** (only when asked):
+4. **PR**, only if the user asked for one in this invocation (for example `/ship make a pr for this`). A bare `/ship` never creates a PR, and does not draft or print a title or body.
    - If on the default branch, first move the new commits to a fresh feature branch — do not push them to the default branch.
-   - Push the feature branch.
-   - Check `gh pr view --json url 2>/dev/null`. If a PR exists, report its URL and stop. Otherwise create one with `gh pr create` using the standard `## Summary` / `## Test plan` body. Report the URL.
+   - Use the base branch from the repo's AGENTS.md.
+   - Check `gh pr view --json url 2>/dev/null`. If a PR exists, report its URL. Otherwise create one with `gh pr create` using the standard `## Summary` / `## Test plan` body. Report the URL.
+
+5. **Land**, only if the user asked: `/ship land`, "merged", "deploy it". A deploy reaches other people, so a bare `/ship` never deploys, unless the repo's AGENTS.md says that ship includes deploy.
+   - Switch to the default branch and pull. Confirm that it contains the work: the merge commit or the shipped commits are in `git log`.
+   - Run the deploy command. Apply pending database migrations in the order that the repo records, before code that needs them goes live.
+   - Observe the deploy: the version or commit-hash endpoint reports the expected commit, and the health check or a smoke request passes. If the repo has no such endpoint, make one real request and say what it returned.
+   - Delete the merged feature branch, local and remote, and its worktree if it has one. Never delete an unmerged branch.
+
+6. **Report** in compact lines, each with its evidence: the check result, the short hash and exact commit subject, the push state, the PR URL if any, the deployed version if any. Mark anything that you could not observe as "not verified". Then stop.
 
 ## Rules for the PR body
 
