@@ -1,0 +1,44 @@
+#!/bin/bash
+set -euo pipefail
+
+# Download a video with yt-dlp as an MP4 that QuickTime and Keynote play.
+#
+#   yt-qt URL [yt-dlp args...]         H.264 + AAC, stream copy. YouTube serves
+#                                      H.264 up to 1080p.
+#   yt-qt --4k URL [yt-dlp args...]    Best SDR stream at any resolution (VP9/AV1),
+#                                      re-encoded to HEVC with VideoToolbox.
+#
+# QuickTime plays neither VP9 nor, on chips before M3, AV1; that is why above
+# 1080p the video must be re-encoded. The hvc1 tag is what QuickTime requires
+# to recognise HEVC in an MP4.
+#
+# yt-dlp[default] brings the solver for the YouTube JS challenge (runs on
+# deno); without it YouTube hides most formats.
+#
+# Writes to the current directory, so it does NOT cd to its own directory.
+
+if [[ "${1:-}" == "--4k" ]]; then
+  shift
+  src=$(uvx --from 'yt-dlp[default]' yt-dlp \
+    -f "bv*[dynamic_range=SDR]+ba[acodec^=mp4a]/bv*+ba" \
+    -S "res,fps" \
+    --merge-output-format mkv \
+    -o "%(title)s [%(id)s].src.%(ext)s" \
+    --print after_move:filepath --no-simulate --progress \
+    "$@")
+  out="${src%.src.*}.mp4"
+  ffmpeg -hide_banner -i "$src" \
+    -c:v hevc_videotoolbox -q:v 65 -tag:v hvc1 \
+    -c:a aac -b:a 192k \
+    -movflags +faststart \
+    "$out"
+  rm "$src"
+  echo "$out"
+else
+  uvx --from 'yt-dlp[default]' yt-dlp \
+    -S "vcodec:h264,res,fps,acodec:aac" \
+    --merge-output-format mp4 \
+    --remux-video mp4 \
+    -o "%(title)s [%(id)s].%(ext)s" \
+    "$@"
+fi
