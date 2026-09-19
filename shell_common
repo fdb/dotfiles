@@ -108,6 +108,9 @@ function gwtrm() {
 alias cc='claude --permission-mode auto'
 alias ccc='claude --dangerously-skip-permissions'
 
+# fragent against the LM Studio server on the 4090 (over Tailscale)
+alias fragent-4090='FRAGENT_URL=http://codespace-4090:1234 fragent --yolo'
+
 # Directory navigation
 alias ..="cd .."
 alias ...="cd ../.."
