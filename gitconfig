@@ -27,7 +27,7 @@
 	defaultBranch = main
 [credential "https://github.com"]
 	helper =
-	helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = "!f() { for gh in gh /opt/homebrew/bin/gh /usr/local/bin/gh; do command -v \"$gh\" >/dev/null 2>&1 && exec \"$gh\" auth git-credential \"$@\"; done; exit 1; }; f"
 [credential "https://gist.github.com"]
 	helper =
-	helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = "!f() { for gh in gh /opt/homebrew/bin/gh /usr/local/bin/gh; do command -v \"$gh\" >/dev/null 2>&1 && exec \"$gh\" auth git-credential \"$@\"; done; exit 1; }; f"
