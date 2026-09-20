@@ -32,6 +32,12 @@
         "source": "github",
         "repo": "anthropics/claude-plugins-community"
       }
+    },
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
     }
   },
   "outputStyle": "Proactive",
@@ -49,5 +55,6 @@
   "theme": "dark-daltonized",
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "model": "claude-fable-5-1[1m]"
 }
