@@ -32,6 +32,12 @@
         "source": "github",
         "repo": "anthropics/claude-plugins-community"
       }
+    },
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
     }
   },
   "outputStyle": "Proactive",
