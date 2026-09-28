@@ -21,3 +21,4 @@ config.codekit
 .claude/settings.local.json
 .env.local
 .worktrees/
+.fragent/
