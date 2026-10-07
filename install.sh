@@ -51,7 +51,18 @@ link_dotfile ~/dotfiles/pi/models.json ~/.pi/agent/models.json
 mkdir -p ~/.claude
 link_dotfile ~/dotfiles/claude/settings.json ~/.claude/settings.json
 link_dotfile ~/dotfiles/agents/AGENTS.md ~/.claude/CLAUDE.md
-link_dotfile ~/dotfiles/agents/skills ~/.claude/skills
+# ~/.claude/skills is a real directory, so link each skill individually and
+# prune links whose repo side is gone.
+for skill_dir in ~/dotfiles/agents/skills/*/; do
+  link_dotfile "${skill_dir%/}" ~/.claude/skills/"$(basename "$skill_dir")"
+done
+for link in ~/.claude/skills/*; do
+  [ -L "$link" ] || continue
+  [ -e "$link" ] && continue
+  case "$(readlink "$link")" in
+    "$HOME"/dotfiles/*) rm "$link" ;;
+  esac
+done
 
 # nvm + Node LTS. PROFILE=/dev/null keeps the installer from appending to the
 # symlinked rc files; shell_common loads nvm at shell start.
