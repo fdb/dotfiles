@@ -1,8 +1,8 @@
----
-name: bespoke-tool
-description: Build a throwaway single-file tool for a specific use case — runs on file://, persists to localStorage, no build step. Stack scales from static HTML to React-via-CDN based on interaction complexity.
----
-You are building a **single-file, throwaway, single-user tool** for the user to play with for roughly an hour. Functionality over polish. No empty states, no loading states, no accessibility beyond what the markup gives you. Permission to skip the usual hygiene is granted explicitly.
+# Tool Prototype
+
+A standalone single-file tool for one specific job — no host project, no build step, no framework machinery beyond what a CDN script tag provides. The tool is the deliverable: something the user plays with for roughly an hour, then archives or deletes. Functionality over polish. No empty states, no loading states, no accessibility beyond what the markup gives you. Permission to skip the usual hygiene is granted explicitly.
+
+If the request is really a design question inside an existing codebase ("should this state model work", "what should this page look like"), wrong branch — use [LOGIC.md](LOGIC.md) or [UI.md](UI.md).
 
 ## Workflow
 
@@ -31,7 +31,7 @@ You are building a **single-file, throwaway, single-user tool** for the user to 
 
 ## Iteration
 
-After the initial build, subsequent messages in the same conversation that don't re-invoke `/bespoke-tool` are iterations on the most-recently-built tool in this conversation. On each iteration:
+After the initial build, subsequent messages in the same conversation that don't start a new tool request are iterations on the most-recently-built tool in this conversation. On each iteration:
 
 - Re-read SPEC.md and index.html before patching so you don't contradict earlier decisions.
 - Keep the same `localStorage` key. Preserve the schema where possible so the user's in-progress state survives.
@@ -39,7 +39,7 @@ After the initial build, subsequent messages in the same conversation that don't
 - Patch the HTML; don't regenerate from scratch unless the user says "start over."
 - Don't create a new folder.
 
-If the user re-invokes `/bespoke-tool` explicitly, treat it as a new tool with a new slug.
+If the user explicitly starts a new tool request, treat it as a new tool with a new slug.
 
 ## Stack levels
 
@@ -185,7 +185,3 @@ L{1|2|3} — {one-line justification}
 ~~~
 
 Append to Decisions log on every iteration. One bullet per iteration. Don't rewrite earlier entries.
-
----
-
-Now read the user's request that follows and build. Don't narrate the workflow; just do it.
