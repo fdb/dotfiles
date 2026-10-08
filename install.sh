@@ -51,8 +51,15 @@ link_dotfile ~/dotfiles/pi/models.json ~/.pi/agent/models.json
 mkdir -p ~/.claude
 link_dotfile ~/dotfiles/claude/settings.json ~/.claude/settings.json
 link_dotfile ~/dotfiles/agents/AGENTS.md ~/.claude/CLAUDE.md
-# ~/.claude/skills is a real directory, so link each skill individually and
+# ~/.claude/skills is a real directory, because Claude Code keeps its own
+# state there (synced/). If it is a symlink into this repo, replace it and
+# move that state out of the repo. Then link each skill individually and
 # prune links whose repo side is gone.
+[ -L ~/.claude/skills ] && rm ~/.claude/skills
+mkdir -p ~/.claude/skills
+if [ -d ~/dotfiles/agents/skills/synced ] && [ ! -e ~/.claude/skills/synced ]; then
+  mv ~/dotfiles/agents/skills/synced ~/.claude/skills/synced
+fi
 for skill_dir in ~/dotfiles/agents/skills/*/; do
   link_dotfile "${skill_dir%/}" ~/.claude/skills/"$(basename "$skill_dir")"
 done

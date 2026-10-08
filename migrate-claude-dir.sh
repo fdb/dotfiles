@@ -9,7 +9,8 @@
 # After:   ~/.claude/                         (real dir, local state)
 #            settings.json -> ~/dotfiles/claude/settings.json
 #            CLAUDE.md     -> ~/dotfiles/agents/AGENTS.md
-#            skills        -> ~/dotfiles/agents/skills
+#            skills/        (real dir, also holds Claude Code's synced/)
+#              <name>      -> ~/dotfiles/agents/skills/<name>, one per skill
 #
 # Safe to re-run: does nothing if ~/.claude is already a real directory.
 # Best run while Claude Code is not running.
