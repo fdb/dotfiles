@@ -153,5 +153,8 @@ if [ -s "$NVM_DIR/nvm.sh" ]; then
     [ -n "$BASH_VERSION" ] && [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 fi
 
+# Personal bin
+export PATH="$HOME/bin:$PATH"
+
 # LM Studio CLI (lms)
 [ -d "$HOME/.lmstudio/bin" ] && export PATH="$PATH:$HOME/.lmstudio/bin"
