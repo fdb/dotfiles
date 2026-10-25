@@ -19,8 +19,16 @@ function gl() {
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gf='git fetch'
-alias gpush='git push'
-alias gp='git pull'
+# Sync with the remote: rebase local commits onto upstream, then push.
+# --autostash sets uncommitted changes aside during the rebase and restores them.
+# A branch without upstream skips the pull and gets one on its first push.
+function gp() {
+  if git rev-parse --verify --quiet '@{u}' >/dev/null; then
+    git pull --rebase --autostash && git push "$@"
+  else
+    git push -u "$@"
+  fi
+}
 alias gss='git stash'
 alias gsp='git stash pop'
 # Delete merged branches. Skip the ones a worktree has checked out (marked "+").
