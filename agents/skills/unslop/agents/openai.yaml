@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unslop"
+  short_description: "Clean up an AI-generated interface in measured passes"
+  default_prompt: "Use $unslop to clean up this interface."
