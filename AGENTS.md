@@ -22,3 +22,9 @@ On macOS, `./setup-macos.sh` writes system defaults (screenshots save straight t
 - **pi**: `pi/models.json` - provider config for the pi agent (symlinked to `~/.pi/agent/models.json`)
 - **Agents**: `agents/`, `claude/` - coding agents skills etc
 
+
+## Shipping
+
+- Verify: `bash -n install.sh setup-macos.sh migrate-claude-dir.sh && zsh -n zshrc`
+- Branch policy: commit directly to `main`; base branch `main`.
+- Deploy: none; `./install.sh` applies changes locally.
