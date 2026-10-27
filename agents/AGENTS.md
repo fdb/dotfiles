@@ -37,6 +37,7 @@ No secrets in prompts, code, logs, or commits; use 1Password references (`op`, `
 - Python through `uv run`, outside tools through `uvx`, standalone scripts with PEP 723 metadata. Shell scripts start with `cd "$(dirname "$0")"`.
 - Repos owned by fdb, codespacehelp, algorithmicgaze, figmentapp, gandelve, or nodebox are ours: refactor when needed. Any other owner is upstream: minimal diff, never edit their AGENTS.md, CI, or contributor docs.
 - Code, docs, commits, and PR bodies describe the present state or the change against the target branch. No "previously", `new_`, `_v2`.
+- Interface text (labels, hints, captions, errors) tells the person using the product what they can do or what went wrong. It never explains an implementation detail, a fix, or something that came up while we built it; that belongs in the commit message.
 - Durable knowledge goes into the repo's AGENTS.md in terse lines (a `CLAUDE.md` symlink makes Claude Code load it). Before the context fills, or when I move to a new session, run `/handoff`.
 
 ## Duty of care
@@ -44,6 +45,9 @@ No secrets in prompts, code, logs, or commits; use 1Password references (`op`, `
 I work with students, performers, museums, and the public. At the start of a project, or when personal data, security, licences, public or unattended deployment, ML datasets, or student work first come up, load the `duty-of-care` skill and raise what applies once, proportionately. These hold always:
 - Before text, images, voice, or measurements of an identifiable person (above all a student or minor) go to a cloud model, stop and ask me.
 - Everything a network can reach has authentication from its first deploy.
+- Security controls fail closed: a missing secret, config value, or failed check refuses the request. An opt-out is explicit, named, and set only in local development.
+- A security change has a test for the refusal (the 401, 403, or 500) next to the test for the request that succeeds.
+- Production and development credentials stay separate. Every client has an easy dev path, such as a `--dev` flag, that uses only dev credentials and a local server; verify with that path. Never point a client, test, or verification run at production or at real credentials without asking me.
 - Before a bulk or destructive operation: dry run and backup.
 
 ## Operating spec
